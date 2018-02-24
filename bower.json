@@ -1,0 +1,21 @@
+{
+  "name": "income",
+  "description": "for income",
+  "main": "server.js",
+  "authors": [
+    "Sukum <kungo2009@hotmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.x",
+    "angular-ui-router": "~1.x"
+  }
+}
