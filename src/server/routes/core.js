@@ -9,7 +9,7 @@ module.exports = function(app){
     app.get('/api/income/views', controllers.viewsinformation);
     app.post('/api/income/addinformation',controllers.addinformation);
     app.put('/api/income/editinformation',controllers.editinformation);
-    app.delete('/api/income/deleteinformation',controllers.deleteinformation);
+    app.delete('/api/income/deleteinformation/:information',controllers.deleteinformation);
 
     app.param('information',controllers.incomeid)
 }

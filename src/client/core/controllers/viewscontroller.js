@@ -46,11 +46,15 @@
         }
         $scope.day = function (date) {
             return DateSet(date, "dd");
-
         }
 
         $scope.deleteInFor = function (infor) {
-           
+            IncomeService.deleteInfor(infor).then(function(res){
+                console.log(res)
+            }).catch(err => {
+                console.log
+            })
+        
         }
         $scope.editInfor = function (infor) {
             console.log(infor)

@@ -22,10 +22,11 @@
             },
             deleteInformation: {
                 method: "DELETE",
-                url: '/api/income/deleteinformation',
-                params: {
-                    information: '@_id'
-                  }
+                url: '/api/income/deleteinformation/:information',
+                params:{
+                    information :"@id"
+                }
+                
             },
             viewsInformation: {
                 method: "GET",
@@ -38,13 +39,11 @@
                 return this.saveInformation(information).$promise
 
             },
-            deleteInfor: function(information) {
-                return this.deleteInformation({
-                    information:information
-                })
-            },
             viewsInfor : function() {
                 return this.viewsInformation({}).$promise;
+            },
+            deleteInformation : function(infor){
+                
             }
 
         })

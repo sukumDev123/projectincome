@@ -9,8 +9,14 @@ exports.rander = function (req, res) {
     });
 };
 exports.incomeid = function(req,res,next,id){
+    
+    Income.findById(id).exec(function(err,resDD){
+        if(err) res.json(err);
+        
+        req.income = resDD;
 
-    console.log(id);
+        next();
+    })
 
 }
 exports.viewsinformation = function(req,res){
@@ -36,5 +42,5 @@ exports.editinformation = function(req,res){
 
 };
 exports.deleteinformation = function(req,res){
-
+    res.json(req.income)
 }
