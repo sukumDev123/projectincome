@@ -6,17 +6,11 @@
         .module('core')
         .controller('HomeController', HomeController)
 
-    HomeController.$inject = ['$scope', '$state','$filter'];
+    HomeController.$inject = ['$scope', '$state','$filter','IncomeService','MouthY'];
 
    
-    function HomeController($scope, $state,$filter) {
-        var setYearT = function(year){
-            return parseInt(year) + 543;
-        }
-        var setMountT = function(mouth){
-            var mountT = ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];
-            return mountT[mouth-1];
-        }
+    function HomeController($scope, $state,$filter,IncomeService,MouthY) {
+       
         var DateSet = function (date,detail){
             return $filter('date')(date, detail);
         }
@@ -49,10 +43,20 @@
             $scope.savea = true;
             $scope.information.date = {
                 day: DateSet(Date.now(),"dd"),
-                mouth:setMountT(DateSet(Date.now(),"M")),
-                year:setYearT(DateSet(Date.now(),'yyyy'))
+                mouth:MouthY.setMountT(DateSet(Date.now(),"M")),
+                year:MouthY.setYearT(DateSet(Date.now(),'yyyy'))
             }
-          
+            $scope.information.typeof = $scope.type[$scope.information.typeof];
+            $scope.information.subtype = $scope.subtype[$scope.information.subtype];
+            
+            IncomeService.saveInfor($scope.information).then(onSucess).catch(onError);
+
+            function onSucess(res){
+                console.log(res);
+            }
+            function onError(err){
+                console.log(err);
+            }
         
             $scope.data.push($scope.information);
             console.log($scope.data)

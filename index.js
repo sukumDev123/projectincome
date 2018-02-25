@@ -1,3 +1,6 @@
+process.env.NODE_ENV = process.env.NODE_ENV || 'development'
 const express = require('./src/server/lib/express')
+const mongoose = require('./src/server/lib/mongo')
+const db = mongoose();
 const app = express();
 app.listen(3000)
