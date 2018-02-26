@@ -1,5 +1,5 @@
 module.exports = {
-    title:"Project Income ",
+    title:"Project Income2 ",
     files:{
         routes:[
             '../routes/core'
