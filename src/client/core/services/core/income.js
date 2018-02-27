@@ -11,7 +11,7 @@
     /** @ngInject */
     function Factory($resource) {
 
-        var Income = $resource('/api/income', {}, {
+        var Income = $resource('/api/income/deleteinformation/:information', {}, {
             update: {
                 method: "PUT",
                 url: "/api/income/editinformation"
@@ -42,8 +42,8 @@
             viewsInfor : function() {
                 return this.viewsInformation({}).$promise;
             },
-            deleteInformation : function(infor){
-                
+            delete : function(infor){
+                return this.deleteInformation({information: infor}).$promise;
             }
 
         })

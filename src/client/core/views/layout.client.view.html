@@ -9,16 +9,20 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ"
         crossorigin="anonymous">
     <link rel="stylesheet" href="public/css/main.css">
-        
+
 
 </head>
 
 <body id='core'>
 
-    <header class='headerP ' ng-include="'src/client/core/views/header.client.view.html'" ></header>
+    <header class='headerP ' ng-include="'src/client/core/views/header.client.view.html'"></header>
 
-    
+
     <div ui-view></div>
+
+
+
+    <script src="/socket.io/socket.io.js"></script>
 
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
@@ -33,14 +37,18 @@
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
 
+
     <script src="src/client/core/app/app.js"></script>
+    <script src="src/client/core/modules/core.js"></script>
+
     <script src="src/client/core/routes/routes.js"></script>
     <script src="src/client/core/controllers/homecontroller.js"></script>
     <script src="src/client/core/controllers/viewscontroller.js"></script>
-    
+
     <script src="src/client/core/services/core/income.js"></script>
     <script src="src/client/core/services/core/mouthY.js"></script>
-    
+    <script src="src/client/core/services/core/socket.js"></script>
+
 
 </body>
 

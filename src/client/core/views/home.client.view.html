@@ -4,6 +4,7 @@
             <h1 class='colorFont'>รายรับ รายจ่าย</h1>
         </div>
         <div class="col-12 ">
+            <button ng-click='testa()'>test</button>
 
             <form ng-submit="save()" class='col-12'>
                 <div class="row  col-md-6" style='margin:0 auto;' ng-if='!skipp'>
@@ -98,7 +99,7 @@
                             <h5>
                                 <strong>{{ d.money | currency:"฿ ": 2 }} บาท</strong>
                             </h5>
-                            <p href="#" class=""></p>
+                           
                         </div>
                     </div>
 

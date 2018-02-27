@@ -2,7 +2,7 @@
     'use strict';
 
     angular
-        .module('core')
+        .module('core-routes')
         .config(Routes)
     Routes.$inject = ['$stateProvider']
     function Routes($stateProvider) {
@@ -26,8 +26,6 @@
                 }
             })
             getInformation.$inject = ['IncomeService'];
-
-
             function getInformation(IncomeService){
                 return IncomeService.viewsInfor();
             }

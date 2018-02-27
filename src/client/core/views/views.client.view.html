@@ -44,7 +44,7 @@
 
 
 
-                            <p class='text-right' ng-click="deleteInFor({_id : d._id})">
+                            <p class='text-right' ng-click="deleteInFor( d._id)">
                                 <i style='color:rgb(250, 98, 98);font-size:23px;' class="far fa-times-circle"></i>
                             </p>
 
@@ -66,8 +66,8 @@
                                     </p>
                                 </div>
                                 <div class="col-4 text-right">
-                                    <p>{{ d.subtype }}</p>
-                                    <p>{{ d.typeof }}</p>
+                                    <p>{{ d.subtypeMoney }}</p>
+                                    <p>{{ d.typeMoney }}</p>
 
                                     <h5>
                                         <strong>{{ d.moneyInput | currency:"฿ ": 2 }} บาท</strong>
@@ -75,13 +75,14 @@
                                     <p href="#" class=""></p>
                                 </div>
                             </div>
-                            <p class='text-right'>
+                            <button style='background:rgb(0, 89, 255);color:white'  class='text-right  btn btn-block'>
                                 <i class="far fa-edit"></i>
                                 <strong> แก้ไข</strong>
-                            </p>
+                            </button>
 
                         </div>
                     </div>
+                    
                 </div>
             </div>
         </div>

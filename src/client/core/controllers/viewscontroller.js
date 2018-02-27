@@ -6,9 +6,10 @@
         .module('core')
         .controller('ViewsIncomeTotal', ViewsIncomeTotal)
 
-    ViewsIncomeTotal.$inject = ['$scope', 'viewsTest', '$filter', 'MouthY','IncomeService'];
+    ViewsIncomeTotal.$inject = ['$scope', 'viewsTest', '$filter', 'MouthY','IncomeService','$state','mySocket'];
     /** @ngInject */
-    function ViewsIncomeTotal($scope, viewsTest, $filter, MouthY,IncomeService) {
+    function ViewsIncomeTotal($scope, viewsTest, $filter, MouthY,IncomeService,$state,mySocket) {
+       
         $scope.information = viewsTest;
         $scope.inmoney = 0;
         $scope.delmoney = 0;
@@ -47,12 +48,13 @@
         $scope.day = function (date) {
             return DateSet(date, "dd");
         }
-
+       
         $scope.deleteInFor = function (infor) {
-            IncomeService.deleteInfor(infor).then(function(res){
-                console.log(res)
-            }).catch(err => {
-                console.log
+            console.log(infor)
+            IncomeService.delete(infor).then(function(res){
+                $state.go('home.views')
+            }).catch(function(err){
+                console.log(err)
             })
         
         }

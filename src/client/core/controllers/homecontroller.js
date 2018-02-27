@@ -6,10 +6,10 @@
         .module('core')
         .controller('HomeController', HomeController)
 
-    HomeController.$inject = ['$scope', '$state','$filter','IncomeService','MouthY'];
+    HomeController.$inject = ['$scope', '$state','$filter','IncomeService','MouthY','mySocket'];
 
    
-    function HomeController($scope, $state,$filter,IncomeService,MouthY) {
+    function HomeController($scope, $state,$filter,IncomeService,MouthY,mySocket) {
        
         var DateSet = function (date,detail){
             return $filter('date')(date, detail);
@@ -51,19 +51,28 @@
             
             IncomeService.saveInfor($scope.information).then(onSucess).catch(onError);
 
-            function onSucess(res){
-                console.log(res);
-            }
-            function onError(err){
-                console.log(err);
-            }
-        
-            $scope.data.push($scope.information);
-            console.log($scope.data)
-            $scope.information = {};
-            $scope.skipp = false;
             
         };
+        $scope.testa = function(){
+            mySocket.emit('Enews', $scope.information );
+            mySocket.on('news',function(data){
+              
+                $scope.data.push(data);
+    
+            })
+            console.log($scope.data)
+        }
+        function onSucess(res){
+            
+           
+            $scope.information = {};
+            $scope.skipp = false;
+            $scope.subtype = false;
+        }
+        function onError(err){
+                console.log(err);
+        }
+       
     };
 
 }());

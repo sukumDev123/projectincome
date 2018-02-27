@@ -8,39 +8,47 @@ exports.rander = function (req, res) {
         user: null
     });
 };
-exports.incomeid = function(req,res,next,id){
-    
-    Income.findById(id).exec(function(err,resDD){
-        if(err) res.json(err);
-        
+exports.incomeid = function (req, res, next, id) {
+
+    Income.findById(id).select('_id').exec(function (err, resDD) {
+        if (err) res.json(err);
+
         req.income = resDD;
 
         next();
     })
 
 }
-exports.viewsinformation = function(req,res){
-    Income.find().exec((err,infor)=>{
-        if(err) res.json(err);
+exports.viewsinformation = function (req, res) {
+    Income.find().exec((err, infor) => {
+        if (err) res.json(err);
         else res.json(infor);
     })
 };
-exports.addinformation = function(req,res){
+exports.addinformation = function (req, res) {
     const income = new Income({
-        moneyInput : req.body.money,
+        moneyInput: req.body.money,
         typeMoney: req.body.typeof,
-        subtypeMoney:req.body.subtype,
-        detailList:req.body.detaill,
-        iduser:'users'
+        subtypeMoney: req.body.subtype,
+        detailList: req.body.detaill,
+        iduser: 'users'
     });
-    income.save( err => {
-        if(err) res.json(err);
+    income.save(err => {
+        if (err) res.json(err);
         else res.json(income)
-    } )
+    })
 };
-exports.editinformation = function(req,res){
+exports.editinformation = function (req, res) {
 
 };
-exports.deleteinformation = function(req,res){
-    res.json(req.income)
-}
+exports.deleteinformation = function (req, res) {
+
+    var income = req.income;
+    income.remove(function(err) {
+        if (!err) {
+            res.json("delete sucess")
+        };
+
+        
+    })
+};
