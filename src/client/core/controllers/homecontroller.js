@@ -1,25 +1,17 @@
 'use strict';
 (function () {
     'use strict';
-
     angular
         .module('core')
         .controller('HomeController', HomeController)
-
-    HomeController.$inject = ['$scope', '$state','$filter','IncomeService','MouthY','mySocket'];
-
-   
+    HomeController.$inject = ['$scope', '$state','$filter','IncomeService','MouthY','mySocket']; 
     function HomeController($scope, $state,$filter,IncomeService,MouthY,mySocket) {
-       
         var DateSet = function (date,detail){
             return $filter('date')(date, detail);
         }
         $scope.data = [];
         $scope.type = ["รายรับ", "รายจ่าย", "ออมเงิน"];
         $scope.nameuser = 'Sukum';
-        
-        
-    
         $scope.information = {};
         $scope.detail = false;
         $scope.showtype = function () {
@@ -35,9 +27,7 @@
             if($scope.information.money != (null && "") && $scope.information.typeof != null && ( $scope.information.subtype != null) ){
                 $scope.skipp = true;
             }
-           
-        }
-        
+        } 
         $scope.save = function(){
             console.log($scope.information)
             $scope.savea = true;
@@ -47,24 +37,17 @@
                 year:MouthY.setYearT(DateSet(Date.now(),'yyyy'))
             }
             $scope.information.typeof = $scope.type[$scope.information.typeof];
-            $scope.information.subtype = $scope.subtype[$scope.information.subtype];
-            
-            IncomeService.saveInfor($scope.information).then(onSucess).catch(onError);
-
-            
+            $scope.information.subtype = $scope.subtype[$scope.information.subtype];  
+            IncomeService.saveInfor($scope.information).then(onSucess).catch(onError);      
         };
         $scope.testa = function(){
             mySocket.emit('Enews', $scope.information );
-            mySocket.on('news',function(data){
-              
+            mySocket.on('news',function(data){      
                 $scope.data.push(data);
-    
             })
             console.log($scope.data)
         }
-        function onSucess(res){
-            
-           
+        function onSucess(res){   
             $scope.information = {};
             $scope.skipp = false;
             $scope.subtype = false;
