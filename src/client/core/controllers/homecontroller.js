@@ -10,6 +10,7 @@
             return $filter('date')(date, detail);
         }
         $scope.data = [];
+        var dataSocket = {};
         $scope.type = ["รายรับ", "รายจ่าย", "ออมเงิน"];
         $scope.nameuser = 'Sukum';
         $scope.information = {};
@@ -29,7 +30,8 @@
             }
         } 
         $scope.save = function(){
-            console.log($scope.information)
+            
+         
             $scope.savea = true;
             $scope.information.date = {
                 day: DateSet(Date.now(),"dd"),
@@ -38,16 +40,13 @@
             }
             $scope.information.typeof = $scope.type[$scope.information.typeof];
             $scope.information.subtype = $scope.subtype[$scope.information.subtype];  
+            
+            
             IncomeService.saveInfor($scope.information).then(onSucess).catch(onError);      
         };
-        $scope.testa = function(){
-            mySocket.emit('Enews', $scope.information );
-            mySocket.on('news',function(data){      
-                $scope.data.push(data);
-            })
-            console.log($scope.data)
-        }
-        function onSucess(res){   
+       
+        function onSucess(res){     
+            $scope.data.push($scope.information)
             $scope.information = {};
             $scope.skipp = false;
             $scope.subtype = false;

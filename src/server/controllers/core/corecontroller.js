@@ -38,8 +38,18 @@ exports.addinformation = function (req, res) {
         else res.json(income)
     })
 };
-exports.editinformation = function (req, res) {
+exports.getinfor = function(req,res){
+    var income = req.income;
+    Income.findById({_id:income.id}).exec(function(err,infor){
+        if(err) return err;
+        else {
+            res.json(infor);
+        }
+    })
 
+}
+exports.editinformation = function (req, res) {
+    var income = new Income();
 };
 exports.deleteinformation = function (req, res) {
 

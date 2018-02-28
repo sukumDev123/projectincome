@@ -1,10 +1,10 @@
 module.exports = {
-    title:"Project Income2 ",
-    files:{
-        routes:[
+    title: "Project Income2 ",
+    files: {
+        routes: [
             '../routes/core'
         ],
-        models:['./src/server/models/core/coremodel']
+        models: ['./src/server/models/core/coremodel', './src/server/models/core/type']
     },
 
 }

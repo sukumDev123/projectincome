@@ -5,16 +5,21 @@
 
     angular
         .module('core')
-        .factory('IncomeService', Factory)
+        .factory('IncomeService', Factory);
 
     Factory.$inject = ['$resource'];
     /** @ngInject */
+
     function Factory($resource) {
 
-        var Income = $resource('/api/income/deleteinformation/:information', {}, {
-            update: {
+        var Income = $resource('/api/income', {}, {
+            updateFodata: {
                 method: "PUT",
-                url: "/api/income/editinformation"
+                url: '/api/income/editinformation/:information',
+                params: {
+                    information: '@id'
+                }
+
             },
             saveInformation: {
                 method: "POST",
@@ -23,27 +28,41 @@
             deleteInformation: {
                 method: "DELETE",
                 url: '/api/income/deleteinformation/:information',
-                params:{
-                    information :"@id"
+                params: {
+                    information: "@id"
                 }
-                
+
+            },
+            getFigetinforndByid: {
+                method: 'GET',
+                url: '/api/income/views/:information'
             },
             viewsInformation: {
                 method: "GET",
-                isArray:true,
+                isArray: true,
                 url: '/api/income/views'
             }
         });
         angular.extend(Income, {
-            saveInfor: function(information){
+            saveInfor: function (information) {
                 return this.saveInformation(information).$promise
 
             },
-            viewsInfor : function() {
+            viewsInfor: function () {
                 return this.viewsInformation({}).$promise;
             },
-            delete : function(infor){
-                return this.deleteInformation({information: infor}).$promise;
+            delete: function (infor) {
+                return this.deleteInformation({
+                    information: infor
+                }).$promise;
+            },
+            updateInfor: function (id) {
+
+                return this.updateFodata;
+            },
+            getinfor: function (id) {
+                return this.getFigetinforndByid({information:id}).$promise;
+                
             }
 
         })

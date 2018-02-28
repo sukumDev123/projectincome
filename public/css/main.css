@@ -1,4 +1,25 @@
 
+p,a,button,input,select,h1,h2,h3,h5,label,table{
+    font-family: 'Kanit', sans-serif;
+}
+table{
+    width: 100%;
+    background: white;
+    border-radius: 5px;
+    border:0.5px solid rgba(0,0,0,0.1);
+}
+td{
+  
+    text-align: center;
+    border-bottom:1px solid rgb(129, 129, 129);
+    padding: 10px;
+}
+th{
+    text-align: center;
+    border-bottom:1px solid rgba(0,0,0,1);
+    padding: 10px;
+    
+}
 body{
     color:#2D1E2F;
     background: #FEFDF0;
