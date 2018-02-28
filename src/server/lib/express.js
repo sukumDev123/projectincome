@@ -1,5 +1,5 @@
 const express = require('express');
-const consolidate = require('consolidate');
+const hbs = require('express-hbs');
 const bodyParser = require('body-parser');
 const config = require('../default/backend_path');
 const morgan = require('morgan')
@@ -21,7 +21,9 @@ var server = function () {
     }));
     app.use(bodyParser.json());
 
-    app.engine('client.view.html', consolidate.swig)
+    app.engine('client.view.html', hbs.express4({
+        extname: '.server.view.html'
+    }))
     app.set('views', './');
     app.set('view engine', 'client.view.html');
     app.use(express.static('./'));

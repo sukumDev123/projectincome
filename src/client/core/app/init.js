@@ -4,7 +4,7 @@
     angular.module(app.angularModuleName,app.angularDependencies);
 
     angular
-    .module(app.applicationModuleName)
+    .module(app.angularModuleName)
     .config(bootstrapConfig);
 
   bootstrapConfig.$inject = ['$compileProvider', '$locationProvider', '$httpProvider', '$logProvider'];
@@ -24,7 +24,7 @@
   }
 
    angular.element(document).ready(function(){
-    angular.bootstrap(document.querySelector('#core'),[core],{
+    angular.bootstrap(document.querySelector('#core'),[app.angularModuleName],{
            strictDi: true
        });
    });

@@ -6,11 +6,11 @@
         .module('core')
         .controller('ViewsIncomeTotal', ViewsIncomeTotal)
 
-    ViewsIncomeTotal.$inject = ['$scope', 'viewsTest', '$filter', 'MouthY', 'IncomeService', '$state', 'mySocket'];
+    ViewsIncomeTotal.$inject = ['$scope', 'viewsTest', '$filter', 'MouthY', 'IncomeService', '$state', 'mySocket','$http'];
     /** @ngInject */
-    function ViewsIncomeTotal($scope, viewsTest, $filter, MouthY, IncomeService, $state, mySocket) {
-
-        $scope.information = viewsTest;
+    function ViewsIncomeTotal($scope, viewsTest, $filter, MouthY, IncomeService, $state, mySocket,$http) {
+        console.log(viewsTest.$promise)
+        //$scope.information = viewsTest;
         $scope.inmoney = 0;
         $scope.delmoney = 0;
         $scope.saveMoney = 0;
@@ -33,7 +33,7 @@
 
             });
         }
-        totalMoney();
+        //totalMoney();
         $scope.dateFormat = function (date) {
             return DateSet(date, "dd") + ' ' + MouthY.setMountT(DateSet(date, "MM")) + ' ' + MouthY.setYearT(DateSet(date, "yyyy"))
         }
@@ -61,7 +61,7 @@
         }
         //updateInfor
         $scope.updateInfor = function(){
-            console.log($scope.dateForUpdate)
+           $http.get('/api/income/views').then(suc => console.log(suc))
         }
         $scope.getInfor = function (id) {
 

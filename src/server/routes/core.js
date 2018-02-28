@@ -5,7 +5,7 @@ module.exports = function(app){
 
     const controllers = require('../controllers/core/corecontroller');
 
-    app.get('/',controllers.rander)
+    app.get('*',controllers.rander)
     app.get('/api/income/views', controllers.viewsinformation);
     app.get('/api/income/views/:information',controllers.getinfor);
     app.post('/api/income/addinformation',controllers.addinformation);

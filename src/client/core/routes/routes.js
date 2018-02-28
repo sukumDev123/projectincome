@@ -37,7 +37,7 @@
             })
             getInformation.$inject = ['IncomeService'];
             function getInformation(IncomeService){
-                return IncomeService.viewsInfor();
+                return IncomeService.viewsInfor().$promise;
             }
     }
 }());

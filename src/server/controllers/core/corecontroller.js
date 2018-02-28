@@ -38,6 +38,7 @@ exports.addinformation = function (req, res) {
         else res.json(income)
     })
 };
+
 exports.getinfor = function(req,res){
     var income = req.income;
     Income.findById({_id:income.id}).exec(function(err,infor){

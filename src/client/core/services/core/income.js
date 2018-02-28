@@ -12,7 +12,7 @@
 
     function Factory($resource) {
 
-        var Income = $resource('/api/income', {}, {
+        var Income = $resource('/api/income/views', {}, {
             updateFodata: {
                 method: "PUT",
                 url: '/api/income/editinformation/:information',
@@ -39,8 +39,8 @@
             },
             viewsInformation: {
                 method: "GET",
-                isArray: true,
-                url: '/api/income/views'
+                isArray: true
+        
             }
         });
         angular.extend(Income, {
@@ -49,7 +49,7 @@
 
             },
             viewsInfor: function () {
-                return this.viewsInformation({}).$promise;
+                return this.get()
             },
             delete: function (infor) {
                 return this.deleteInformation({
