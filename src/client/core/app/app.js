@@ -4,6 +4,8 @@
    var core = "main";
 
     var service = {
+        angularModuleName : core,
+        angularDependencies: ['ui.router','ngResource'],
         registerModule: registerModuleFunction
     }
 
@@ -18,14 +20,5 @@
 
 
 
-   angular.module(core,['ui.router','ngResource'])
-
-
-
-   angular.element(document).ready(function(){
-    angular.bootstrap(document.querySelector('#core'),[core],{
-           strictDi: true
-       });
-   });
-
+   
 }(window));
