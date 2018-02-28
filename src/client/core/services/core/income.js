@@ -39,6 +39,7 @@
             },
             viewsInformation: {
                 method: "GET",
+                url:'/api/income/views',
                 isArray: true
         
             }
@@ -49,7 +50,7 @@
 
             },
             viewsInfor: function () {
-                return this.get()
+                return this;
             },
             delete: function (infor) {
                 return this.deleteInformation({

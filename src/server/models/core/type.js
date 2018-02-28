@@ -5,18 +5,14 @@ const mongoose = require('mongoose'),
 const TypeAnSubtype = new Schema({
     typeMoney:{
         type:String,
-        unique:true,
-        require:true
-    },
-    numberType:{
-        type:Number,
-        unique:true,
-        require:true
+        enum: ['รายรับ','รายจ่าย','เงินออม']
     },
     subtype : {
         type:String,
-        unique:true,
-        default:null
+    },
+    iduser:{
+        type:String,
+        default:'user'
     },
     create_at:{
         type:Date,

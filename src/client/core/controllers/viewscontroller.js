@@ -9,8 +9,8 @@
     ViewsIncomeTotal.$inject = ['$scope', 'viewsTest', '$filter', 'MouthY', 'IncomeService', '$state', 'mySocket','$http'];
     /** @ngInject */
     function ViewsIncomeTotal($scope, viewsTest, $filter, MouthY, IncomeService, $state, mySocket,$http) {
-        console.log(viewsTest.$promise)
-        //$scope.information = viewsTest;
+        console.log(viewsTest)
+        $scope.information = viewsTest;
         $scope.inmoney = 0;
         $scope.delmoney = 0;
         $scope.saveMoney = 0;

@@ -1,7 +1,7 @@
 (function(app){
     'use strict';
 
-   app.registerModule('setting');
-   app.registerModule('setting-routes',['core-routes','ui.router'])
+   app.registerModule('setting',['core']);
+   app.registerModule('setting-routes')
 
 }(ApplicationConfig));
