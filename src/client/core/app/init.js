@@ -14,7 +14,7 @@
       enabled: true,
       requireBase: false
     }).hashPrefix('!');
-
+    
     //$httpProvider.interceptors.push('authInterceptor');
 
     // Disable debug data for production environment
