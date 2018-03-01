@@ -22,7 +22,7 @@
                             <option ng-repeat="(key,types) in type" value='{{key}}'>{{ types }}</option>
                         </select>
                         <br>
-                        <select class="form-control" ng-model="information.subtype" ng-if='subtype'>
+                        <select class="form-control" ng-model="information.subtype" ng-if='subtype.lenght != 0'>
                             <option ng-repeat="(key,types) in subtype" value='{{key}}'>{{ types }}</option>
                         </select>
                         <br>

@@ -2,22 +2,17 @@
     <div class="row">
         <div class="col-12 col-md-6 p-3">
             <form ng-submit="saveType()" name='myForm' novalidate>
-                <div class="md-form" >
+                <div class="md-form">
                     <select type="text" class="form-control" name='typeMoney' ng-model="type.typeMoney" required>
                         <option value="รายรับ">รายรับ</option>
                         <option value="รายจ่าย">รายจ่าย</option>
                         <option value="เงินออม">เงินออม</option>
-                        
                     </select>
-                    <p class='cencle' ng-show='myForn.typeMoney.$dirty && myForm.typeMoney.$error.required' > a</p>
                 </div>
                 <div class="md-form">
-                    
-                    <input type="text" class="form-control" name='subtype'  ng-model='type.subtype' required>
-                    <p class='cencle' ng-show='myForn.subtype.$dirty && myForm.subtype.$error.required' > a</p>
-                    
+                    <input type="text" class="form-control" name='subtype' ng-model='type.subtype' required>
                 </div>
-                <button type='submit'  ng-disabled="myForm.$invalid"  class="btn btn-block">Save</button>
+                <button type='submit' ng-disabled="myForm.$invalid" class="btn btn-block">Save</button>
                 <p class='err' ng-show='err'>{{err}}</p>
             </form>
         </div>

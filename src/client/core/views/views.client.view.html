@@ -54,14 +54,14 @@
                     <div class="md-form"><input type="text" class="form-control" ng-model="dateForUpdate.moneyInput"></div>
                     <div class="md-form"><input type="text" class="form-control" ng-model="dateForUpdate.detailList"></div>
                     <div class="md-form">
-                        <select name="" ng-model='dataForUpdate.typeMoney' convert-to-number>
+                        <select class='form-control' ng-model="dateForUpdate.subtypeMoney" >
                             <option value="{{dateForUpdate.typeMoney}}">{{dateForUpdate.typeMoney}}</option>
                             <option value="รายจ่าย">รายจ่าย</option>
                             <option value="รายรับ">รายรับ</option>
                             <option value="ออม">ออม</option>
                             
                         </select>
-                        <select name="" id="">
+                        <select class='form-control' ng-model="dateForUpdate.subtypeMoney">
                             <option value="">{{dateForUpdate.subtypeMoney}}</option>
                         </select>
                     </div>
