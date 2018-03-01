@@ -1,0 +1,14 @@
+<div class="container">
+    <div  class="col-12 col-md-12 p-3 signin">
+        <h3 class="text-center">เข้าสู่ระบบ</h3>
+        <form name='myForm' class='p-3 signup' ng-submit="SignIn()" novalidate>
+            <div class="md-form">
+                <input type="text" name="username" ng-model='users.username' placeholder="username" class="form-control" required>
+            </div>
+            <div class="md-form">
+                <input type="password" name="password" ng-model="users.password" placeholder="password" class="form-control" required>
+            </div>
+            <button type="submit" ng-disabled="myForm.$invalide" class="btn btn-lg btn-block">เข้าสู่ระบบ</button>
+        </form>
+    </div>
+</div>
