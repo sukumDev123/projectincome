@@ -2,6 +2,7 @@
 module.exports = function(app){
     const controllers = require('../controllers/setting/typesetting')
     app.route('/api/setting/type/:typeId')
+        .get(controllers.listType)
         .delete(controllers.deleteType)
         .put(controllers.updateType);
     app.route('/api/setting/type')

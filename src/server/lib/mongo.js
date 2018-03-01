@@ -1,3 +1,5 @@
+
+
 'use strict';
 const mongoose = require('mongoose')
 const config = require('../config');
@@ -13,7 +15,9 @@ module.exports = function() {
     mongoose.set('debug', config.env_L.debug);
     mongoose.Promise = global.Promise;
     
-    var db = mongoose.connect(config.env_L.mongoUri);
+    var db = mongoose.connect(config.env_L.mongoUri,(err,db)=>{
+        if(err) throw err;
+    });
     
 
     modelFile();

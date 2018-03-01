@@ -9,13 +9,13 @@
     SettingType.$inject = ['$scope', 'TypeAndSubType']
     /** @ngInject */
     function SettingType($scope, TypeAndSubType) {
-        //TypeAndSubType.getInformation().then(suc => console.log(suc))
+        TypeAndSubType.getInformation().then(suc => console.log(suc))
         $scope.type = {};
         $scope.saveType = function () {
             TypeAndSubType.typeUpdate($scope.type).then(suc => {
-                console.log(suc)
+               $scope.type = {};
             }).catch(err => {
-                console.log(err)
+               $scope.err = err.data;
             })
         }
     }
