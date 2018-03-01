@@ -23,6 +23,9 @@
     <div ui-view></div>
 
 
+    <script >
+        var users = null;
+    </script>
 
     <script src="/socket.io/socket.io.js"></script>
 
@@ -43,20 +46,27 @@
     <script src="src/client/core/app/app.js"></script>
     <script src="src/client/core/app/init.js"></script>
     <script src="src/client/core/modules/core.js"></script>
+    <script src="src/client/users/users_module.js"></script>
+    
     <script src="src/client/setting/setting.js"></script>
+    
     <script src="src/client/setting/controllers/settingType.js"></script>
     
     <script src="src/client/core/routes/routes.js"></script>
     <script src="src/client/setting/routes/setting-routes.js"></script>
+    <script src="src/client/users/routes/users_routes.js"></script>
     
     <script src="src/client/core/controllers/homecontroller.js"></script>
     <script src="src/client/core/controllers/viewscontroller.js"></script>
+    
 
     <script src="src/client/core/services/core/income.js"></script>
     <script src="src/client/core/services/core/mouthY.js"></script>
     <script src="src/client/core/services/core/socket.js"></script>
-    <script src="src/client/setting/services/typeMoney.js"></script>
     
+    
+    <script src="src/client/setting/services/typeMoney.js"></script>
+    <script src="src/client/users/services/Auth.js"></script>
     <!--<script src="http://localhost:35729/livereload.js"></script>-->
 </body>
 

@@ -29,18 +29,38 @@ table {
     color: white;
     background: #E84136;
     padding: 10px;
+}
+
+.cancle {
+    position: absolute;
+    right: 0;
+    top: -10px;
+    font-size: 20px;
+    color: #E84136
+}
+
+.active1 {
+    color: #E84136;
+}
+.signup input,.signup input{
+    padding: 15px;
+
+}
+.auth{
+    background: white;
+    position: relative;
+    top:20px;
+    border: 0.5px solid rgba(0, 0, 0, 0.1);
     
 }
-.cancle{
-    position: absolute;
-    right:0;
-    top:-10px;
-    font-size:20px;
-    color:#E84136
+.signin {
+    margin: 0 auto;
+    position: relative;
+    top: 30px;
+    background: white;
+    border:0.5px solid rgba(0, 0, 0, 0.1)
 }
-.active1{
-    color:#E84136;
-}
+
 td {
     text-align: center;
     border-bottom: 1px solid rgb(129, 129, 129);
