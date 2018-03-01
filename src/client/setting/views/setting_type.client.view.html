@@ -1,14 +1,40 @@
 <div class="container" ng-controller="SettingType">
     <div class="row">
-        <div class="col-12 col-md-6">
-            <form ng-submit="saveType()">
-                <div class="md-form"><input type="text" class="form-control" ng-model="type.typeMoney"></div>
-                <div class="md-form"><input type="text" class="form-control" ng-model='type.subtype'></div>
-               <button type='submit' class="btn btn-block">Save</button>
-               <p ng-show='err'>{{err}}</p>
+        <div class="col-12 col-md-6 p-3">
+            <form ng-submit="saveType()" name='myForm' novalidate>
+                <div class="md-form" >
+                    <select type="text" class="form-control" name='typeMoney' ng-model="type.typeMoney" required>
+                        <option value="รายรับ">รายรับ</option>
+                        <option value="รายจ่าย">รายจ่าย</option>
+                        <option value="เงินออม">เงินออม</option>
+                        
+                    </select>
+                    <p class='cencle' ng-show='myForn.typeMoney.$dirty && myForm.typeMoney.$error.required' > a</p>
+                </div>
+                <div class="md-form">
+                    
+                    <input type="text" class="form-control" name='subtype'  ng-model='type.subtype' required>
+                    <p class='cencle' ng-show='myForn.subtype.$dirty && myForm.subtype.$error.required' > a</p>
+                    
+                </div>
+                <button type='submit'  ng-disabled="myForm.$invalid"  class="btn btn-block">Save</button>
+                <p class='err' ng-show='err'>{{err}}</p>
             </form>
         </div>
         <div class="col-12 col-md-6">
+            <p class='suc' ng-show='sucess'>{{sucess}}</p>
+            <div class="card p-3" ng-repeat="t in types">
+                <p class='cancle'>
+                    <strong ng-click="deleteType1(t._id)">
+                        <i class="fas fa-times-circle"></i>
+                    </strong>
+                </p>
+                <p>ประเภท : {{ t.typeMoney }}</p>
+                <p>ประเภทย่อย : {{ t.subtype }}</p>
+                <small> create_at : {{ t.create_at | date : 'dd : MM : yyyy h:mm a' }}</small>
+                <small> update_at : {{ t.update_at | date : 'dd : MM : yyyy h:mm a' }}</small>
+
+            </div>
         </div>
     </div>
 </div>

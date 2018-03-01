@@ -24,7 +24,7 @@
             saveType :{
                 method:"POST"
             },
-            deleteType:{
+            deleteTypeL:{
                 method:"DELETE"
             }
         });
@@ -37,7 +37,7 @@
                 return this.query({}).$promise;
             },
             deleteType:function(id){
-                return this.deleteType(id).$promise;
+                return this.deleteTypeL({typeId:id}).$promise;
             },
             updateInfor:function(id){
                 return this.update({typeId:id},{typeId:id}).$promise;
