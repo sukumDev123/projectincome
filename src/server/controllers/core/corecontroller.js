@@ -5,7 +5,7 @@ const config = require('../../config')
 exports.rander = function (req, res) {
     res.render('./src/client/core/views/layout', {
         title: config.title,
-        user: null
+        user: JSON.stringify(req.user) || null
     });
 };
 exports.incomeid = function (req, res, next, id) {

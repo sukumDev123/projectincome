@@ -19,12 +19,13 @@
 
     <header class='headerP ' ng-include="'src/client/core/views/header.client.view.html'"></header>
 
-
+    
+        
     <div ui-view></div>
 
 
-    <script >
-        var users = null;
+    <script type="text/javascript" >
+        var user = {{{ user }}};
     </script>
 
     <script src="/socket.io/socket.io.js"></script>
@@ -58,6 +59,7 @@
     
     <script src="src/client/core/controllers/homecontroller.js"></script>
     <script src="src/client/core/controllers/viewscontroller.js"></script>
+    <script src="src/client/users/controllers/auth_users.js"></script>
     
 
     <script src="src/client/core/services/core/income.js"></script>

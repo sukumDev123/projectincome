@@ -4,6 +4,7 @@
     angular
         .module('core-routes')
         .config(Routes)
+        .run(rootScope)
     Routes.$inject = ['$stateProvider']
     function Routes($stateProvider) {
         $stateProvider
@@ -39,5 +40,16 @@
             function getInformation(IncomeService){
                 return IncomeService.viewsInformation({}).$promise;
             }
+    }
+    rootScope.$inject=['$rootScope','Auth']
+    function rootScope($rootScope,Auth){
+
+       
+        $rootScope.$on('$stateChangeStart', stateChangeStart);
+        function stateChangeStart(event, toState,toParams,formState,formParams,op){
+            
+            console.log(Auth)
+
+        }
     }
 }());

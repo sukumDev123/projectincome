@@ -1,6 +1,6 @@
-
 'use stict';
 const mongoose = require('mongoose');
+const crypto = require('crypto')
 const Schema = mongoose.Schema;
 const UserSchema = new Schema({
     first: {
@@ -35,10 +35,8 @@ const UserSchema = new Schema({
         required: 'Provider is required'
     },
     roles: {
-        type: [{
-            type: String,
-            enum: ['user', 'admin']
-        }],
+        type: String,
+        enum: ['user', 'admin'],
         default: ['user']
     },
     salt: {
@@ -54,10 +52,9 @@ const UserSchema = new Schema({
 });
 
 UserSchema.pre('save', function (next) {
-    if (this.password && this.isModified('password') && this.password.length > 6) {
-        this.salt = crypto.randomBytes(16).toString('base64');
-        this.password = this.hashPassword(this.password);
-    }
+
+    this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
+    this.password = this.hashPassword(this.password);
 
     next();
 });
@@ -66,11 +63,9 @@ UserSchema.pre('save', function (next) {
  * Create instance method for hashing a password
  */
 UserSchema.methods.hashPassword = function (password) {
-    if (this.salt && password) {
-        return crypto.pbkdf2Sync(password, new Buffer(this.salt, 'base64'), 10000, 64).toString('base64');
-    } else {
-        return password;
-    }
+
+    return crypto.pbkdf2Sync(password, this.salt, 10000, 64, 'sha512').toString('base64');
+
 };
 
 /**

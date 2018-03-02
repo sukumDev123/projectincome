@@ -1,7 +1,7 @@
 (function(app){
     'use strict';
     app.registerModule('core')
-    app.registerModule('core-routes');
+    app.registerModule('core-routes',['ui.router']);
 
     
 
