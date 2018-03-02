@@ -1,9 +1,9 @@
-const config = require( "../default/backend_path");
+
 
 'use strict';
 module.exports = function(app){
 
-    const controllers = require('../controllers/core/corecontroller');
+    const controllers = require('../controllers/corecontroller');
 
     app.get('/',controllers.rander)
     app.get('/api/income/views', controllers.viewsinformation);

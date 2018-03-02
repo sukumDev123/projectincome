@@ -1,7 +1,7 @@
 'use strict';
 const mongoose = require('mongoose');
 const Income = mongoose.model('Income');
-const config = require('../../config')
+const config = require('../../config/config')
 exports.rander = function (req, res) {
     res.render('./src/client/core/views/layout', {
         title: config.title,

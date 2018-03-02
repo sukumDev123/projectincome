@@ -13,6 +13,6 @@ module.exports = () => {
             done(err, user);
         });
     });
-    require(path.resolve('src/server/strategies/local'))();
+    require(path.resolve('src/server/users/strategies/local'))();
   
 };

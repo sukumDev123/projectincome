@@ -1,6 +1,6 @@
 'use stict';
 module.exports = function(app){
-    const controllers = require('../controllers/setting/typesetting')
+    const controllers = require('../controllers/typesetting')
     app.route('/api/setting/type/:typeId')
         .get(controllers.listType)
         .delete(controllers.deleteType)

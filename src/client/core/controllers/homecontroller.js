@@ -7,6 +7,9 @@
     HomeController.$inject = ['$scope', '$state', '$filter', 'IncomeService', 'MouthY', 'mySocket', 'TypeAndSubType','Auth'];
 
     function HomeController($scope, $state, $filter, IncomeService, MouthY, mySocket, TypeAndSubType,Auth) {
+      
+        $scope.authentication = Auth
+     
         var DateSet = function (date, detail) {
             return $filter('date')(date, detail);
         }
@@ -31,7 +34,7 @@
             }
         }
         $scope.skip = function () {
-            console.log($scope.information)
+            
             if ($scope.information.money != (null && "") && $scope.information.typeof != null && ($scope.information.subtype != null)) {
                 $scope.skipp = true;
             }

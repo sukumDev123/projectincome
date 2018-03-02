@@ -4,10 +4,11 @@ const passport = require('passport')
 const bodyParser = require('body-parser');
 const config = require('../default/backend_path');
 const morgan = require('morgan');
-const session = require('express-session')
+const session = require('express-session');
+const path = require('path');
 var routes = function (app) {
     config.files.routes.forEach(element => {
-        require(element)(app);
+        require(path.resolve(element))(app);
     });
 }
 var sessionFunction = (app) => {

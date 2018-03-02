@@ -3,7 +3,7 @@
 var User = require('mongoose').model('User');
 var path = require("path");
 var passport = require('passport');
-var errorHandler = require('./useMore');
+var errorHandler = require('../../useMore');
 
 exports.create = (req, res) => {
  var user = new User(req.body);

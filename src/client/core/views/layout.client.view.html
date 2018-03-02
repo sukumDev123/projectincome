@@ -19,9 +19,9 @@
 
     <header class='headerP ' ng-include="'src/client/core/views/header.client.view.html'"></header>
 
-    
+  
         
-    <div ui-view></div>
+    <div ng-controller="CoreControl" ui-view></div>
 
 
     <script type="text/javascript" >
@@ -56,6 +56,7 @@
     <script src="src/client/core/routes/routes.js"></script>
     <script src="src/client/setting/routes/setting-routes.js"></script>
     <script src="src/client/users/routes/users_routes.js"></script>
+    <script src="src/client/core/controllers/core_home.js"></script>
     
     <script src="src/client/core/controllers/homecontroller.js"></script>
     <script src="src/client/core/controllers/viewscontroller.js"></script>
