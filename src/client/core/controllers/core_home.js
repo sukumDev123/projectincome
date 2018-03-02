@@ -8,10 +8,7 @@
     /** @ngInject */
     ControllerCtrl.$inject = ['Auth','$state','$scope']
     function ControllerCtrl(Auth,$state,$scope){
-        $scope.authentication = Auth;
-        if(!$scope.authentication.users){
-            $state.go('auth.signin')
-        }
+        
     }
 
 }());

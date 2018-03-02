@@ -25,6 +25,7 @@
         $scope.detail = false;
         $scope.showtype = function () {      
             $scope.subtype = [];
+            var num = $scope.information.typeof;
             var t0 = performance.now();
             for(var t = 0 ; t < $scope.suc.length ; t++){
                 if( $scope.suc[t].typeMoney == null) break;
