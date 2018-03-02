@@ -1,10 +1,7 @@
-import {
-    mongo
-} from 'mongoose';
 
 'use stict';
-const Schema = require('mongoose').Schema;
-
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 const UserSchema = new Schema({
     first: {
         type: String,
@@ -32,6 +29,17 @@ const UserSchema = new Schema({
         validate: [function (password) {
             return password && password.length > 10
         }, 'Please Input yours password and input password lenght > 10']
+    },
+    provider: {
+        type: String,
+        required: 'Provider is required'
+    },
+    roles: {
+        type: [{
+            type: String,
+            enum: ['user', 'admin']
+        }],
+        default: ['user']
     },
     salt: {
         type: String
@@ -94,4 +102,4 @@ UserSchema.statics.findUniqueUsername = function (username, suffix, callback) {
     });
 };
 
-mongoose.model('Users', UserSchema);
+mongoose.model('User', UserSchema);

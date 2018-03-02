@@ -1,12 +1,23 @@
 const express = require('express');
 const hbs = require('express-hbs');
+const passport = require('passport')
 const bodyParser = require('body-parser');
 const config = require('../default/backend_path');
-const morgan = require('morgan')
+const morgan = require('morgan');
+const session = require('express-session')
 var routes = function (app) {
     config.files.routes.forEach(element => {
         require(element)(app);
     });
+}
+var sessionFunction = (app) => {
+    app.use(session({
+        secret: 'secret_key',
+        resave: false,
+        saveUninitialized: true
+    }))
+    app.use(passport.initialize());
+    app.use(passport.session());
 }
 var server = function () {
     const app = express();
@@ -15,6 +26,7 @@ var server = function () {
 
     if(process.env.NODE_ENV === 'development') app.use(morgan('dev'));
 
+    sessionFunction(app);
 
     app.use(bodyParser.urlencoded({
         extended: true
