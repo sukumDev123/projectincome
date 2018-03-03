@@ -15,6 +15,9 @@
                 <input type="password" name="password" ng-model="users.password" placeholder="password" class="form-control" required>
             </div>
             <button type="submit" ng-disabled="myForm.$invalide" class="btn btn-lg btn-block">สมัคร</button>
+            <div class="p-3"  ng-show='error'>
+                    <p class='err'>{{error.message}}</p>
+            </div>
         </form>
     </div>
 </div>

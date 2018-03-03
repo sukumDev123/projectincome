@@ -11,6 +11,9 @@
         .state('setting',{
             url:'/setting',
             templateUrl:'src/client/setting/views/setting-home.clilent.view.html',
+            data:{
+                roles:['user','admin']
+            }
         })
         .state('setting.type',{
             url:'/putType',

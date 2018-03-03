@@ -1,25 +1,45 @@
-<nav class="navbar navbar-toggleable-md navbar-light bg-faded" style="background:white">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <a class="navbar-brand " style="color:#E3170A" href="#">Navbar</a>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item ">
-          <a class="nav-link "    ui-sref="home"><i class="fas fa-home"></i> หน้าหลัก</a>
+<nav ng-controller="HeaderControl" class="navbar navbar-toggleable-md navbar-light bg-faded" style="background:white">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <a class="navbar-brand " style="color:#E3170A" href="#">Navbar</a>
+  <div class="collapse navbar-collapse" id="navbarNav">
+
+    <ul class="navbar-nav" ng-if='authentication.users'>
+      <li class="nav-item ">
+        <a class="nav-link " ui-sref="home">
+          <i class="fas fa-home"></i> หน้าหลัก</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">ความสำเร็จ</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#">เป้าหมาย</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" ui-sref="setting">
+          <i class="fas fa-cog"></i> ตั่งต่าระบบ</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href='/api/users/logout'>
+          <i class="fas fa-cog"></i> Log out</a>
+      </li>
+    </ul>
+
+   
+
+  </div>
+  <div style="width:100%;" >
+      <ul class="navbar-nav" style='float:right' ng-if='!authentication.users'>
+        <li class='nav-item'>
+          <a class="nav-link" ui-sref='auth.signin'><i class="fas fa-sign-in-alt"></i> เข้าสู่ระบบ</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">ความสำเร็จ</a>
+        <li class='nav-item'>
+          <a class="nav-link" ui-sref='auth.signup'><i class="fas fa-user-plus"></i> สมัครสมาชิก</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link" href="#">เป้าหมาย</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" ui-sref="setting"><i class="fas fa-cog"></i> ตั่งต่าระบบ</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link"  href='/api/users/logout'><i class="fas fa-cog"></i> Log out</a>
-          </li>
       </ul>
+
     </div>
-  </nav>
+</nav>

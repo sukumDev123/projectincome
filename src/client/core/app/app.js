@@ -5,7 +5,7 @@
 
     var service = {
         angularModuleName : core,
-        angularDependencies: ['ui.router','ngResource'],
+        angularDependencies: ['ui.router','ngResource','ui.router.state.events'],
         registerModule: registerModuleFunction
     }
 

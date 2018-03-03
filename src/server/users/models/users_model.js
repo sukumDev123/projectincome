@@ -5,12 +5,12 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema({
     first: {
         type: String,
-        required: true,
+        required: "Please insert your First Name",
         trim: true
     },
     last: {
         type: String,
-        required: true,
+        required: 'Please insert your last Name',
         trim: true
     },
     displayName: {
@@ -19,13 +19,13 @@ const UserSchema = new Schema({
     },
     username: {
         unique: true,
-        required: true,
+        required: "Please insert your username",
         trim: true,
         type: String
     },
     password: {
         type: String,
-        required: true,
+        required: "Please insert your password",
         validate: [function (password) {
             return password && password.length > 10
         }, 'Please Input yours password and input password lenght > 10']

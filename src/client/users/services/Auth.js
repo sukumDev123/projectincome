@@ -8,7 +8,7 @@
     
     function Auth($window){
         var users = {
-            users : $window.user
+            users : $window.users
         }
         return users;
     };
