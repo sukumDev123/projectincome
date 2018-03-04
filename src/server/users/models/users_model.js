@@ -27,8 +27,8 @@ const UserSchema = new Schema({
         type: String,
         required: "Please insert your password",
         validate: [function (password) {
-            return password && password.length > 10
-        }, 'Please Input yours password and input password lenght > 10']
+            return password && password.length > 6 && password.length < 12;
+        }, 'Please Input yours password and input password lenght > 6 and < 12']
     },
     provider: {
         type: String,

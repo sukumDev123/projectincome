@@ -10,9 +10,9 @@
             </div>
             <button type="submit" ng-disabled="myForm.$invalide" class="btn btn-lg btn-block">เข้าสู่ระบบ</button>
 
-        <div class="p-3"  ng-show='error'>
-                <p class='err'>{{error.message}}</p>
-        </div>
+            <growl-notifications class='err' ng-if='error'>
+                {{error.message}}
+            </growl-notifications>
         </form>
     </div>
 </div>

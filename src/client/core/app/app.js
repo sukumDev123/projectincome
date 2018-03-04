@@ -5,7 +5,7 @@
 
     var service = {
         angularModuleName : core,
-        angularDependencies: ['ui.router','ngResource','ui.router.state.events'],
+        angularDependencies: ['ui.router','ngResource','ui.router.state.events','growlNotifications'],
         registerModule: registerModuleFunction
     }
 
@@ -15,7 +15,6 @@
         angular.module(core).requires.push(moduleName);
     }
     window.ApplicationConfig = service;
-
 
 
 

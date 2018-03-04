@@ -11,6 +11,22 @@ label,
 table {
     font-family: 'Kanit', sans-serif;
 }
+growl-notifications {
+    position: fixed;
+    top: 150px;
+    right: 10px;
+    z-index: 1000;
+}
+
+growl-notifications growl-notification {
+    background: rgba(0,0,0,0.6);
+    color: white;
+    padding: 15px 30px;
+    width: 200px;
+    display: block;
+    border-radius: 5px;
+    margin-top: 15px;
+}
 
 table {
     width: 100%;
@@ -42,23 +58,25 @@ table {
 .active1 {
     color: #E84136;
 }
-.signup input,.signup input{
-    padding: 15px;
 
+.signup input,
+.signup input {
+    padding: 15px;
 }
-.auth{
+
+.auth {
     background: white;
     position: relative;
-    top:20px;
+    top: 20px;
     border: 0.5px solid rgba(0, 0, 0, 0.1);
-    
 }
+
 .signin {
     margin: 0 auto;
     position: relative;
     top: 30px;
     background: white;
-    border:0.5px solid rgba(0, 0, 0, 0.1)
+    border: 0.5px solid rgba(0, 0, 0, 0.1)
 }
 
 td {
@@ -81,10 +99,12 @@ body {
 .colorFont {
     color: #E84136;
 }
-button{
+
+button {
     background: rgba(227, 24, 10, 0.678);
-    color:white;
+    color: white;
 }
+
 .backGcolor {
     background: white;
     padding-top: 10px;

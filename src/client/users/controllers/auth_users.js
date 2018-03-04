@@ -8,6 +8,7 @@
     Authentication.$inject = ['$scope', 'Auth', 'UserService', '$location', '$state', '$timeout']
     /** @ngInject */
     function Authentication($scope, Auth, UserService, $location, $state, $timeout) {
+      
         $scope.authentication = Auth;
         if ($scope.authentication.users) {
             $location.path('/home');
@@ -34,6 +35,7 @@
                 $timeout( function(){
                     $scope.error = false
                 }, 5000 );
+               
             })
         }
 

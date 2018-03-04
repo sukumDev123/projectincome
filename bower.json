@@ -17,6 +17,9 @@
   "dependencies": {
     "angular": "~1.x",
     "angular-ui-router": "~1.x",
-    "angular-resource": "^1.6.9"
+    "angular-resource": "^1.6.9",
+    "angular-growl-notifications": "^2.6.0",
+    "bootstrap": "4.x",
+    "jquery": "^3.3.1"
   }
 }
