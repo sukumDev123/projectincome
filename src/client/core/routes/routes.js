@@ -35,11 +35,11 @@
                
                 }
             })
-            .state('home.views.show',{
+           /* .state('home.views.show',{
                 url:'/show',
                 templateUrl:"src/client/core/views/showStatic.client.view.html",
                
-            })
+            })*/
             .state('home.views.table',{
                 url:'/table',
                 templateUrl:"src/client/core/views/table.client.view.html",

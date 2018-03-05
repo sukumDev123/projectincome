@@ -16,7 +16,6 @@ exports.create = (req, res) => {
  // Then save the user
  user.save(function(err) {
      if (err) {
-         console.log(err)
         return res.status(400).json({
             message: errorHandler.getErrorMessage(err)
         });
@@ -59,4 +58,11 @@ exports.signin = function(req,res,next){
             });
         }
     })(req, res, next);
+}
+exports.iduser = function(req,res,next,id){
+    User.findById({_id:id}).select('_id').exec((err,user)=>{
+        if(err) throw err;
+        req.user = user;
+        next();
+    })
 }

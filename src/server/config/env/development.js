@@ -1,4 +1,4 @@
 module.exports = {
-    mongoUri: 'mongodb://localhost/NewDB',
+    mongoUri: 'mongodb://localhost/Income',
     debug: true
 }

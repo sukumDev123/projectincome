@@ -21,6 +21,9 @@ const InComeModel = new Schema({
     timeCreate:{
         type:Date,
         default:Date.now
+    },
+    update_at:{
+        type:Date
     }
 });
 

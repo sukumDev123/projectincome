@@ -13,21 +13,20 @@ const TypeAnSubtype = new Schema({
     subtype : {
         type:String,
         required:true,
-        trim:true,
-        unique:true
+        trim:true
+       
         
     },
     iduser:{
-        type:String,
-        default:'user'
+        type:String
     },
     create_at:{
         type:Date,
-        default:Date.now()
+        default:Date.now
     },
     update_at:{
         type:Date,
-        default:Date.now()
+        default:Date.now
     }
 });
 mongoose.model('Type',TypeAnSubtype);

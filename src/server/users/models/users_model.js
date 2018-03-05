@@ -17,6 +17,11 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    email:{
+        type:String,
+        required:'Please insert your email',
+        unique:true
+    },
     username: {
         unique: true,
         required: "Please insert your username",
@@ -40,7 +45,8 @@ const UserSchema = new Schema({
         type: String
     },
     updated: {
-        type: Date
+        type: Date,
+        default: Date.now
     },
     created: {
         type: Date,

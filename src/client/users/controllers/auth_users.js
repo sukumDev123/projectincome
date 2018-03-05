@@ -8,9 +8,7 @@
     Authentication.$inject = ['$scope', 'Auth', 'UserService', '$location', '$state', '$timeout']
     /** @ngInject */
     function Authentication($scope, Auth, UserService, $location, $state, $timeout) {
-        $scope.users = {}
-        $scope.users.username = 'kungo000';
-        $scope.users.password = '0859932942Ku'
+        
         $scope.authentication = Auth;
         if ($scope.authentication.users) {
             $location.path('/home');

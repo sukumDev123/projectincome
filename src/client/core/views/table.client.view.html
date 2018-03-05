@@ -8,14 +8,15 @@
         <th><strong>แก้ไข</strong></th>
         <th><strong>ลบ</strong></th>
     </tr>
-    <tr ng-repeat="infor in information">
+    <tr ng-repeat="(i,infor) in information">
         <td>{{infor.typeMoney}}</td>
         <td>{{infor.subtypeMoney}}</td>
         <td>{{infor.detailList}}</td>
         <td>{{infor.moneyInput}}</td>
         <td>{{dateFormat(infor.timeCreate)}}</td>
-        <td><i class="far fa-edit"></i></td>
+        <td ng-click='getInfor(infor._id,i)'><i class="far fa-edit"></i></td>
         <td ng-click="deleteInFor( infor._id)"><i style='color:rgb(250, 98, 98);font-size:23px;' class="far fa-times-circle"></i></td>
         
     </tr> 
+    {{page}}
 </table>

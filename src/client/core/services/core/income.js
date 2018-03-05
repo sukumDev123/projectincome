@@ -17,9 +17,8 @@
                 method: "PUT",
                 url: '/api/income/editinformation/:information',
                 params: {
-                    information: '@id'
+                    information: "@id"
                 }
-
             },
             saveInformation: {
                 method: "POST",
@@ -57,9 +56,9 @@
                     information: infor
                 }).$promise;
             },
-            updateInfor: function (id) {
+            updateInfor: function (updateFodata) {
 
-                return this.updateFodata;
+                return this.updateFodata({information: updateFodata._id },updateFodata).$promise;
             },
             getinfor: function (id) {
                 return this.getFigetinforndByid({information:id}).$promise;

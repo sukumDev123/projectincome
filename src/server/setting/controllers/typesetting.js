@@ -4,24 +4,32 @@ const mongoose = require('mongoose'),
     useMore = require('../../useMore')
 
 exports.getType = function (req, res) {
-    Type.find().exec(function (err, type) {
+    Type.find({
+        iduser: req.user._id
+    }).exec(function (err, type) {
         if (err) return res.status(400).json(useMore.getErrorMessage(err))
         else res.json(type)
     })
+
 }
 
 exports.saveType = function (req, res) {
-    var type = new Type(req.body);
 
-    type.save(err => {
-        if (err) {
-            return res.status(400).json(useMore.getErrorMessage(err))
-        } else {
-            res.json(type)
-        }
+    if (req.user) {
+        var type = new Type(req.body);
+        type.iduser = req.user._id;
+        type.save(err => {
+            if (err) {
+                return res.status(400).json(useMore.getErrorMessage(err))
+            } else {
+                res.json(type)
+            }
 
 
-    })
+        })
+    }else{
+        res.redirect('/')
+    }
 }
 exports.updateType = function (req, res) {
 
