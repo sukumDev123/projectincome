@@ -9,13 +9,18 @@
     function Routes($stateProvider,$urlRouterProvider) {
      
         $stateProvider
+            .state('core',{
+                url:'/',
+                templateUrl: 'src/client/core/views/first.client.view.html'
+            })
             .state('home',{
-           
                 url:'/home',
                 templateUrl:  "src/client/core/views/select.client.view.html",
                 data: {
-                   roles:['user','admin']
+                   roles:['user','admin'],
+                   ignorePage : true
                 }
+                
             })
             .state('home.insert', {
                 url: "/insert",

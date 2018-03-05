@@ -20,7 +20,7 @@
                 for (var i = 0; i < toState.data.roles.length; i++) {
                     if (Auth.users && Auth.users.roles == toState.data.roles[i]) {
                         allowed = true;
-                    }
+                    }  
                 }
                 if (!allowed) {
                     event.preventDefault();
@@ -45,7 +45,7 @@
                     params: params,
                     href: $state.href(state, params)
                 };
-                console.log($state.previous)
+         
             }
         }
     }

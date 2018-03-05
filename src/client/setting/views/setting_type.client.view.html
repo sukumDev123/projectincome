@@ -1,6 +1,8 @@
 <div class="container" ng-controller="SettingType">
+        <h1>เพิ่มรายการ</h1>
+    
     <div class="row">
-        <div class="col-12 col-md-6 p-3">
+        <div class="col-12 col-md-10 p-3" style='margin:auto ;'>
             <form ng-submit="saveType()" name='myForm' novalidate>
                 <div class="md-form">
                     <select type="text" class="form-control" name='typeMoney' ng-model="type.typeMoney" required>
@@ -16,7 +18,7 @@
                 <p class='err' ng-show='err'>{{err}}</p>
             </form>
         </div>
-        <div class="col-12 col-md-6">
+        <div class="col-12">
             <p class='suc' ng-show='sucess'>{{sucess}}</p>
             <div class="card p-3" ng-repeat="t in types">
                 <p class='cancle'>

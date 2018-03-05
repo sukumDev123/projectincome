@@ -11,6 +11,7 @@ label,
 table {
     font-family: 'Kanit', sans-serif;
 }
+
 growl-notifications {
     position: fixed;
     top: 150px;
@@ -19,7 +20,7 @@ growl-notifications {
 }
 
 growl-notifications growl-notification {
-    background: rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.6);
     color: white;
     padding: 15px 30px;
     width: 200px;
@@ -55,7 +56,11 @@ table {
     color: #E84136
 }
 
-.active1 {
+a {
+    color: black;
+}
+
+.active {
     color: #E84136;
 }
 
@@ -117,20 +122,64 @@ button {
     margin: 0 auto;
 }
 
-.backGcolor-nav {
-    /* box-shadow: 0 0 3px 2px rgba(0,0,0,0.1);*/
-    border-radius: 3px;
-    position: relative;
-    top: 10px;
-    margin-bottom: 15px;
-}
-
 .headerP {
-    background: #FEFDF0;
+    background: rgb(255, 255, 255);
     box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
 }
 
 .btn-color {
     background: #E84136;
     color: #FCF7BF;
+}
+
+.left {
+    float: left;
+    width: 40%;
+    margin: auto;
+}
+
+.right {
+    float: right;
+    width: 40%;
+    margin: auto;
+}
+
+.clear {
+    clear: both
+}
+
+.slowW {
+    padding: 10px;
+    height: 300px;
+    border: 0.5px solid rgba(0, 0, 0, 0.1);
+    text-align: center;
+    background: white;
+}
+
+.slowW:hover {
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1)
+}
+
+.slowW img {
+    width: 30%;
+}
+
+.slowW img:hover {
+    border-radius: 50%;
+    animation: example 4s infinite;
+
+}
+
+@keyframes example {
+    from {
+        transform: rotate(0deg);
+        box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.1)
+        
+    }
+    to {
+        transform: rotate(360deg);
+        box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.1)
+        
+    }
 }
