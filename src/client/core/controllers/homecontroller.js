@@ -49,6 +49,7 @@
             }
             $scope.information.typeof = $scope.type[$scope.information.typeof];
             $scope.information.subtype = $scope.subtype[$scope.information.subtype];
+            $scope.information.iduser = $scope.authentication.users._id
             IncomeService.saveInfor($scope.information).then(onSucess).catch(onError);
         };
 

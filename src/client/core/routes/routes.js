@@ -45,9 +45,9 @@
                 templateUrl:"src/client/core/views/table.client.view.html",
                
             })
-            getInformation.$inject = ['IncomeService'];
-            function getInformation(IncomeService){
-                return IncomeService.viewsInformation({}).$promise;
+            getInformation.$inject = ['IncomeService','Auth'];
+            function getInformation(IncomeService,Auth){
+                return IncomeService.viewsInformation({id:'5942222'}).$promise;
             }
             $urlRouterProvider.otherwise('/')
     }

@@ -1,7 +1,8 @@
 'use strict';
 const mongoose = require('mongoose');
 const Income = mongoose.model('Income');
-const config = require('../../config/config')
+const config = require('../../config/config');
+const User = mongoose.model('User')
 exports.rander = function (req, res) {
     res.render('./src/client/core/views/layout', {
         title: config.title,
@@ -20,7 +21,7 @@ exports.incomeid = function (req, res, next, id) {
 
 }
 exports.viewsinformation = function (req, res) {
-    Income.find().exec((err, infor) => {
+   Income.find({ iduser: req.user.id} ).exec((err, infor) => {
         if (err) res.json(err);
         else res.json(infor);
     })
@@ -31,7 +32,7 @@ exports.addinformation = function (req, res) {
         typeMoney: req.body.typeof,
         subtypeMoney: req.body.subtype,
         detailList: req.body.detaill,
-        iduser: 'users'
+        iduser: req.body.iduser
     });
     income.save(err => {
         if (err) res.json(err);
@@ -63,3 +64,10 @@ exports.deleteinformation = function (req, res) {
         
     })
 };
+exports.iduser = function(req,res,id,next){
+    User.findById({_id:id}).select('id').exec((err,user)=>{
+        if(err) throw err;
+
+        req.user = user;
+    })
+}

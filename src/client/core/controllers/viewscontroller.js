@@ -6,10 +6,10 @@
         .module('core')
         .controller('ViewsIncomeTotal', ViewsIncomeTotal)
 
-    ViewsIncomeTotal.$inject = ['$scope', 'viewsTest', '$filter', 'MouthY', 'IncomeService', '$state', 'mySocket','$http'];
+    ViewsIncomeTotal.$inject = ['$scope', 'viewsTest', '$filter', 'MouthY', 'IncomeService', '$state', 'mySocket','$http','Auth'];
     /** @ngInject */
-    function ViewsIncomeTotal($scope, viewsTest, $filter, MouthY, IncomeService, $state, mySocket,$http) {
-        console.log(viewsTest)
+    function ViewsIncomeTotal($scope, viewsTest, $filter, MouthY, IncomeService, $state, mySocket,$http,Auth) {
+        $scope.authentication = Auth;
         $scope.information = viewsTest;
         $scope.inmoney = 0;
         $scope.delmoney = 0;
