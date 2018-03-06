@@ -9,7 +9,7 @@
     function HomeController($scope, $state, $filter, IncomeService, MouthY, mySocket, TypeAndSubType,Auth) {
       
         $scope.authentication = Auth
-    
+        $scope.subtype = false
         var DateSet = function (date, detail) {
             return $filter('date')(date, detail);
         }
@@ -20,7 +20,7 @@
         $scope.data = [];
         $scope.type = ['รายรับ', 'รายจ่าย', 'เงินออม'];
         $scope.nameuser = Auth;
-       
+        $scope.skipp = false;
         $scope.information = {};
         $scope.detail = false;
         $scope.showtype = function () {      

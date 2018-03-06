@@ -13,25 +13,29 @@
             return $filter('date')(date, detail);
         }
         var incomeFunc = (element) => {
-          
-        
-                if (element.typeMoney == "รายรับ") {
-                    $scope.inmoney += parseInt(element.moneyInput);
-                    
-                } else if (element.typeMoney == "รายจ่าย") {
-                 
-                    
-                    $scope.delmoney += parseInt(element.moneyInput)
-                } else if (element.typeMoney == 'เงินออม') {
-                    $scope.saveMoney += parseInt(element.moneyInput)
-                  
-                }
+
+
+            if (element.typeMoney == "รายรับ") {
+                $scope.inmoney += parseInt(element.moneyInput);
+
+            } else if (element.typeMoney == "รายจ่าย") {
+
+
+                $scope.delmoney += parseInt(element.moneyInput)
+            } else if (element.typeMoney == 'เงินออม') {
+                $scope.saveMoney += parseInt(element.moneyInput)
+
+            }
             /**/
         }
         var check_type = (time) => {
             $scope.information = [];
+
+
+    
+
             if ($stateParams.type == 'day') {
-                $scope.informationReal.forEach((element ,k ) => {
+               $scope.informationReal.forEach((element ,k ) => {
                     if (DateSet(element.timeCreate, 'dd MM yyyy') == DateSet(time, 'dd MM yyyy')) {
                       incomeFunc(element);
                       $scope.information.push(element);
@@ -60,6 +64,11 @@
                 });
 
             }else{
+                $scope.informationReal.forEach((element ,k ) => {
+                    if (DateSet(element.timeCreate, 'MM yyyy') == DateSet(time, 'MM yyyy')) {
+                      incomeFunc(element);           
+                    }
+                });
                 $scope.information = $scope.informationReal;
                 
             }
@@ -72,11 +81,11 @@
         $scope.informationReal = viewsTest;
         $scope.type = ['รายรับ', 'รายจ่าย', 'เงินออม'];
         $scope.inmoney = 0;
-            $scope.delmoney = 0;
-            $scope.saveMoney = 0;
+        $scope.delmoney = 0;
+        $scope.saveMoney = 0;
         $scope.timeS = new Date();
         check_type(Date.now())
-        $scope.timeChnge = () =>{
+        $scope.timeChnge = () => {
             $scope.inmoney = 0;
             $scope.delmoney = 0;
             $scope.saveMoney = 0;
@@ -118,19 +127,19 @@
 
         $scope.deleteInFor = function (infor) {
             IncomeService.delete(infor).then(function (res) {
-              
+
                 $scope.information.splice(infor, 1);
-               // check_type(Date.now() || $scope.timeS );
+                // check_type(Date.now() || $scope.timeS );
             }).catch(function (err) {
                 console.log(err)
             })
 
         }
-        $scope.removeEdit  = ()=>{
+        $scope.removeEdit = () => {
             $scope.showUpadte = false;
         }
         $scope.updateInfor = function () {
-           
+
             $scope.dateForUpdate.iduser = $scope.authentication.users._id;
             IncomeService.updateInfor($scope.dateForUpdate).then(suc => {
                 $scope.information[$scope.indexof] = suc;

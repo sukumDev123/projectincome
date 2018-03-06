@@ -24,7 +24,7 @@ exports.incomeid = function (req, res, next, id) {
 exports.viewsinformation = function (req, res) {
     Income.find({
         iduser: req.user.id
-    }).exec((err, infor) => {
+    }).sort('-_id').exec((err, infor) => {
         if (err) res.json(err);
         else res.json(infor);
     })

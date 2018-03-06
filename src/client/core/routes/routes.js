@@ -40,11 +40,7 @@
                 templateUrl:"src/client/core/views/showStatic.client.view.html",
                
             })*/
-            .state('home.views.table',{
-                url:'/table',
-                templateUrl:"src/client/core/views/table.client.view.html",
-               
-            })
+           
             .state('home.views.day',{
                 url:'/table/:type',
                 templateUrl:"src/client/core/views/table.client.view.html",

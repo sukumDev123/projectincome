@@ -2,14 +2,14 @@
     <div class='backGcolor-nav backGcolor' >
         <ul class="nav">
             <li class="nav-item">
-                <a class="nav-link active" ui-sref="home.insert">เพิ่มข้อมูล</a>
+                <a class="nav-link" ui-sref="home.insert">เพิ่มข้อมูล</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" ui-sref="home.views">ดูรายการทั่งหมด</a>
+                <a class="nav-link" ui-sref="home.views.day({type:'all'})">ดูรายการทั่งหมด</a>
             </li>
             
         </ul>
     </div>
-    <div  ui-view></div>
+    <div class='p-3' ui-view></div>
 
 </div>

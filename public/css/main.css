@@ -10,6 +10,7 @@ h5,
 label,
 table {
     font-family: 'Kanit', sans-serif;
+    color:rgb(66, 64, 64);
 }
 
 growl-notifications {
@@ -79,9 +80,7 @@ table {
     color: #E84136
 }
 
-a {
-    color: black;
-}
+
 
 .active {
     color: #E84136;
@@ -121,7 +120,7 @@ th {
 
 body {
     color: #2D1E2F;
-    background: #e9e9e9;
+    background: #f3f3f3;
 }
 
 .colorFont {
