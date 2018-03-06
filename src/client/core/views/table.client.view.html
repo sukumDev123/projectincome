@@ -1,3 +1,27 @@
+<div class="card">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="row p-3">
+                <div class="col-12 col-md-3">
+                    <p>รายรับทั้้งหมด : {{ inmoney }}</p>
+                </div>
+                <div class="col-12 col-md-3">
+                    <p>รายจ่ายทั่งหมด : {{ delmoney }}</p>
+                </div>
+                <div class="col-12 col-md-3">
+                    <p>ยอดเงินคงเหลือ : {{ inmoney - delmoney }}</p>
+                </div>
+                <div class="col-12 col-md-3">
+                    <p>เงินที่ออมได้ : {{ saveMoney }}</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+<input type="date" class='form-control' ng-model="timeS" ng-change="timeChnge()" id="">
+
 <table>
     <tr>
         <th><strong>ประเภท</strong></th>
@@ -20,3 +44,38 @@
     </tr> 
     {{page}}
 </table>
+<div class="row edit" ng-if='showUpadte'>
+    <div class="container edit_Path">
+        <div class="col-12 col-md-6 text-center formEdit">
+            <h5>แก้ไข ข้อมูล</h5>
+
+            <form class='col-10' style='margin:0 auto'>
+                <div class="md-form">
+                    <input type="text" class="form-control" ng-model="dateForUpdate.moneyInput">
+                </div>
+                <div class="md-form">
+                    <input type="text" class="form-control" ng-model="dateForUpdate.detailList">
+                </div>
+                <div class="md-form">
+                    <select class='form-control' ng-change="onChange()" ng-model="dateForUpdate.typeMoney">
+                        <option value="รายจ่าย">รายจ่าย</option>
+                        <option value="รายรับ">รายรับ</option>
+                        <option value="เงินออม">เงินออม</option>
+
+                    </select>
+                    <select class='form-control' ng-model="dateForUpdate.subtypeMoney">
+                        <option value="{{dateForUpdate.subtypeMoney}}">{{dateForUpdate.subtypeMoney}}</option>
+
+                        <option ng-repeat="(key,types) in subtype" value='{{types}}'>{{ types }}</option>
+                    </select>
+                </div>
+                <div class="md-form">
+                    <button class="btn btn-lg btn-block " ng-click='updateInfor()'>แก้ไข</button>
+                </div>
+                <div class="md-form">
+                    <button style='background:rgb(138, 138, 138)' class="btn btn-lg btn-block " ng-click='removeEdit()'>ยกเลิก</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

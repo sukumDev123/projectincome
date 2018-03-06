@@ -45,6 +45,12 @@
                 templateUrl:"src/client/core/views/table.client.view.html",
                
             })
+            .state('home.views.day',{
+                url:'/table/:type',
+                templateUrl:"src/client/core/views/table.client.view.html",
+                controller:'ViewsIncomeTotal',
+                
+            })
             getInformation.$inject = ['IncomeService','Auth'];
             function getInformation(IncomeService,Auth){
                 return IncomeService.viewsInformation({id:'5942222'}).$promise;

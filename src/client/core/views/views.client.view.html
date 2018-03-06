@@ -1,76 +1,27 @@
-<div class="container" >
+<div class="container">
     <div class="row">
         <div class="col-12 col-md-3 p-3 card" style='background-color: #FFFFFF;'>
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">วัน</a>
+                    <a class="nav-link active" ui-sref='home.views.table'>all</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">เดือน</a>
+                    <a class="nav-link active" ui-sref='home.views.day({type:"day"})'>วัน</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">ปี</a>
+                    <a class="nav-link" ui-sref='home.views.day({type:"month"})'>เดือน</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" ui-sref='home.views.day({type:"year"})'>ปี</a>
                 </li>
 
             </ul>
         </div>
         <div class="col-12 col-md-9 p-3">
-            <div class="card">
-
-                <div class="row">
-                    <div class="col-12">
-                        <div class="row p-3">
-                            <div class="col-12 col-md-3">
-                                <p>รายรับทั้้งหมด : {{ inmoney }}</p>
-                            </div>
-                            <div class="col-12 col-md-3">
-                                <p>รายจ่ายทั่งหมด : {{ delmoney }}</p>
-                            </div>
-                            <div class="col-12 col-md-3">
-                                <p>ยอดเงินคงเหลือ : {{ inmoney - delmoney }}</p>
-                            </div>
-                            <div class="col-12 col-md-3">
-                                <p>เงินที่ออมได้ : {{ saveMoney }}</p>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-12 col-md-9 p-3">
-                <a ui-sref='home.views.show'>Show</a>
-                <a ui-sref='home.views.table'>Table</a>
-                
-            </div>
-           <div ui-view></div>
+        
+            <div ui-view></div>
         </div>
     </div>
 
-    <div class="row edit" ng-if='showUpadte'>
-        <div class="container edit_Path">
-            <div class="col-12 col-md-6 text-center formEdit">
-            <h5>แก้ไข ข้อมูล</h5>
-                
-                <form class='col-10' style='margin:0 auto'>
-                    <div class="md-form"><input type="text" class="form-control" ng-model="dateForUpdate.moneyInput"></div>
-                    <div class="md-form"><input type="text" class="form-control" ng-model="dateForUpdate.detailList"></div>
-                    <div class="md-form">
-                        <select class='form-control' ng-change="onChange()" ng-model="dateForUpdate.typeMoney" >
-                            <option value="รายจ่าย">รายจ่าย</option>
-                            <option value="รายรับ">รายรับ</option>
-                            <option value="เงินออม">เงินออม</option>
-                            
-                        </select>
-                        <select class='form-control' ng-model="dateForUpdate.subtypeMoney">
-                                <option value="{{dateForUpdate.subtypeMoney}}">{{dateForUpdate.subtypeMoney}}</option>
-                            
-                                <option ng-repeat="(key,types) in subtype" value='{{types}}'>{{ types }}</option>
-                        </select>
-                    </div>
-                    <div class="md-form"><button class="btn btn-lg btn-block " ng-click='updateInfor()'>แก้ไข</button></div>
-                    <div class="md-form"><button style='background:rgb(138, 138, 138)' class="btn btn-lg btn-block " ng-click='removeEdit()'>ยกเลิก</button></div>
-                </form>
-            </div>
-        </div>
-    </div>
+    
 </div>
