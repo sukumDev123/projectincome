@@ -49,7 +49,7 @@
             })
             getInformation.$inject = ['IncomeService','Auth'];
             function getInformation(IncomeService,Auth){
-                return IncomeService.viewsInformation({id:'5942222'}).$promise;
+                return IncomeService.viewsInformation().$promise;
             }
             $urlRouterProvider.otherwise('/')
     }

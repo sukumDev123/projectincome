@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/sukumDev123/projectincome#readme",
   "dependencies": {
+    "acl": "^0.4.11",
     "body-parser": "^1.18.2",
     "express": "^4.16.2",
     "express-hbs": "^1.0.4",

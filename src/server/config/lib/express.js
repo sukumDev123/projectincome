@@ -11,6 +11,9 @@ var routes = function (app) {
         require(path.resolve(element))(app);
     });
 }
+const policy = (app) => {
+    require(path.resolve('./src/server/core/policies/core_polict')).invokeRolesPolicies();
+}
 var sessionFunction = (app) => {
     app.use(session({
         secret: 'secret_key',
@@ -44,6 +47,8 @@ var server = function () {
     //routes express
     routes(app);
    
+    policy(app);
+    
 
     return app;
 }
