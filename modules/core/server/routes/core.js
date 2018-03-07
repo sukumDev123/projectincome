@@ -6,11 +6,14 @@ module.exports = function(app){
     const controllers = require('../controllers/corecontroller');
     const policies = require('../policies/core_polict')
     app.get('/',controllers.rander)
-    app.get('/api/income/views',policies.isAllowed, controllers.viewsinformation);
-    app.get('/api/income/views/:information',controllers.getinfor);
-    app.post('/api/income/addinformation',controllers.addinformation);
-    app.put('/api/income/editinformation/:information',controllers.editinformation);
-    app.delete('/api/income/deleteinformation/:information',controllers.deleteinformation);
+    app.route('/api/income/views')
+    .get(policies.isAllowed, controllers.viewsinformation)
+    .post(policies.isAllowed, controllers.addinformation)
+    app.route('/api/income/views/:information')
+        .get(policies.isAllowed,controllers.getinfor)
+        .put(policies.isAllowed,controllers.editinformation)
+        .delete(policies.isAllowed,controllers.deleteinformation)
+  
 
     app.param('information',controllers.incomeid)
 }

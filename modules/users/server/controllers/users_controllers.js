@@ -59,10 +59,3 @@ exports.signin = function(req,res,next){
         }
     })(req, res, next);
 }
-exports.iduser = function(req,res,next,id){
-    User.findById({_id:id}).select('_id').exec((err,user)=>{
-        if(err) throw err;
-        req.user = user;
-        next();
-    })
-}

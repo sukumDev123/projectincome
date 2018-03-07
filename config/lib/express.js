@@ -59,13 +59,6 @@ var server = function () {
 
     engine(app);
 
-    app.use((req, res, next) => {
-        console.log(req.session)
-        console.log("---------------")
-        console.log(req.cookies)
-        next();
-
-    })
     //routes express
     routes(app);
 

@@ -15,18 +15,18 @@
         var Income = $resource('/api/income/views', {}, {
             updateFodata: {
                 method: "PUT",
-                url: '/api/income/editinformation/:information',
+                url: '/api/income/views/:information',
                 params: {
                     information: "@id"
                 }
             },
             saveInformation: {
                 method: "POST",
-                url: "/api/income/addinformation",
+                url: "/api/income/views",
             },
             deleteInformation: {
                 method: "DELETE",
-                url: '/api/income/deleteinformation/:information',
+                url: '/api/income/views/:information',
                 params: {
                     information: "@id"
                 }

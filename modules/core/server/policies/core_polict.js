@@ -9,7 +9,7 @@ acl = new acl(new acl.memoryBackend());
 */
 exports.invokeRolesPolicies = function () {
  acl.allow([{
-   roles: 'user',
+   roles: ['user','admin'],
    allows: [{
      resources: '/api/income/views',
      permissions: '*'
