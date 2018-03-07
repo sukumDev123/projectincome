@@ -1,7 +1,7 @@
 'use stict'
 const mongoose = require('mongoose'),
     Type = mongoose.model('Type'),
-    useMore = require('../../useMore')
+    useMore = require('../../../useMore')
 
 exports.getType = function (req, res) {
     Type.find({

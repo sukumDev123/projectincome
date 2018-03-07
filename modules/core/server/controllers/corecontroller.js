@@ -1,11 +1,12 @@
 'use strict';
+const path = require('path')
 const mongoose = require('mongoose');
 const Income = mongoose.model('Income');
-const config = require('../../config/config');
+const config = require(path.resolve('./config/config'));
 const User = mongoose.model('User');
-const getError = require('../../useMore')
+const getError = require('../../../useMore')
 exports.rander = function (req, res) {
-    res.render('./src/client/core/views/layout', {
+    res.render(path.resolve('./modules/core/client/views/layout'), {
         title: config.title,
         user: JSON.stringify(req.user) || null
     });
@@ -21,6 +22,7 @@ exports.incomeid = function (req, res, next, id) {
     })
 
 }
+
 exports.viewsinformation = function (req, res) {
     Income.find({
         iduser: req.user.id

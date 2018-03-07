@@ -10,14 +10,14 @@
         $stateProvider
         .state('setting',{
             url:'/setting',
-            templateUrl:'src/client/setting/views/setting-home.clilent.view.html',
+            templateUrl:'modules/setting/client/views/setting-home.clilent.view.html',
             data:{
                 roles:['user','admin']
             }
         })
         .state('setting.type',{
             url:'/putType',
-            templateUrl:'src/client/setting/views/setting_type.client.view.html',
+            templateUrl:'modules/setting/client/views/setting_type.client.view.html',
         })
         
     }
