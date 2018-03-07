@@ -4,4 +4,9 @@ module.exports = app => {
     const adminController = require('../controllers/admin_controller')
     app.get('/api/admin/views',adminPolicies.isAllowed ,adminController.viewUsers)
 
+
+
+
+
+    app.param('userId',adminController.userId);
 }

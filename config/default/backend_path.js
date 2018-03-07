@@ -4,7 +4,9 @@ module.exports = {
         routes: [
             'modules/core/server/routes/core',
             'modules/setting/server/routes/setting',
-            'modules/users/server/routes/users'
+            'modules/users/server/routes/users',
+            'modules/users/server/routes/admin'
+            
             
         ],
         policies : [

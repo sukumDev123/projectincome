@@ -4,17 +4,25 @@ const path = require('path'),
     User = require('mongoose').model('User');
 
 exports.viewUsers = (req, res) => {
-    if(req.user.roles == "admin" ){
-        User.find().populate('-_id').exec( (err,users) => {
-            if(err) return res.status(400).json({
-                mess : getError(err)
+    if (req.user.roles == "admin") {
+        User.find().populate('-_id').exec((err, users) => {
+            if (err) return res.status(400).json({
+                mess: getError(err)
             });
-            else{
+            else {
                 res.json(users);
             }
-        } )
-    }else{
-        return res.status(403).json({mess : "Admin only !"})
+        })
+    } else {
+        return res.status(403).json({
+            mess: "Admin only !"
+        })
     }
-    
+
+}
+
+exports.userId = (req, res, next, id) => {
+    User.findById({_id: id}).populate('-timeCreate').select('displayName ').exec((err,user) => {
+        
+    })
 }
