@@ -17,10 +17,11 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    email:{
-        type:String,
-        required:'Please insert your email',
-        unique:true
+    email: {
+        type: String,
+        required: 'Please insert your email',
+        unique: true,
+        match: /^\w+@[a-zA-Z_]+?\.[c-z]{2,6}$/ 
     },
     username: {
         unique: true,

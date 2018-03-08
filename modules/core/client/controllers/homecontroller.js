@@ -7,7 +7,11 @@
     HomeController.$inject = ['$scope', '$state', '$filter', 'IncomeService', 'MouthY', 'mySocket', 'TypeAndSubType','Auth'];
 
     function HomeController($scope, $state, $filter, IncomeService, MouthY, mySocket, TypeAndSubType,Auth) {
-      
+        let match = false;
+        let first = "assu4kum"
+        let chenck = /^\S+[a-zA-z]$/ //[ก-๙a-zA-z]+\D/;
+        console.log(first.match(chenck))
+        console.log(chenck.test(first))
         $scope.authentication = Auth
         $scope.subtype = false
         var DateSet = function (date, detail) {
@@ -41,6 +45,8 @@
             }
         }
         $scope.save = function () {
+            
+           if(match){
             $scope.savea = true;
             $scope.information.date = {
                 day: DateSet(Date.now(), "dd"),
@@ -52,6 +58,7 @@
             $scope.information.iduser = $scope.authentication.users._id;
 
             IncomeService.saveInfor($scope.information).then(onSucess).catch(onError);
+           }
         };
 
         function onSucess(res) {
