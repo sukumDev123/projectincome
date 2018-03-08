@@ -89,10 +89,13 @@
     
 
         $scope.showPage = 1;
+        $scope.informationReal = viewsTest;
         $scope.information = [];
         $scope.indexof = 0;
         $scope.authentication = Auth;
-        $scope.informationReal = viewsTest;
+        
+      
+        
         $scope.type = ['รายรับ', 'รายจ่าย', 'เงินออม'];
         $scope.inmoney = 0;
         $scope.delmoney = 0;
@@ -101,7 +104,6 @@
         
         
         check_type(Date.now())
-        
        
         $scope.timeChnge = () => {
             $scope.inmoney = 0;
@@ -113,7 +115,6 @@
         }
         TypeAndSubType.getInformation().then(suc => {
             $scope.suc = suc
-
         });
         const subType = () => {
             $scope.subtype = [];
@@ -136,10 +137,10 @@
         $scope.dateSetNew = (date)=>{
             return 'วันที่ทำรายการ : ' + DateSet(date,'dd')+ ' ' + MouthY.setMountT(DateSet(date,'MM')) + ' ' + MouthY.setYearT(DateSet(date,'yyyy'))
         }
-        $scope.deleteInFor = function (infor) {
-            IncomeService.delete(infor).then(function (res) {
-
-                $scope.information.splice(infor, 1);
+        $scope.deleteInFor = function (infor,i) {
+            $scope.filteredTodos.splice(i,1)
+           IncomeService.delete(infor).then(function (res) {
+                console.log(res)
                 // check_type(Date.now() || $scope.timeS );
             }).catch(function (err) {
                 console.log(err)
@@ -181,6 +182,10 @@
             numberPage();
             $scope.showPage = n;
         }
+        mySocket.on('showNew' ,data=>{    
+            $scope.filteredTodos.push(data)
+                        
+        })
     }
 
 }());

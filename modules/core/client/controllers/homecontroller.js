@@ -49,17 +49,22 @@
             }
             $scope.information.typeof = $scope.type[$scope.information.typeof];
             $scope.information.subtype = $scope.subtype[$scope.information.subtype];
-            $scope.information.iduser = $scope.authentication.users._id
+            $scope.information.iduser = $scope.authentication.users._id;
+
             IncomeService.saveInfor($scope.information).then(onSucess).catch(onError);
         };
 
         function onSucess(res) {
-            $scope.data.push($scope.information)
+            mySocket.emit('InputNew',res);
+            
             $scope.information = {};
             $scope.skipp = false;
             $scope.subtype = false;
         }
-
+        mySocket.on('showNew' ,data=>{
+            $scope.data.push(data)
+            
+        })
         function onError(err) {
             console.log(err);
         }

@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const Income = mongoose.model('Income');
 const config = require(path.resolve('./config/config'));
 const User = mongoose.model('User');
-const getError = require('../../../useMore')
+const getError = require('../../../useMore');
+
 exports.rander = function (req, res) {
     res.render(path.resolve('./modules/core/client/views/layout'), {
         title: config.title,
@@ -24,12 +25,13 @@ exports.incomeid = function (req, res, next, id) {
 }
 
 exports.viewsinformation = function (req, res) {
-    Income.find({
-        iduser: req.user.id
-    }).sort('-_id').exec((err, infor) => {
-        if (err) res.json(err);
-        else res.json(infor);
-    })
+
+     Income.find({
+         iduser: req.user.id
+     }).sort('-_id').exec((err, infor) => {
+         if (err) res.json(err);
+         else res.json(infor);
+     })
 };
 exports.addinformation = function (req, res) {
     if (req.user) {
@@ -44,7 +46,7 @@ exports.addinformation = function (req, res) {
             if (err) res.json(err);
             else res.json(income)
         })
-    }else{
+    } else {
         return res.status(500).send("Users not login .")
     }
 };

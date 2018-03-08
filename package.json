@@ -29,6 +29,7 @@
     "livereload-js": "^2.3.0",
     "mongoose": "^5.0.7",
     "morgan": "^1.9.0",
+    "os": "^0.1.1",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
     "socket.io": "^2.0.4"

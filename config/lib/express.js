@@ -10,6 +10,9 @@ const morgan = require('morgan');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const cookieParser = require('cookie-parser');
+
+
+
 const routes = (app) => {
     config.files.routes.forEach(element => {
         require(path.resolve(element))(app);
@@ -53,7 +56,7 @@ const engine = (app) => {
 var server = function () {
     const app = express();
 
-    if (process.env.NODE_ENV === 'development') app.use(morgan('dev'));
+    if (process.env.NODE_ENV === 'development') app.use( morgan('dev') );
 
     sessionFunction(app);
 
