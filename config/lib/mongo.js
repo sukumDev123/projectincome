@@ -6,6 +6,7 @@ const config = require('../config');
 const path = require('path');
 var modelFile = () => {
     config.file.files.models.forEach(element => {
+        console.log(element)
         require(path.resolve(element));
 
     });

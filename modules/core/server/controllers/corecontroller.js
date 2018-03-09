@@ -5,7 +5,7 @@ const Income = mongoose.model('Income');
 const config = require(path.resolve('./config/config'));
 const User = mongoose.model('User');
 const getError = require('../../../useMore');
-
+//const Money = mongoose.model('MoneyTotal')
 exports.rander = function (req, res) {
     res.render(path.resolve('./modules/core/client/views/layout'), {
         title: config.title,
