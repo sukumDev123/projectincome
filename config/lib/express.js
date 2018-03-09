@@ -45,7 +45,7 @@ var sessionFunction = (app) => {
 
 const engine = (app) => {
     app.engine('client.view.html', hbs.express4({
-        extname: '.server.view.html'
+        extname: '.client.view.html'
     }))
     app.set('views', './');
     app.set('view engine', 'client.view.html');
@@ -61,7 +61,10 @@ var server = function () {
     sessionFunction(app);
 
     engine(app);
-
+    app.locals.jsFilesRoutes = config.clientP.routes
+    app.locals.jsFilesControllers = config.clientP.controllers
+    app.locals.jsFilesServices = config.clientP.services
+    
     //routes express
     routes(app);
 

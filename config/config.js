@@ -12,8 +12,14 @@ function filesFunction(){
         routes : glob.sync(  defaultPa.files.routes),
         policies : glob.sync( defaultPa.files.policies )
     }
+    var h = {
+        routes : glob.sync(defaultPa.filesC.routes),
+        controllers : glob.sync(defaultPa.filesC.controllers),
+        services : glob.sync(defaultPa.filesC.services),
+    }
     var path = {
         files:g,
+        clientP :h,
         env_L : envP
     }
     

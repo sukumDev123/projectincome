@@ -11,12 +11,12 @@
         
         $scope.authentication = Auth;
         if ($scope.authentication.users) {
-            $location.path('/home');
+            $location.path('/home/dashboard');
         }
         $scope.signup = function () {
             UserService.usersSignup($scope.users).then(suc => {
                 $scope.authentication.users = suc;
-                $state.go('home.insert')
+                $state.go('home.dash')
             }).catch(err => {
                 $scope.error = err.data;
                 $timeout( function(){
@@ -29,7 +29,7 @@
         
             UserService.usersSignin($scope.users).then(suc => {
                 $scope.authentication.users = suc;
-                $state.go('home')
+                $state.go('home.dash')
 
             }).catch(err => {
                 $scope.error = err.data;

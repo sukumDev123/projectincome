@@ -10,21 +10,20 @@ const app = express();
 const ps = passport();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
-const sockett = require(path.resolve('./modules/core/server/scokets/core_socket'))(io,app)
+const sockett = require(path.resolve('./modules/core/server/scokets/core_socket'))(io, app)
 
 const os = require('os')
 const networkInterfaces = os.networkInterfaces();
 
 module.exports.start = function start() {
-   
-  
-   server.listen(process.env.PORT, () => {
+
+    server.listen(process.env.PORT, () => {
         console.log(chalk.rgb(181, 242, 38).bold("=========================================================\n"))
         console.log(chalk.rgb(181, 242, 38).bold('\tRun Host :   http://localhost:' + process.env.PORT));
         console.log(chalk.rgb(255, 255, 255).bold('\tENV : ' + process.env.NODE_ENV + ''));
         console.log(chalk.rgb(181, 242, 38).bold('\tDB :    ' + config.env_L.mongoUri));
         console.log(chalk.rgb(181, 242, 38).bold("\tIP ADDESS : " + networkInterfaces.enp0s26u1u2c4i2[0].address));
-      
+
         console.log(chalk.rgb(181, 242, 38).bold("\n========================================================="))
 
     })

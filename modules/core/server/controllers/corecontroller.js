@@ -16,7 +16,7 @@ exports.incomeid = function (req, res, next, id) {
 
     Income.findById(id).select('_id').exec(function (err, resDD) {
         if (err) {
-            return res.status(404).json(getError(err))
+            return res.status(404).json(getError.getErrorMessage(err))
         }
 
         req.income = resDD;
@@ -32,7 +32,7 @@ exports.viewsinformation = function (req, res) {
         iduser: req.user.id
     }).sort('-_id').exec((err, infor) => {
         if (err) {
-            return res.status(404).json(getError(err))
+            return res.status(404).json(getError.getErrorMessage(err))
             
         } else res.json(infor);
     })
@@ -48,7 +48,9 @@ exports.addinformation = function (req, res) {
         });
         income.save(err => {
             if (err) res.json(err);
-            else res.json(income)
+            else {
+               res.json(income)
+            }
         })
     } else {
         return res.status(500).send("Users not login .")

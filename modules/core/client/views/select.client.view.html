@@ -1,13 +1,16 @@
 <div class="container ">
-    <div class='backGcolor-nav backGcolor' >
+    <div class='backGcolor-nav backGcolor'>
         <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" ui-sref="home.dash">DashBoard</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" ui-sref="home.insert">เพิ่มข้อมูล</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" ui-sref="home.views.day({type:'all'})">ดูรายการทั่งหมด</a>
             </li>
-            
+
         </ul>
     </div>
     <div class='p-2' ui-view></div>

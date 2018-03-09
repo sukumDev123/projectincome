@@ -25,6 +25,7 @@
     <div  ui-view></div>
 
 
+    <div class="row"></div>
 
     <script src="/socket.io/socket.io.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
@@ -60,29 +61,17 @@
     
     <script src="modules/setting/client/setting.js"></script>
     
-    <script src="modules/setting/client/controllers/settingType.js"></script>
-    <script src="modules/core/client/routes/router-filter.js"></script>
-    
-    <script src="modules/core/client/routes/routes.js"></script>
-    <script src="modules/setting/client/routes/setting-routes.js"></script>
-    <script src="modules/users/client/routes/users_routes.js"></script>
-  
-    <script src="modules/core/client/controllers/headercontroller.js"></script>
-    
-    <script src="modules/core/client/controllers/homecontroller.js"></script>
-    <script src="modules/core/client/controllers/viewscontroller.js"></script>
-    <script src="modules/users/client/controllers/auth_users.js"></script>
+    {{#each jsFilesRoutes}}<script type="text/javascript" src="/{{this}}"></script>{{/each}}
+
+
+
+    {{#each jsFilesControllers}}<script type="text/javascript" src="/{{this}}"></script>{{/each}}
+
     
 
-    <script src="modules/core/client/services/core/income.js"></script>
-    <script src="modules/core/client/services/core/mouthY.js"></script>
-    <script src="modules/core/client/services/core/socket.js"></script>
-    
-    
-    <script src="modules/setting/client/services/typeMoney.js"></script>
-    <script src="modules/users/client/services/Auth.js"></script>
-    <script src="modules/users/client/services/user_service.js"></script>
-    
+
+    {{#each jsFilesServices}}<script type="text/javascript" src="/{{this}}"></script>{{/each}}
+
     <!--<script src="http://localhost:35729/livereload.js"></script>-->
 </body>
 
