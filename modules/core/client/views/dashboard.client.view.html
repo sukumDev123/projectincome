@@ -1,1 +1,83 @@
-{{$scope.avenDay}}
+<div class="container">
+    <div class="row p-3 bb" style='background:white'>
+
+        <h3>{{showTitle}}</h3>
+        <div class="col-12 col-md-4 p-3 " ng-hide='totalShow'>
+               
+                   
+                        <p ng-repeat="i in showInfor">
+                            {{i.moneyInput}}
+                        </p>
+                        
+    
+    
+            </div>
+        <div class="col-12 col-md-4 p-3 " ng-hide='totalShow'>
+            <div class="bigShow">
+
+                <h3> {{dash_Big | currency : '฿' : 2 }}</h3>
+
+
+            </div>
+        </div>
+    </div>
+    <div class="row p-3">
+        <div class="col-12 col-md-3 " style='text-align:center'>
+            <h3 ng-click='typeShow("aven")' class='p-3 bb'>
+                <small>
+                    {{show.avenDay | currency : '฿' : 2 }} บาท
+                    <br>
+                </small>
+            </h3>
+            <small>
+                จำนวนเงินเฉลี่ย จาก {{show.numI}} รายการ
+            </small>
+        </div>
+        <div class="col-12 col-md-3 " style='text-align:center'>
+            <h3 ng-click='typeShow("totalComein")' class='p-3 bb'>
+                <small>
+                    {{show.totalComein | currency : '฿' : 2 }} บาท
+                    <br>
+                </small>
+            </h3>
+            <small>
+                จำนวนเงินรายรับของเดือนน จาก {{show.numCome}} รายการ
+            </small>
+        </div>
+        <div class="col-12 col-md-3 " style='text-align:center'>
+            <h3 ng-click='typeShow("beyond")' class='p-3 bb'>
+                <small>
+                    {{show.beyond | currency : '฿' : 2 }} บาท
+                    <br>
+                </small>
+            </h3>
+            <small>
+                จำนวนเงินคงเหลือ จาก {{show.numB}} รายการ
+            </small>
+        </div>
+        <div class="col-12 col-md-3 " style='text-align:center'>
+            <h3 ng-click='typeShow("pay")' class='p-3 bb'>
+                <small>
+                    {{show.pay | currency : '฿' : 2 }} บาท
+                    <br>
+                </small>
+            </h3>
+            <small>
+                จำนวนเงินรายจ่ายของเดือนน จาก {{show.numI}} รายการ
+            </small>
+        </div>
+        <!-- <div class="col-12 col-md-8">
+            <h5>จำนวนรายการ ร่ายจ่าย ล่าสุด 5 รายการ</h5>
+            <div>
+                <ul ng-repeat="(i,ele) in showInfor ">
+                    <li>{{ele.moneyInput | currency : '฿' : 2 }} บาท</li>
+                    <li>{{ ele.subtypeMoney }}</li>
+                    <li>{{ ele.detailList }}</li>
+                    
+                </ul>
+            </div>
+        </div>-->
+    </div>
+
+
+</div>

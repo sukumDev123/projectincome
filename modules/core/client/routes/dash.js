@@ -15,6 +15,7 @@
             .state('home.dash', {
                 url: '/dashboard',
                 controller: 'DashBoardController',
+                templateUrl:'modules/core/client/views/dashboard.client.view.html',
                 resolve: {
                     DashGet: getInformation
                 }

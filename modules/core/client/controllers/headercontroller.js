@@ -14,6 +14,7 @@
             console.log(infor)
             
         })
+       
     }
 
 }());

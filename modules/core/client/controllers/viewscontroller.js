@@ -111,10 +111,22 @@
         }
         check_type(Date.now());
 
-        mySocket.on('showNew' ,data=>{    
+        mySocket.on('showNew', data => {
             $scope.filteredTodos.push(data)
-                        
+
         })
+
+        $scope.deleteInFor = (infor, i) => {
+            $scope.filteredTodos.splice(infor ,1)
+            IncomeService.delete(infor).then(
+                suc => {
+                    $scope.success = 'Success';
+                    console.log(suc)
+                }
+            ).catch(err => {
+                $scope.error = err;
+            })
+        }
     }
 
 }());
