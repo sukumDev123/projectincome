@@ -5,7 +5,7 @@ const hbs = require('express-hbs');
 const mongoose = require('mongoose')
 const passport = require('passport')
 const bodyParser = require('body-parser');
-const config = require('../default/backend_path');
+const config = require('../config')();
 const morgan = require('morgan');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
@@ -19,7 +19,7 @@ const routes = (app) => {
     });
 }
 const policy = (app) => {
-    config.files.policies.forEach(ele => {
+    config.files.policies.forEach(ele => {    
         require(path.resolve(ele)).invokeRolesPolicies();
     })
 }

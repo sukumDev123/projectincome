@@ -2,10 +2,10 @@
 
 'use strict';
 const mongoose = require('mongoose')
-const config = require('../config');
+const config = require('../config')();
 const path = require('path');
 var modelFile = () => {
-    config.file.files.models.forEach(element => {
+    config.files.models.forEach(element => {
         require(path.resolve(element));
 
     });
