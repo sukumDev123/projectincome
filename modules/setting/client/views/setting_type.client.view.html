@@ -20,7 +20,7 @@
         </div>
         <div class="col-12">
             <p class='suc' ng-show='sucess'>{{sucess}}</p>
-            <div class="card p-3" ng-repeat="t in types">
+            <div class="card p-3" ng-repeat="t in num_page">
                 <p class='cancle'>
                     <strong ng-click="deleteType1(t._id)">
                         <i class="fas fa-times-circle"></i>
@@ -33,5 +33,6 @@
 
             </div>
         </div>
+        <button class="btn btn-lg btn-block" ng-click='show_more()' >Show More</button>
     </div>
 </div>

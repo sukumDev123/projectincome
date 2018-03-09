@@ -6,11 +6,34 @@
         .module('core')
         .controller('ViewsIncomeTotal', ViewsIncomeTotal)
 
-    ViewsIncomeTotal.$inject = ['$scope', 'viewsTest', '$filter', 'MouthY', 'IncomeService', '$state', 'mySocket', '$http', 'Auth', 'TypeAndSubType', '$stateParams','$location'];
+    ViewsIncomeTotal.$inject = ['$scope', 'viewsTest', '$filter', 'MouthY', 'IncomeService', '$state', 'mySocket', '$http', 'Auth', 'TypeAndSubType', '$stateParams', '$location'];
     /** @ngInject */
-    function ViewsIncomeTotal($scope, viewsTest, $filter, MouthY, IncomeService, $state, mySocket, $http, Auth, TypeAndSubType, $stateParams,$location) {
-        var DateSet = function (date, detail) {
+    function ViewsIncomeTotal($scope, viewsTest, $filter, MouthY, IncomeService, $state, mySocket, $http, Auth, TypeAndSubType, $stateParams, $location) {
+
+        var debug = infor => {
+            console.log(infor)
+        }
+        var DateSet = (date, detail) => {
             return $filter('date')(date, detail);
+        }
+        $scope.filteredTodos = []; // for show
+        $scope.incomeTotal = viewsTest // status first infor total
+        $scope.currentPage = 1;
+        $scope.numPerPage = 7;
+        $scope.information = [];
+        $scope.notShow = false;
+        $scope.type = ['รายรับ', 'รายจ่าย', 'เงินออม'];
+        $scope.inmoney = 0;
+        $scope.delmoney = 0;
+        $scope.saveMoney = 0;
+        $scope.timeS = new Date();
+        var check_num_page = (num) => {
+            $scope.t = [];
+
+            var v = Math.ceil(num / $scope.numPerPage);
+            for (var i = 0; i < v; i++) {
+                $scope.t[i] = i + 1;
+            }
         }
         var incomeFunc = (element) => {
             if (element.typeMoney == "รายรับ") {
@@ -26,162 +49,68 @@
             }
             /*ตรวจสอบรายรับรายจ่าย เพื่อทำการคำนวน หา รายรับรายจ่าย*/
         }
-        $scope.currentPage = 1;
-        $scope.numPerPage = 7;
-      
-        var numberPage = () => {
-            $scope.$watch("currentPage + numPerPage", function() {
-                var begin = ($scope.currentPage - 1) * $scope.numPerPage
-                , end = begin + $scope.numPerPage;
-            
-                $scope.filteredTodos = $scope.information.slice(begin, end);
-              });
-              
-        }
         var check_type = (time) => {
-            $scope.notShow = false;
-            
-            $scope.filteredTodos = [];
-            $scope.information = [];
             if ($stateParams.type == 'day') {
-               $scope.informationReal.forEach((element ,k ) => {
+                $scope.incomeTotal.forEach((element, k) => {
                     if (DateSet(element.timeCreate, 'dd MM yyyy') == DateSet(time, 'dd MM yyyy')) {
-                      incomeFunc(element);
-                      $scope.information.push(element);
-                        
+                        incomeFunc(element);
+                        $scope.information.push(element);
                     }
                 });
-            } 
-            else if ($stateParams.type == 'month') {
-                $scope.informationReal.forEach((element ,k ) => {
+            } else if ($stateParams.type == 'month') {
+                $scope.incomeTotal.forEach((element, k) => {
                     if (DateSet(element.timeCreate, 'MM yyyy') == DateSet(time, 'MM yyyy')) {
-                      incomeFunc(element);
-                      $scope.information.push(element);             
+                        incomeFunc(element);
+                        $scope.information.push(element);
+
                     }
                 });
-            }
-            else if ($stateParams.type == 'year') {
-                $scope.informationReal.forEach((element ,k ) => {
+            } else if ($stateParams.type == 'year') {
+                $scope.incomeTotal.forEach((element, k) => {
                     if (DateSet(element.timeCreate, 'yyyy') == DateSet(time, 'yyyy')) {
-                      incomeFunc(element);
-                      $scope.information.push(element);
-                      
+                        incomeFunc(element);
+                        $scope.information.push(element);
+
                     }
                 });
-            }else if($stateParams.type == 'all'){
-                $scope.informationReal.forEach((element ,k ) => {
+            } else if ($stateParams.type == 'all') {
+                $scope.incomeTotal.forEach((element, k) => {
                     if (DateSet(element.timeCreate, 'yyyy') == DateSet(time, 'yyyy')) {
-                      incomeFunc(element);
-                     
+                        incomeFunc(element);
+
                     }
-                });            
-                $scope.information = $scope.informationReal;
+                });
+                $scope.information = $scope.incomeTotal
                 $scope.notShow = true;
-            }else{
+            } else {
                 $location.path('/home/views/table/all')
             }
-            numberPage();
+            check_num_page($scope.information.length);
 
-            /*ตรวจสอบการค้นหาว่าหาโดยวันที่ เดือน หรือ ปี*/
+            page_show();
 
         }
-    
-    
-
-        $scope.showPage = 1;
-        $scope.informationReal = viewsTest;
-        $scope.information = [];
-        $scope.indexof = 0;
-        $scope.authentication = Auth;
-        
-      
-        
-        $scope.type = ['รายรับ', 'รายจ่าย', 'เงินออม'];
-        $scope.inmoney = 0;
-        $scope.delmoney = 0;
-        $scope.saveMoney = 0;
-        $scope.timeS = new Date();
-        
-        
-        check_type(Date.now())
-       
+        var page_show = () => {
+            var begin = ($scope.currentPage - 1) * $scope.numPerPage,
+                end = begin + $scope.numPerPage;
+            $scope.filteredTodos = $scope.information.slice(begin, end);
+        }
         $scope.timeChnge = () => {
             $scope.inmoney = 0;
             $scope.delmoney = 0;
             $scope.saveMoney = 0;
-            
+
             check_type($scope.timeS);
-         
-        }
-        TypeAndSubType.getInformation().then(suc => {
-            $scope.suc = suc
-        });
-        const subType = () => {
-            $scope.subtype = [];
-            var num = $scope.dateForUpdate.typeMoney;
-
-            for (var t = 0; t < $scope.suc.length; t++) {
-                if ($scope.suc[t].typeMoney == null) break;
-                if (num == $scope.suc[t].typeMoney) {
-                    $scope.subtype.push($scope.suc[t].subtype)
-                }
-            }
-        }
-        $scope.onChange = () => {
-            subType();
-        }
-        //totalMoney();
-        $scope.dateFormat = function (date) {
-            return  DateSet(date,'hh:mma');
-        }
-        $scope.dateSetNew = (date)=>{
-            return 'วันที่ทำรายการ : ' + DateSet(date,'dd')+ ' ' + MouthY.setMountT(DateSet(date,'MM')) + ' ' + MouthY.setYearT(DateSet(date,'yyyy'))
-        }
-        $scope.deleteInFor = function (infor,i) {
-            $scope.filteredTodos.splice(i,1)
-           IncomeService.delete(infor).then(function (res) {
-                console.log(res)
-                // check_type(Date.now() || $scope.timeS );
-            }).catch(function (err) {
-                console.log(err)
-            })
 
         }
-        $scope.removeEdit = () => {
-            $scope.showUpadte = false;
-        }
-        $scope.updateInfor = function () {
 
-            $scope.dateForUpdate.iduser = $scope.authentication.users._id;
-            IncomeService.updateInfor($scope.dateForUpdate).then(suc => {
-                $scope.information[$scope.indexof] = suc;
-                $scope.showUpadte = false;
-                $scope.indexof = 0;
-
-            }).catch(err => console.log(err))
-        }
-        $scope.getInfor = function (id, arry) {
-            $scope.indexof = arry;
-            $scope.showUpadte = true;
-            IncomeService.getinfor(id).then(suc => {
-                $scope.dateForUpdate = suc;
-            });
-        }
-
- /** สำหรับคิดเลขเภท */
-   
-        numberPage();
-
-        $scope.t = [];
-        const v = Math.ceil($scope.information.length / $scope.numPerPage);
-        for(var i = 0 ; i < v;i++){
-            $scope.t[i]=i+1;
-        }
-        $scope.changePage = (n)=>{
+        $scope.changePage = n => {
             $scope.currentPage = n;
-            numberPage();
+            page_show();
             $scope.showPage = n;
         }
+        check_type(Date.now());
+
         mySocket.on('showNew' ,data=>{    
             $scope.filteredTodos.push(data)
                         

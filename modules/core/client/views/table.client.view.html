@@ -54,8 +54,8 @@
             <td>{{infor.subtypeMoney}}</td>
             <td>{{infor.detailList}}</td>
             <td>{{infor.moneyInput}}</td>
-            <td>{{dateFormat(infor.timeCreate)}}
-                <br>{{infor.timeCreate | date: 'd/M/yy'}}</td>
+            <td>{{infor.timeCreate | date: 'h:ma'}}
+            <br>{{infor.timeCreate | date: 'd/M/yy'}}</td>
             <td ng-click='getInfor(infor._id,i)'>
                 <i class="far fa-edit"></i>
             </td>

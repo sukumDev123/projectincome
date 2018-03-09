@@ -15,7 +15,9 @@ exports.rander = function (req, res) {
 exports.incomeid = function (req, res, next, id) {
 
     Income.findById(id).select('_id').exec(function (err, resDD) {
-        if (err) res.json(err);
+        if (err) {
+            return res.status(404).json(getError(err))
+        }
 
         req.income = resDD;
 
@@ -26,12 +28,14 @@ exports.incomeid = function (req, res, next, id) {
 
 exports.viewsinformation = function (req, res) {
 
-     Income.find({
-         iduser: req.user.id
-     }).sort('-_id').exec((err, infor) => {
-         if (err) res.json(err);
-         else res.json(infor);
-     })
+    Income.find({
+        iduser: req.user.id
+    }).sort('-_id').exec((err, infor) => {
+        if (err) {
+            return res.status(404).json(getError(err))
+            
+        } else res.json(infor);
+    })
 };
 exports.addinformation = function (req, res) {
     if (req.user) {

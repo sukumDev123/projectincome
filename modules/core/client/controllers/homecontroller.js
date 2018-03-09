@@ -8,10 +8,9 @@
 
     function HomeController($scope, $state, $filter, IncomeService, MouthY, mySocket, TypeAndSubType,Auth) {
         let match = false;
-        let first = "assu4kum"
-        let chenck = /^\S+[a-zA-z]$/ //[ก-๙a-zA-z]+\D/;
-        console.log(first.match(chenck))
-        console.log(chenck.test(first))
+        let first = "234"
+        let chenck = /[0-9]+$/g //[ก-๙a-zA-z]+\D/;
+    
         $scope.authentication = Auth
         $scope.subtype = false
         var DateSet = function (date, detail) {
@@ -46,7 +45,7 @@
         }
         $scope.save = function () {
             
-           if(match){
+           if(chenck.test($scope.information.money)){
             $scope.savea = true;
             $scope.information.date = {
                 day: DateSet(Date.now(), "dd"),
@@ -58,6 +57,11 @@
             $scope.information.iduser = $scope.authentication.users._id;
 
             IncomeService.saveInfor($scope.information).then(onSucess).catch(onError);
+           }else{
+               alert('จำนวนเงินไม่สามารถเป็นตัวอักษรได้');
+               $scope.information = {};
+               $scope.skipp = false;
+               $scope.subtype = false;
            }
         };
 
