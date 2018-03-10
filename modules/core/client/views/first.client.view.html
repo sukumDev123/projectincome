@@ -1,24 +1,10 @@
 <div class="container">
     <div class="row p-3">
-        <div class=" col-12 col-md-6">
-            <div class="title slowW">
-                <h1>ระบบสมัครสมาชิก</h1>
-            </div>
-        </div>
-        <div class=" col-12 col-md-6">
-            <div class="title slowW">
-                <h1>เข้าสู่ระบบ</h1>
-            </div>
-        </div>
-    </div>
-    <div class="row p-3">
-        <div class="col-12 col-md-6">
-
-            <div class="slowW">
-                <h1>ดูรายการสถิติ </h1>
-                <img src="public/img/pie-chart.png" alt="รูปภาพ">
-            </div>
-
+        <div class="col-12">
+                <canvas id="base" class="chart-bar"
+                chart-data="data" chart-labels="labels" chart-colors="colors"
+                chart-dataset-override="datasetOverride" >
+              </canvas> 
         </div>
     </div>
     <div class="clear">

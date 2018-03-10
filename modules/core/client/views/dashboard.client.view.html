@@ -1,24 +1,40 @@
 <div class="container">
     <div class="row p-3 bb" style='background:white'>
 
-        <h3>{{showTitle}}</h3>
         <div class="col-12 col-md-4 p-3 " ng-hide='totalShow'>
-               
-                   
-                        <p ng-repeat="i in showInfor">
-                            {{i.moneyInput}}
-                        </p>
-                        
-    
-    
+            <h3>รายการใหม่
+                <span class="badge badge-secondary badge-danger">New</span>
+            </h3>
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">เงิน</th>
+                        <th scope="col">ประเภท</th>
+                        <th scope="col">เวลา / วัน</th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="i in showInfor">
+                    <td>{{i.moneyInput | currency : '฿' : 2}}</td>
+                    <td>{{i.typeMoney }}</td>
+                    <td>{{i.timeCreate | date : 'h:ma d/m/yy'}}</td>
+
+                </tr>
+            </table>
+        </div>
+        <div class="col-12 col-md-4 p-3 " style='margin:auto' ng-hide='totalShow'>
+            <div class="col-12">
+                <h3>{{showTitle}}</h3>
             </div>
-        <div class="col-12 col-md-4 p-3 " ng-hide='totalShow'>
+
             <div class="bigShow">
 
                 <h3> {{dash_Big | currency : '฿' : 2 }}</h3>
 
 
             </div>
+        </div>
+        <div class="col-12 col-md-4 p-3 " style='margin:auto' ng-hide='totalShow'>
+            <!-- ความสำเร็จเป้าหมาย -->
         </div>
     </div>
     <div class="row p-3">
@@ -30,7 +46,7 @@
                 </small>
             </h3>
             <small>
-                จำนวนเงินเฉลี่ย จาก {{show.numI}} รายการ
+                จำนวนเงินเฉลี่ย จาก {{show.numI}} วัน
             </small>
         </div>
         <div class="col-12 col-md-3 " style='text-align:center'>
@@ -66,17 +82,7 @@
                 จำนวนเงินรายจ่ายของเดือนน จาก {{show.numI}} รายการ
             </small>
         </div>
-        <!-- <div class="col-12 col-md-8">
-            <h5>จำนวนรายการ ร่ายจ่าย ล่าสุด 5 รายการ</h5>
-            <div>
-                <ul ng-repeat="(i,ele) in showInfor ">
-                    <li>{{ele.moneyInput | currency : '฿' : 2 }} บาท</li>
-                    <li>{{ ele.subtypeMoney }}</li>
-                    <li>{{ ele.detailList }}</li>
-                    
-                </ul>
-            </div>
-        </div>-->
+        
     </div>
 
 

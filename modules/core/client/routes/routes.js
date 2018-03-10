@@ -11,7 +11,8 @@
         $stateProvider
             .state('core',{
                 url:'/',
-                templateUrl: 'modules/core/client/views/first.client.view.html'
+                templateUrl: 'modules/core/client/views/first.client.view.html',
+                controller : 'HeaderControl'
             })
             .state('home',{
                 url:'/home',
