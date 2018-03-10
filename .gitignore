@@ -1,3 +1,13 @@
-node_modules/
-bower_components/
-.vscode/
+# Node build artifacts
+node_modules
+npm-debug.log
+bower_components
+
+# Local development
+*.env
+*.dev
+.DS_Store
+
+# Docker
+Dockerfile
+docker-compose.yml

@@ -15,8 +15,10 @@ module.exports = function() {
     mongoose.set('debug', config.env_L.debug);
     mongoose.Promise = global.Promise;
     
-    var db = mongoose.connect(config.env_L.mongoUri,(err,db)=>{
-        if(err) throw err;
+    var db = mongoose.connect(config.env_L.mongoUri).then(s => {
+        console.log("Connect Success")
+    }).catch(e => {
+        console.log(e + 'errorrrr')
     });
     
 

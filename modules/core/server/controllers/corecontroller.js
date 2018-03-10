@@ -28,14 +28,18 @@ exports.incomeid = function (req, res, next, id) {
 
 exports.viewsinformation = function (req, res) {
 
-    Income.find({
-        iduser: req.user.id
-    }).sort('-_id').exec((err, infor) => {
-        if (err) {
-            return res.status(404).json(getError.getErrorMessage(err))
-            
-        } else res.json(infor);
-    })
+    if(req.user){
+        Income.find({
+            iduser: req.user.id
+        }).sort('-_id').exec((err, infor) => {
+            if (err) {
+                return res.status(404).json(getError.getErrorMessage(err))
+                
+            } else res.json(infor);
+        })
+    }else{
+        return res.status(403).json('Not Sreach information.')
+    }
 };
 exports.addinformation = function (req, res) {
     if (req.user) {
@@ -97,11 +101,11 @@ exports.editinformation = function (req, res) {
     })
 };
 exports.deleteinformation = function (req, res) {
-
+    let mess = '';
     var income = req.income;
     income.remove(function (err) {
         if (!err) {
-            res.json("delete sucess")
+            res.json({mess : "delete sucess"})
         };
 
 

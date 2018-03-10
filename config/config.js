@@ -13,6 +13,7 @@ function filesFunction(){
         policies : glob.sync( defaultPa.files.policies )
     }
     var h = {
+        title : defaultPa.title,
         routes : glob.sync(defaultPa.filesC.routes),
         controllers : glob.sync(defaultPa.filesC.controllers),
         services : glob.sync(defaultPa.filesC.services),

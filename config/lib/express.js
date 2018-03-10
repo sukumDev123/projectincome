@@ -61,10 +61,11 @@ var server = function () {
     sessionFunction(app);
 
     engine(app);
+    app.locals.titleShow = config.clientP.title
     app.locals.jsFilesRoutes = config.clientP.routes
     app.locals.jsFilesControllers = config.clientP.controllers
     app.locals.jsFilesServices = config.clientP.services
-    
+  
     //routes express
     routes(app);
 

@@ -58,11 +58,8 @@
             }
 
             let numdatearr = arr.length;
-
-            console.log(arr)
-            console.log(numdate)
             $scope.show = {
-                avenDay: ho / numdatearr,
+                avenDay:  ho / numdatearr || 0,
                 numI: numdatearr,
                 totalComein: comein,
                 numCome: numcomein,
@@ -108,8 +105,6 @@
 
 
         /**Canvas */
-     
-       console.log($window.ctx)
     }
 
 }());

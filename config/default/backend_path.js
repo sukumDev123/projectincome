@@ -1,5 +1,5 @@
 module.exports = {
-    title: "Project Income ",
+    title: "รายรับรายจ่าย ออนไลน์",
     files: {
         routes: 'modules/*/server/routes/*',
         policies: './modules/*/server/policies/*',

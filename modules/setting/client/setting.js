@@ -2,6 +2,6 @@
     'use strict';
 
    app.registerModule('setting',['core']);
-   app.registerModule('setting-routes')
+   app.registerModule('setting-routes',['core-routes'])
 
 }(ApplicationConfig));

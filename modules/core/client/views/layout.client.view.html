@@ -5,53 +5,123 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{title}}</title>
+    <title>{{ titleShow }}</title>
     <base href="/">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+
 
     <link href="https://fonts.googleapis.com/css?family=Kanit" rel="stylesheet">
     <link rel="stylesheet" href="public/css/main.css">
+    <style>
+        #aaaaa{
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: rgba(255,255,255,0.5);
+            z-index: 100;
+        }
+        #loader {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            z-index: 1;
+            width: 150px;
+            height: 150px;
+            margin: -75px 0 0 -75px;
+            border: 16px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 16px solid #db3434;
+            width: 90px;
+            height: 90px;
+            -webkit-animation: spin 2s linear infinite;
+            animation: spin 2s linear infinite;
+        }
+        @-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
 
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+        @-webkit-keyframes animatebottom {
+            from {
+                bottom: -100px;
+                opacity: 0
+            }
+            to {
+                bottom: 0px;
+                opacity: 1
+            }
+        }
 
+        @keyframes animatebottom {
+            from {
+                bottom: -100px;
+                opacity: 0
+            }
+            to {
+                bottom: 0;
+                opacity: 1
+            }
+        }
+    </style>
+    <script type="text/javascript">
+        var myLoaasdasdwd;
+
+        function myFunction() {
+            myVar = setTimeout(showPage, 3000);
+
+        }
+
+        function showPage() {
+            document.getElementById("aaaaa").style.display = "none";
+
+            //document.getElementById("myDiv").style.display = "block";
+        }
+    </script>
 </head>
 
-<body id='core'>
-
+<body id='core' onload='myFunction()'>
+    <div id='aaaaa' >
+        <div id="loader"></div>
+    </div>
     <header class='headerP' ng-include="'modules/core/client/views/header.client.view.html'"></header>
 
-    <div  ui-view></div>
+    <div ui-view></div>
 
 
     <script src="/socket.io/socket.io.js"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 
 
- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
 
     <script type="text/javascript">
-        var users = {{{user}}};
        
-       $('a').click(function(){
-         console.log("AAA")
-       })
+        var users = {{{user}}};
     </script>
- 
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-   
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-   
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+
 
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-growl-notifications/dist/angular-growl-notifications.js"></script>
-    
+
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <script src="bower_components/angular-ui-router/release/stateEvents.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
 
-<script src="bower_components/chart.js/dist/Chart.min.js"></script>
+    <script src="bower_components/chart.js/dist/Chart.min.js"></script>
 
-<script src="bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
+    <script src="bower_components/angular-chart.js/dist/angular-chart.min.js"></script>
 
 
     <script src="https://unpkg.com/popper.js@1.12.9/dist/umd/popper.min.js"></script>
@@ -60,19 +130,13 @@
     <script src="modules/core/client/app/init.js"></script>
     <script src="modules/core/client/modules/core.js"></script>
     <script src="modules/users/client/users_module.js"></script>
-    
+
     <script src="modules/setting/client/setting.js"></script>
-    
-    {{#each jsFilesRoutes}}<script type="text/javascript" src="/{{this}}"></script>{{/each}}
 
-
-
-    {{#each jsFilesControllers}}<script type="text/javascript" src="/{{this}}"></script>{{/each}}
-
-    
-
-
-    {{#each jsFilesServices}}<script type="text/javascript" src="/{{this}}"></script>{{/each}}
+    {{#each jsFilesRoutes}}
+    <script type="text/javascript" src="/{{this}}"></script>{{/each}} {{#each jsFilesControllers}}
+    <script type="text/javascript" src="/{{this}}"></script>{{/each}} {{#each jsFilesServices}}
+    <script type="text/javascript" src="/{{this}}"></script>{{/each}}
 
     <!--<script src="http://localhost:35729/livereload.js"></script>-->
 </body>
