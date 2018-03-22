@@ -1,0 +1,29 @@
+<div class="container" style='padding:10px;'>
+    <div class="row">
+        <div class="col-12 text-center">
+            <h5>ข้อมูลส่วนตัว</h5>
+        </div>
+        <div class="col-12 col-md-6" style="margin:0 auto;">
+            <form name="SaveUpdate" ng-submit="save_Update(update._id)">
+                <div class="md-form">
+                    <label for="name">ชื่อ :</label>
+                    <input type="text" ng-model="update.first" class="form-control" required>
+                </div>
+                <div class="md-form">
+                    <label for="last">นามสกุล : </label>
+                    <input type="text" ng-model="update.last" class="form-control" required>
+                </div>
+                <div class="md-form">
+                    <label for="email">Email : </label>
+                    <input type="email" ng-model="update.email" class="form-control" required>
+                </div>
+                <div class="md-form p-3">
+                    <button  type="submit" ng-disabled="SaveUpdate.$invalid" class="btn btn-block">Upate</button>
+                </div>
+                <p class='suc' ng-show='suc'> {{suc}} </p>
+                <p class='err' ng-show='err'> {{err}} </p>
+                
+            </form>
+        </div>
+    </div>
+</div>

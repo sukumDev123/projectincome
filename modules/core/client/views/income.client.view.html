@@ -1,0 +1,102 @@
+<div class="row" style='background:white;box-shadow:0 0 10px 5px rgba(0,0,0,0.1)'  ng-if='!type_ready'>
+    <div class="col-12 col-md-5" style='background:rgba(77, 77, 77, 0.452);'>
+        <div class="p-2">
+            <h3 style='color:white'>Step save </h3>
+            
+        </div>
+    </div>
+    <div class="col-12 col-md-7">
+        <div class="p-3 col-12  text-center  margin-center">
+            <h1 class='colorFont'>รายรับ รายจ่าย</h1>
+        </div>
+        <div class="col-12 ">
+
+            <form ng-submit="save()" class='col-12'>
+                <div class="row" style='margin:0 auto;' ng-if='!skipp'>
+                    <div class="col-12 ">
+
+                        <div class="md-form">
+                            <label for="">ใส่จำนวนเงินที่ต้องการ</label>
+                            <input type="text" ng-change="keypass()" ng-model="information.money" placeholder="0.00 บาท" class="form-control">
+                        </div>
+
+                    </div>
+
+                    <div class="col-12 ">
+                        <label for="">ระบุบประเภทของรายการ</label>
+                        <select class="form-control" ng-model="information.typeof" ng-change="showtype()">
+                            <option ng-repeat="(key,types) in type" value='{{key}}'>{{ types }}</option>
+                        </select>
+                        <br>
+                        <select class="form-control" ng-model="information.subtype" ng-if='subtype'>
+                            <option ng-repeat="(key,types) in subtype" value='{{key}}'>{{ types }}</option>
+                        </select>
+                        <br>
+                    </div>
+                    <button type="button" ng-click="skip()" class="p-3 btn btn-lg btn-block btn-color">
+                        <i class="fas fa-angle-double-right"></i> Skip
+
+
+                    </button>
+                    <p class='suc' ng-if='success'>{{success}}</p>
+
+                </div>
+                <div class="row" ng-if='skipp'>
+                    <div class="col-12 col-md-6">
+                        <div class="col-12 ">
+                            <label for="">จำนวนเงิน</label>
+                            <p class='text-center'>
+                                <strong>{{ information.money | currency:"฿ ": 2 }} บาท</strong>
+                            </p>
+                        </div>
+                        <div class="col-12 ">
+                            <label for="">ประเภทของรายการ</label>
+                            <p class='text-center'>
+                                <strong>{{ type[information.typeof] }}</strong>
+                            </p>
+                        </div>
+                        <div class="col-12 ">
+                            <label for="">ประเภทย่อยของรายการ</label>
+                            <p class='text-center'>
+                                <strong>{{ subtype[information.subtype] }}</strong>
+                            </p>
+                        </div>
+                        <div class="col-12 ">
+                            <label for="">รายละเอียด</label>
+                            <p class='text-center'>
+                                <strong>{{ information.detaill }}</strong>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-6 p-3">
+                        <div class="form-group">
+                            <label for="comment">รายละเอียดของรายการ :</label>
+                            <input type="text" ng-model='information.detaill' class="form-control">
+                        </div>
+                    </div>
+                    <button type="submit" class='btn btn-lg btn-block btn-color'>
+                        <i class="far fa-save"></i> SAVE</button>
+                </div>
+            </form>
+
+        </div>
+        <div class="p-3">
+                
+            </div>
+    </div>
+    <div class="row backGcolor p-3 " ng-if='type_ready'>
+
+        <div style='margin:auto;' class="col-12 text-center p-3">
+
+            <h3 class='p-3'> กรุณาตั่งค่า ประเภทย่อย ที่คุณต้องารก่อนเพิ่มรายการ</h3>
+        </div>
+        <div style='margin:auto;' class="col-12 col-md-6">
+
+            <a class='btn btn-block btn-lg btn-primary' ui-sref='setting.type'>ตั่งต่าประเภท</a>
+            <br>
+            <p>หมายเหตุ : การตั่งต่าประเภทย่อยคือ สมมุติเราเลือกรายรับ เราสามารถกำหนดประเภทย่อยเป็น เงินเดือน หรืออื่นๆได้</p>
+        </div>
+    </div>
+   
+
+</div>
