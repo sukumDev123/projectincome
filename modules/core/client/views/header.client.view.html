@@ -1,6 +1,9 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light" ng-controller='HeaderControl'>
+<nav class="navbar navbar-expand-lg navbar-light" ng-controller='HeaderControl'>
   <div class="container">
-    <a class="navbar-brand" style='color:rgb(227, 24, 10)' ui-sref='core'>รายรับรายจ่าย</a>
+    <a class="navbar-brand" style='color:rgb(227, 24, 10)' ui-sref='core'>
+      <img src="public/img/logo.png" width="64px" alt="">
+      <small style='color:red;'>รายรับรายจ่าย</small>
+    </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02"
       aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -9,15 +12,11 @@
     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
       <ul  class="navbar-nav mr-auto mt-2 mt-lg-0">
         <li class="nav-item">
-          <a class="nav-link " ui-sref="home.views.day({type:'all'})">
+          <a  ng-if='authentication.users' class="nav-link " ui-sref="home.views">
             <i class="fas fa-home"></i> หน้าหลัก</a>
         </li>
         
-        <li ng-if='authentication.users' class="nav-item">
-            <a class="nav-link" ><i class="far fa-gem"></i>
-
-              เป้าหมาย</a>
-          </li>
+    
       </ul>
      
       <div class="form-inline my-2 my-lg-0" ng-if='!authentication.users'>
@@ -41,7 +40,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <a class="dropdown-item" ui-sref='setting.type'>เพิ่มประเภทรายการ</a>
-              <a class="dropdown-item" >Another action</a>
+              <a class="dropdown-item" ui-sref='setting.user'>ข้อมูลส่วนตัว</a>
               <a class="dropdown-item" href="/api/users/logout"><i class="fas fa-sign-out-alt"></i> ออกจากระบบ</a>
             </div>
           </li>

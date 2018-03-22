@@ -31,9 +31,7 @@ exports.saveType = function (req, res) {
         res.redirect('/')
     }
 }
-exports.updateType = function (req, res) {
 
-}
 exports.deleteType = function (req, res) {
     const type = req.typeId;
     var mess = '';
@@ -44,9 +42,7 @@ exports.deleteType = function (req, res) {
         })
     })
 }
-exports.listType = function (req, res) {
-    console.log(req.typeId)
-}
+
 exports.typeId = function (req, res, next, id) {
     Type.findById({
         _id: id

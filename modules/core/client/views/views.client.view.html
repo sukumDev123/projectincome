@@ -1,25 +1,157 @@
-<div class="container">
+<div class="container backGcolor">
     <div class="row">
-        <div class="col-12 col-md-3 p-3 card" style='background-color: #FFFFFF;'>
+        <div class="col-12 col-md-3 p-3" style='background-color: #FFFFFF;'>
             <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link" ui-sref='home.views.day({type:"all"})'>all</a>
+                <li class="nav-item cursor-point">
+                    <a class="nav-link " ng-click='view_date("all")'>all</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" ui-sref='home.views.day({type:"day"})'>วัน</a>
+                <li class="nav-item cursor-point">
+                    <a class="nav-link" ng-click='view_date("day")'>วัน</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" ui-sref='home.views.day({type:"month"})'>เดือน</a>
+                <li class="nav-item cursor-point">
+                    <a class="nav-link" ng-click='view_date("month")'>เดือน</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" ui-sref='home.views.day({type:"year"})'>ปี</a>
+                <li class="nav-item cursor-point">
+                    <a class="nav-link" ng-click='view_date("year")'>ปี</a>
                 </li>
-
+                <li class="nav-item show-view">
+                    <a class="nav-link" >รายการโชว์ : {{chDate}}</a>
+                </li>
+               
             </ul>
         </div>
-        <div class="col-12 col-md-9">
+        <div class="col-12 col-md-9" style='background-color: #FFFFFF;'>
         
-            <div ui-view></div>
+            <div class='container' >
+                <select ng-model='type_push_show' class="form-control" ng-change="showType()" id="">
+                    <option value="รายรับ">รายรับ</option>
+                    <option value="รายจ่าย">รายจ่าย</option>
+                    <option value="เงินออม">เงินออม</option>
+                    
+                </select>
+                <div class="row" style='margin:0'>
+                    <div class="col-12">
+                        <div class="row p-3">
+                            <div class="col-12 col-md-6">
+                                <p>รายรับทั้้งหมด : {{ inmoney | currency: '฿' : 2 }}</p>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <p>รายจ่ายทั่งหมด : {{ delmoney| currency: '฿' : 2}}</p>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <p>ยอดเงินคงเหลือ : {{ inmoney - delmoney | currency: '฿' : 2}}</p>
+                            </div>
+                            <div class="col-12 col-md-6">
+                                <p>เงินที่ออมได้ : {{ saveMoney | currency: '฿' : 2}}</p>
+                            </div>
+                        </div>
+            
+                    </div>
+            
+                </div>
+            
+                <input ng-hide="notShow" type="date" class='form-control' ng-model="timeS" ng-change="timeChnge()" id="">
+            
+                <p ng-hide="notShow" class="mb-0 text-center">{{dateSetNew()}}</p>
+                <div class="table-responsive">
+                    <table>
+                        <tr>
+                            <th>
+                                <strong>ประเภท</strong>
+                            </th>
+                            <th>
+                                <strong>ประเภทย่อย</strong>
+                            </th>
+                            <th>
+                                <strong>รายละเอียด</strong>
+                            </th>
+                            <th>
+                                <strong>จำนวนเงิน</strong>
+                            </th>
+                            <th>
+                                <strong>เวลา</strong>
+                            </th>
+                            <th>
+                                <strong>แก้ไข</strong>
+                            </th>
+                            <th>
+                                <strong>ลบ</strong>
+                            </th>
+                        </tr>
+                        <tr ng-repeat="(i,infor) in filteredTodos">
+                            <td>{{infor.typeMoney}}</td>
+                            <td>{{infor.subtypeMoney}}</td>
+                            <td>{{infor.detailList}}</td>
+                            <td>{{infor.moneyInput}}</td>
+                            <td>{{infor.timeCreate | date: 'h:ma'}}
+                                <br>{{infor.timeCreate | date: 'd/M/yy'}}</td>
+                            <td ng-click='getInfor(infor._id,i)'>
+                                <i class="far fa-edit"></i>
+                            </td>
+                            <td ng-click="deleteInFor( infor._id,i)">
+                                <i style='color:rgb(250, 98, 98);font-size:23px;' class="far fa-times-circle"></i>
+                            </td>
+            
+                        </tr>
+                        <nav aria-label="Page navigation example" style='margin:0 auto;'>
+            
+                            <ul class="pagination" style='margin:0'>
+                                <li class="page-item">
+                                    <a class="page-link">Previous</a>
+                                </li>
+    
+                                <li class="page-item" ng-repeat="n in t">
+                                    <a ng-click="changePage(n)" class="page-link">{{n}}</a>
+                                </li>
+            
+                                <li class="page-item">
+                                    <a class="page-link">Next</a>
+                                </li>
+                            </ul>
+                        </nav>
+            
+            
+                    </table>
+                </div>
+            
+                <div class="col-12 p-3" style='margin:0'>
+                    <p>จำนวนรายการทั้งหมด : {{information.length}}</p>
+                    <p> หน้าที่ : {{showPage || 1}} </p>
+                </div>
+                <div class="row edit" ng-if='showUpadte'>
+                    <div class="container edit_Path">
+                        <div class="col-12 col-md-6 text-center formEdit">
+                            <h5>แก้ไข ข้อมูล</h5>
+            
+                            <form class='col-10' style='margin:0 auto'>
+                                <div class="md-form">
+                                    <input type="text" class="form-control" ng-model="dateForUpdate.moneyInput">
+                                </div>
+                                <div class="md-form">
+                                    <input type="text" class="form-control" ng-model="dateForUpdate.detailList">
+                                </div>
+                                <div class="md-form">
+                                    <select class='form-control' ng-change="onChange()" ng-model="dateForUpdate.typeMoney">
+                                        <option value="รายจ่าย">รายจ่าย</option>
+                                        <option value="รายรับ">รายรับ</option>
+                                        <option value="เงินออม">เงินออม</option>
+                                    </select>
+                                    <select class='form-control' ng-model="dateForUpdate.subtypeMoney">
+                                        <option value="{{dateForUpdate.subtypeMoney}}">{{dateForUpdate.subtypeMoney}}</option>
+            
+                                        <option ng-repeat="(key,types) in subtype" value='{{types}}'>{{ types }}</option>
+                                    </select>
+                                </div>
+                                <div class="md-form">
+                                    <button class="btn btn-lg btn-block " ng-click='updateInfor()'>แก้ไข</button>
+                                </div>
+                                <div class="md-form">
+                                    <button style='background:rgb(138, 138, 138)' class="btn btn-lg btn-block " ng-click='removeEdit()'>ยกเลิก</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
         </div>
     </div>
 

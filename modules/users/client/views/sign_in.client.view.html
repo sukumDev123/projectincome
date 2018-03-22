@@ -1,18 +1,47 @@
-<div class="container" ng-controller="Authentication">
-    <div  class="col-12 col-md-12 p-3 signin">
-        <h3 class="text-center">เข้าสู่ระบบ</h3>
-        <form name='myForm' class='p-3 signup' ng-submit="signin()" novalidate>
-            <div class="md-form">
-                <input type="text" name="username" ng-model='users.username' placeholder="username" class="form-control" required>
+<div class="container" style="background:white;box-shadow:0 0 10px 5px rgba(0,0,0,0.1)" ng-controller="Authentication">
+    <div class="row">
+        <div class="col-12 col-md-6" style="background:rgb(247, 121, 121);">
+            <img src="public/img/text4725.png" style='width:100%' alt="">
+        </div>
+        <div class="col-12 col-md-6">
+            <div class="p-3 text-center">
+                <h3>Sign In </h3>
+                <small> ยินดีต้อนรับการกลับมา เข้าสู่ระบบเพื่อใช้งาน
+                    <br> และต้อนรับ สมาชิกใหม่ สามรถสมัครได้โดย
+                    <a ui-sref='auth.signup' style='color:rgb(0, 153, 255)'>สมัครสมาชิก</a>
+                </small>
+                <hr>
             </div>
-            <div class="md-form">
-                <input type="password" name="password" ng-model="users.password" placeholder="password" class="form-control" required>
-            </div>
-            <button type="submit" ng-disabled="myForm.$invalide" class="btn btn-lg btn-block">เข้าสู่ระบบ</button>
+            <div class="form col-md-10" style='margin:auto;'>
+                <form name='myForm' style='padding:10px;' ng-submit="signin()" novalidate>
+                    <div class="md-form">
+                        <label for="username">username </label>
+                        <div class="p-2">
+                            <input type="text" name="username" ng-model='users.username' placeholder="username" class="input_submit" required>
+                        </div>
+                    </div>
+                    <div class="md-form">
+                        <label for="password">password </label>
+                        <div class="p-2">
+                            <input type="password" name="password" ng-model="users.password" placeholder="password" class="input_submit" required>
+                        </div>
+                    </div>
+                    <!--<div class="md-form p-1 text-right">
+                            <a > ลืม password</a>
+                        </div>-->
+                    <div class="md-form p-3">
+                        <button type="submit" style='padding:10px;' ng-disabled="myForm.$invalide" class="btn btn-lg btn-block btn-danger">เข้าสู่ระบบ</button>
+                    </div>
 
-            <growl-notifications class='err' ng-if='error'>
-                {{error.message}}
-            </growl-notifications>
-        </form>
+
+                </form>
+            </div>
+            <div class="p-3"></div>
+        </div>
+
+
+
+
     </div>
+</div>
 </div>

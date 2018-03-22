@@ -1,7 +1,7 @@
 (function (app) {
   'use strict';
 
-  angular.module(app.angularModuleName, app.angularDependencies);
+  angular.module(app.angularModuleName, app.angularDependencies)
 
 
   angular.element(document).ready(function () {

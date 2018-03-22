@@ -21,7 +21,7 @@ const UserSchema = new Schema({
         type: String,
         required: 'Please insert your email',
         unique: true,
-        match: /^\w+@[a-zA-Z_]+?\.[c-z]{2,6}$/ 
+        match: /^\w+@[a-zA-Z_]+?\.[c-z]{2,6}$/
     },
     username: {
         unique: true,
@@ -56,9 +56,11 @@ const UserSchema = new Schema({
 });
 
 UserSchema.pre('save', function (next) {
+    if (this.password) {
+        this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
+        this.password = this.hashPassword(this.password);
+    }
 
-    this.salt = new Buffer(crypto.randomBytes(16).toString('base64'), 'base64');
-    this.password = this.hashPassword(this.password);
 
     next();
 });

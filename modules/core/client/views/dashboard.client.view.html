@@ -1,42 +1,4 @@
 <div class="container">
-    <div class="row p-3 bb" style='background:white'>
-
-        <div class="col-12 col-md-4 p-3 " ng-hide='totalShow'>
-            <h3>รายการใหม่
-                <span class="badge badge-secondary badge-danger">New</span>
-            </h3>
-            <table class="table">
-                <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">เงิน</th>
-                        <th scope="col">ประเภท</th>
-                        <th scope="col">เวลา / วัน</th>
-                    </tr>
-                </thead>
-                <tr ng-repeat="i in showInfor">
-                    <td>{{i.moneyInput | currency : '฿' : 2}}</td>
-                    <td>{{i.typeMoney }}</td>
-                    <td>{{i.timeCreate | date : 'h:ma d/m/yy'}}</td>
-
-                </tr>
-            </table>
-        </div>
-        <div class="col-12 col-md-4 p-3 " style='margin:auto' ng-hide='totalShow'>
-            <div class="col-12">
-                <h3>{{showTitle}}</h3>
-            </div>
-
-            <div class="bigShow">
-
-                <h3> {{dash_Big | currency : '฿' : 2 }}</h3>
-
-
-            </div>
-        </div>
-        <div class="col-12 col-md-4 p-3 " style='margin:auto' ng-hide='totalShow'>
-            <!-- ความสำเร็จเป้าหมาย -->
-        </div>
-    </div>
     <div class="row p-3">
         <div class="col-12 col-md-3 " style='text-align:center'>
             <h3 ng-click='typeShow("aven")' class='p-3 bb'>
@@ -82,8 +44,45 @@
                 จำนวนเงินรายจ่ายของเดือนน จาก {{show.numI}} รายการ
             </small>
         </div>
-        
+
+    </div>
+    <div class="row p-3 ">
+
+        <div class="col-12 col-md-4 p-3 " ng-hide='totalShow'>
+            <h3>แสดงเท่าไหร่ถึงจะได้สิงของ
+            </h3>
+            <table class="table">
+                <thead class="thead-dark">
+                    <th>สิงของ</th>
+                    <th>เหลืออีกเท่าไหร่</th>
+                </thead>
+     
+                <tr ng-repeat="i in showInfor">
+                    <td>{{i.name}}</td>
+                    <td>{{i.price | currency : '฿' : 2}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-12 col-md-8" style='margin:auto' ng-hide='totalShow'>
+            <div class=" p-3">
+                <div class="col-12 p-3 text-center">
+                    <h3>{{showTitle}}</h3>
+                </div>
+
+                <div class="bigShow">
+
+                    <h3> {{dash_Big | currency : '฿' : 2 }}</h3>
+
+
+                </div>
+            </div>
+
+        </div>
+
     </div>
 
 
+    <div class="col-12 text-center">
+        <h5> ยอดสำหรับ เดือน {{eyeDo.month }} พ.ศ. {{ eyeDo.year }} </h5>
+    </div>
 </div>

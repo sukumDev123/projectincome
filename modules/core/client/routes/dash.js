@@ -5,11 +5,9 @@
 
     angular
         .module('dash-routes')
-        .config(ConfigConfig)
-
-    /** @ngInject */
+        .config(ConfigConfig);
+        
     ConfigConfig.$inject = ['$stateProvider']
-
     function ConfigConfig($stateProvider) {
         $stateProvider
             .state('home.dash', {
@@ -17,12 +15,9 @@
                 controller: 'DashBoardController',
                 templateUrl:'modules/core/client/views/dashboard.client.view.html',
                 resolve: {
-                    DashGet: getInformation
+                     viewsTest: getInformation,
                 }
             })
-
-
-
         getInformation.$inject = ['IncomeService', 'Auth'];
 
         function getInformation(IncomeService, Auth) {

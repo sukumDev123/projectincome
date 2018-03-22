@@ -4,4 +4,8 @@ module.exports = function(app){
     app.post('/api/users/signin',users.signin)
     app.post('/api/users/signup',users.create)
     app.get('/api/users/logout',users.logout)
+
+    app.route('/api/users/:userId').put(users.updateData);
+  
+   // app.param('userId',users.getId);
 }

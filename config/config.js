@@ -21,7 +21,9 @@ function filesFunction(){
     var path = {
         files:g,
         clientP :h,
-        env_L : envP
+        env_L : envP,
+        sessionSecret: process.env.SESSION_SECRET || 'secret_income_keyy',
+        sessionKey: 'sessionId'
     }
     
     return path;

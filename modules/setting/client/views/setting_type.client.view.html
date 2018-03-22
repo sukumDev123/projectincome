@@ -1,30 +1,56 @@
-<div class="container" ng-controller="SettingType">
-        <h1>เพิ่มรายการ</h1>
-    
-    <div class="row">
-        <div class="col-12 col-md-10 p-3" style='margin:auto ;'>
-            <form ng-submit="saveType()" name='myForm' novalidate>
-                <div class="md-form">
-                    <select type="text" class="form-control" name='typeMoney' ng-model="type.typeMoney" required>
-                        <option value="รายรับ">รายรับ</option>
-                        <option value="รายจ่าย">รายจ่าย</option>
-                        <option value="เงินออม">เงินออม</option>
-                    </select>
-                </div>
-                <div class="md-form">
-                    <input type="text" class="form-control" name='subtype' ng-model='type.subtype' required>
-                </div>
-                <button type='submit' ng-disabled="myForm.$invalid" class="btn btn-block">Save</button>
-                <p class='err' ng-show='err'>{{err}}</p>
-            </form>
+<div class="container" style='padding:20px;' ng-controller="SettingType">
+
+
+
+    <div class="col-12 col-md-10 p-3" style='margin:auto ; '>
+        <form class='col-12 col-md-10' style='margin:auto;' ng-submit="saveType()" name='myForm' novalidate>
+            <div class="md-form">
+                <label for="type">เลือกประเภทหลัก : </label>
+                <select type="text" class="form-control" name='typeMoney' ng-model="type.typeMoney" required>
+
+                    <option value="รายรับ">รายรับ</option>
+                    <option value="รายจ่าย">รายจ่าย</option>
+                    <option value="เงินออม">เงินออม</option>
+                </select>
+            </div>
+            <div class="md-form">
+                <input type="text" class="form-control" name='subtype' placeholder="ชนิดเพิ่มเติม * จำเป็นต้องใส่เป็นตัวอักษร" ng-model='type.subtype'
+                    required>
+            </div>
+            <button type='submit' ng-disabled="myForm.$invalid" class="btn btn-block">Save</button>
+            <p class='err' ng-show='err'>{{err}}</p>
+        </form>
+    </div>
+
+    <div class="col-12 col-md-10 p-3" style='margin:auto ; '>
+
+        <div class="table-responsive-sm">
+            <table class="table">
+                <tr>
+                    <th>ประเภท</th>
+                    <th>ประย่อย</th>
+                    <th>ลบข้อมูล</th>
+                </tr>
+                <tr ng-repeat="(k,i) in num_page">
+                    <td>{{ i.typeMoney }}</td>
+
+                    <td>{{ i.subtype }}</td>
+                    <td>
+                        <strong ng-click="deleteType1(i._id,k)">
+                            <i class="fas fa-times-circle"></i>
+                        </strong>
+                    </td>
+                </tr>
+            </table>
         </div>
-        <div class="col-12">
+        <button class="btn btn-block" style='background:#1d1a1a' ng-click='show_more()'>Show More</button>
+    </div>
+
+    <!--<div class="col-12 col-md-4">
             <p class='suc' ng-show='sucess'>{{sucess}}</p>
             <div class="card p-3" ng-repeat="t in num_page">
                 <p class='cancle'>
-                    <strong ng-click="deleteType1(t._id)">
-                        <i class="fas fa-times-circle"></i>
-                    </strong>
+                    
                 </p>
                 <p>ประเภท : {{ t.typeMoney }}</p>
                 <p>ประเภทย่อย : {{ t.subtype }}</p>
@@ -33,6 +59,8 @@
 
             </div>
         </div>
-        <button class="btn btn-lg btn-block" ng-click='show_more()' >Show More</button>
-    </div>
+        <div class="col-12 col-md-4" style='margin:auto;'>
+           
+
+        </div>-->
 </div>

@@ -10,7 +10,7 @@ const app = express();
 const ps = passport();
 const server = require('http').Server(app);
 const io = require('socket.io')(server);
-const sockett = require(path.resolve('./modules/core/server/scokets/core_socket'))(io, app)
+const sockett = require(path.resolve('./modules/core/server/scokets/core_socket'))(io,app)
 
 const os = require('os')
 //const networkInterfaces = os.networkInterfaces();
