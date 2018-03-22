@@ -30,6 +30,7 @@
             })
         }
         select_type();
+        $scope.type_push_show = false
         $scope.incomeTotal = viewsTest // status first infor total
         $scope.currentPage = 1;
         $scope.numPerPage = 7;
@@ -189,7 +190,9 @@
                 $scope.filteredTodos = [];
             }
             show_type_boolen = false;
-
+            if($scope.type_push_show == null) {
+                $scope.sub_type_show = false
+            }
         }
         $scope.timeChnge = () => {
 

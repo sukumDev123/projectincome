@@ -1,11 +1,28 @@
 <div class="container">
 
     <div class="row">
-      <div class="col-12 p-3"  ng-hide="jj">
-          <a ui-sref='home.insert.income'>ss</a>
-      </div>
-        <div class="col-12 p-3">
-           <div ui-view></div>
+        <div class="col-12 ">
+            <div ui-view></div>
         </div>
+        <div class="col-12 ">
+            <div class="row" style="background:white;box-shadow:0 0 10px 5px rgba(0,0,0,0.1)">
+                <div class="col-12 col-md-6 p-3 insert text-center">
+                    <a ui-sref='home.insert.income'>
+                        <img src="public/img/path4229-income.png" alt="income insert">
+                        <h5 class='p-3'>เพิ่มบัญชีรายรับ รายจ่าย</h5>
+
+                    </a>
+                </div>
+                <div class="col-12 col-md-6 p-3 insert  text-center">
+                    <a ui-sref='home.insert.wanna'>
+                        <img src="public/img/wannasave.png" alt="income insert">
+                        <h5 class='p-3 '>เพิ่มรายการ สิ่งที่อยากได้</h5>
+                    </a>
+
+
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>

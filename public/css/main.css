@@ -13,42 +13,62 @@ table {
     font-family: 'Kanit', sans-serif;
     color: rgb(66, 64, 64);
 }
-button:hover{
-    cursor: pointer;
-}
-.pointer:honer{
-    cursor: pointer;
 
+button:hover {
+    cursor: pointer;
 }
-.detail_p{
+
+.pointer:honer {
+    cursor: pointer;
+}
+
+.detail_p {
     padding: 10px;
     background: white;
     z-index: 100;
-
 }
-.img_s > img{
+
+.img_s>img {
     padding: 10px;
-width: 100%;
-
+    width: 100%;
 }
-.img_s{
 
+.img_s {
     width: 100%;
     height: auto;
     text-align: center
+}
+
+.shadow-p {
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.1);
+}
+
+.insert:hover {
+    box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.2);
+}
+
+.show_damart {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, .5);
+    z-index: 100;
     
 }
-.shadow-p {
-    box-shadow: 0 0 2px 1px rgba(0,0,0,0.1);
+
+.col-10-k {
+    width: 80%;
+    
 }
-.col-10-k{
-    width: 80%;;
-}
+
 .bb {
     background: white;
     border-radius: 3px;
-  
-    box-shadow : 0 0 5px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
     transition: all 1s;
     -webkit-transition: all 2s;
 }
@@ -69,44 +89,51 @@ growl-notifications growl-notification {
     border-radius: 5px;
     margin-top: 15px;
 }
-.bigShow > h3:hover{
-    color: rgb(250, 98, 98);
 
+.bigShow>h3:hover {
+    color: rgb(250, 98, 98);
     font-size: 40px;
 }
-.bigShow:hover{
+
+.bigShow:hover {
     border-color: rgb(250, 98, 98);
 }
-.bigShow > h3{
+
+.bigShow>h3 {
     text-align: center;
     position: relative;
-    top:60px;
+    top: 60px;
     transition: all 1s;
     -webkit-transition: all 2s;
 }
-.bb > small:hover{
+
+.bb>small:hover {
     color: rgb(250, 98, 98)
-    
 }
-.bb > small{
+
+.bb>small {
     transition: all 1s;
     -webkit-transition: all 2s;
 }
-.bb:hover{
-    box-shadow : 0 0 10px 5px rgba(0, 0, 0, 0.3); 
+
+.bb:hover {
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, 0.3);
 }
-.bigShow{
+
+.bigShow {
     border-radius: 50%;
-	width: 200px;
-    height: 200px; 
-    border:20px solid rgba(0, 0, 0, 0.1);
-    margin:0 auto;
-    transition:  border-color 1s;
-    -webkit-transition:  border-color 2s;
+    width: 200px;
+    height: 200px;
+    border: 20px solid rgba(0, 0, 0, 0.1);
+    margin: 0 auto;
+    transition: border-color 1s;
+    -webkit-transition: border-color 2s;
 }
-.backwhite{
-    margin-top:1%;
+
+.backwhite {
+    margin-top: 1%;
 }
+
 table {
     width: 100%;
     background: white;
@@ -119,38 +146,41 @@ table {
     background: rgb(130, 235, 44);
     padding: 10px;
 }
-.cursor-point:hover{
 
+.cursor-point:hover {
     font-weight: bold;
-    
 }
-.show-view:hover{
-    box-shadow : 0 0 5px 1px rgba(0,0,0,0.1);
-    
+
+.show-view:hover {
+    box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
 }
-.btn-home:hover{
+
+.btn-home:hover {
     background: red;
-    color:white;
-    border:3px solid rgba(0,0,0,0)
-    
+    color: white;
+    border: 3px solid rgba(0, 0, 0, 0)
 }
-.btn-black{
+
+.btn-black {
     background-size: 1600px 600px;
-    
 }
-.btn-home{
-    background: rgba(0,0,0,0);
-    color:red;
-    border:3px solid rgba(255,0,0,1)
+
+.btn-home {
+    background: rgba(0, 0, 0, 0);
+    color: red;
+    border: 3px solid rgba(255, 0, 0, 1)
 }
-.show-view{
-    border: 1px solid rgba(0,0,0,0.1);
-    transition:  all 1s;
-    -webkit-transition:  all 1s;
+
+.show-view {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    transition: all 1s;
+    -webkit-transition: all 1s;
 }
-.cursor-point{
+
+.cursor-point {
     cursor: pointer;
 }
+
 .err {
     color: white;
     background: #E84136;
@@ -174,12 +204,14 @@ table {
     height: 70%;
     top: 10%;
     left: 10%;
-    
 }
-.scroll-show{
-    overflow:scroll;
-    height: 100px;;
+
+.scroll-show {
+    overflow: scroll;
+    height: 100px;
+    ;
 }
+
 .formEdit {
     margin: 0 auto;
     background: white;
@@ -225,8 +257,10 @@ td {
     border-bottom: 1px solid rgb(129, 129, 129);
     padding: 10px;
 }
-.md-form > label{
-    width: 100%;;
+
+.md-form>label {
+    width: 100%;
+    ;
 }
 
 th {
@@ -239,24 +273,20 @@ body {
     color: #2D1E2F;
     background: url('../img/rect4355.png');
     background-size: 100%;
-
 }
 
 .colorFont {
     color: #E84136;
 }
 
-button {
-    /*background: #ef7371;
-    color: white;*/
-}
-.input_submit{
-    width:100%;
-    border:0;
+.input_submit {
+    width: 100%;
+    border: 0;
     background: rgb(243, 243, 243);
     padding: 10px;
     border-radius: 3px;
 }
+
 .backGcolor {
     background: white;
     padding-top: 10px;
@@ -270,8 +300,7 @@ button {
 }
 
 .headerP {
-
-   /* box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.1);*/
+    /* box-shadow: 0 0 3px 2px rgba(0, 0, 0, 0.1);*/
     margin-bottom: 10px;
 }
 
@@ -327,9 +356,11 @@ button {
         box-shadow: 0 0 10px 10px rgba(0, 0, 0, 0.1)
     }
 }
+
 .progressbar {
     counter-reset: step;
 }
+
 .progressbar li {
     list-style-type: none;
     width: 25%;
@@ -340,6 +371,7 @@ button {
     text-transform: uppercase;
     color: #7d7d7d;
 }
+
 .progressbar li:before {
     width: 30px;
     height: 30px;
@@ -353,6 +385,7 @@ button {
     border-radius: 50%;
     background-color: white;
 }
+
 .progressbar li:after {
     width: 100%;
     height: 2px;
@@ -363,15 +396,42 @@ button {
     left: -50%;
     z-index: -1;
 }
+
 .progressbar li:first-child:after {
     content: none;
 }
+
 .progressbar li.active {
     color: green;
 }
+
 .progressbar li.active:before {
     border-color: #55b776;
 }
-.progressbar li.active + li:after {
+
+.progressbar li.active+li:after {
     background-color: #55b776;
+}
+
+/**income.html
+.income_insert {
+    position: fixed;
+    width: 60%;
+    left: 25%;
+    top:10%;
+}
+*/
+.wanna_B{
+    background: url('../img/path4373.png');
+  
+    background-size : 100%;
+    height: 340px;
+}
+.income_b{
+    background: url('../img/path4373.png');
+    background-size: 100%;
+}
+.view_b{
+    background: url('../img/path4373.png');
+    background-size:auto 100%;
 }
