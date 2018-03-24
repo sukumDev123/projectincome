@@ -151,7 +151,6 @@
 
         function date_y(date) {
             let date_start = new Date(date);;
-            console.log(date)
             let date_end = new Date();
             let oneDay = 24 * 60 * 60 * 1000;
             var startA = Date.parse(date_start);
@@ -353,6 +352,8 @@
 
             var g_h_j = [];
             i = 0;
+
+            
             subtype_put_show_s = subtype_put_show_s.sort();
             subtype_put_show_s.forEach((ele, k) => {
                 if (g_h_j[i - 1] != ele) {
@@ -360,7 +361,11 @@
                     i++;
                 }
             })
+
+
             i = 0;
+
+
             subType_show_input_value.forEach((ele, k) => {
                 for (var j = 0; j < g_h_j.length; j++) {
                     if (money_selet[j] == null) {
