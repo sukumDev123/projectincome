@@ -1,99 +1,62 @@
 <div class="container">
     <div class="row">
-        <div class="col-12 col-md-3 " style='text-align:center'>
-            <h3 ng-click='typeShow("aven")' class='p-3 bb'>
-                <small>
-                    {{show.avenDay | currency : '฿' : 2 }} บาท
-                    <br>
-                </small>
-            </h3>
-            <small>
-                จำนวนเงินเฉลี่ย จาก {{show.numI}} วัน
-            </small>
-        </div>
-        <div class="col-12 col-md-3 " style='text-align:center'>
-            <h3 ng-click='typeShow("totalComein")' class='p-3 bb'>
-                <small>
-                    {{show.totalComein | currency : '฿' : 2 }} บาท
-                    <br>
-                </small>
-            </h3>
-            <small>
-                จำนวนเงินรายรับของเดือนน จาก {{show.numCome}} รายการ
-            </small>
-        </div>
-        <div class="col-12 col-md-3 " style='text-align:center'>
-            <h3 ng-click='typeShow("beyond")' class='p-3 bb'>
-                <small>
-                    {{show.beyond | currency : '฿' : 2 }} บาท
-                    <br>
-                </small>
-            </h3>
-            <small>
-                จำนวนเงินคงเหลือ จาก {{show.numB}} รายการ
-            </small>
-        </div>
-        <div class="col-12 col-md-3 " style='text-align:center'>
-            <h3 ng-click='typeShow("pay")' class='p-3 bb'>
-                <small>
-                    {{show.pay | currency : '฿' : 2 }} บาท
-                    <br>
-                </small>
-            </h3>
-            <small>
-                จำนวนเงินรายจ่ายของเดือนน จาก {{show.numI}} รายการ
-            </small>
-        </div>
-
-    </div>
-
-    <div class="col-12 p-3">
-        <div class="row">
-            <div class="col-12 col-md-4">
-                
+        <div class="col-12 bb " style='margin-bottom:10px;'>
+            <div class='p-3 '>
+                <h3 style='color:red;text-align: center'> ตารางกราฟแสดงผล</h3>
+                <div zingchart id="chart-1" zc-json="myJson" zc-width=100%></div>
             </div>
         </div>
-    </div>
 
+        <div class="col-12 bb col-md-6 col-lg-4 slow ">
+            <div class='p-3'>
+                <h3 style='color:red;text-align: center'> จำนวนรายจ่ายเฉลี่ย</h3>
 
+                <div class="p-3">
+                    <h3 style='color:rgb(0, 0, 0);text-align: center' ng-click='typeShow("aven")'>
 
-    <!--<div class="row p-3 ">
-        
-      <div class="col-12 col-md-4 p-3 " ng-hide='totalShow'>
-            <h3>แสดงเท่าไหร่ถึงจะได้สิงของ
-            </h3>
-            <table class="table">
-                <thead class="thead-dark">
-                    <th>สิงของ</th>
-                    <th>เหลืออีกเท่าไหร่</th>
-                </thead>
+                        <small> {{show.avenDay | currency : '฿' : 2 }} บาท</small>
+                    </h3>
 
-                <tr ng-repeat="i in showInfor">
-                    <td>{{i.name}}</td>
-                    <td>{{i.price | currency : '฿' : 2}}</td>
-                </tr>
-            </table>
-        </div>-->
-        <!--<div class="col-12 col-md-8" style='margin:auto' ng-hide='totalShow'>
-            <div class=" p-3">
-                <div class="col-12 p-3 text-center">
-                    <h3>{{showTitle}}</h3>
                 </div>
+                <div class="p-2">
+                    <label>รายรับทั่งหมดของเดือนนี้ : {{show.totalComein | currency : '฿' : 2 }} บาท </label>
+                    <label>รายจ่ายทั่งหมดของเดือนนี้ : {{show.pay | currency : '฿' : 2 }} บาท </label>
+                    <label>เงินคงเหลือ : {{show.beyond | currency : '฿' : 2 }} บาท </label>
+                    <br>
+                    <br>
 
-                <div class="bigShow">
-
-                    <h3> {{dash_Big | currency : '฿' : 2 }}</h3>
-
+                </div>
+                <div class='text-right'>
+                    <small>
+                        จำนวนรายจ่ายทั่งหมดจาก {{show.numI}} วัน
+                    </small>
+                    <br>
+                    <small>ยอดสำหรับ เดือน {{eyeDo.month }} พ.ศ. {{ eyeDo.year }} </small>
 
                 </div>
             </div>
+        </div>
+        <div class='col-12 col-md-6 col-lg-8  slow'>
+            <div class="p-3 bb">
+                <div class='md-form text-right'>
+                    <select class='form-control' ng-model="myJson2_S" ng-change='data_flow(myJson2_S)'>
+                        <option value="รายรับ">รายรับ</option>
+                        <option value="รายจ่าย">รายจ่าย</option>
+
+                        <option value="เงินออม">เงินออม</option>
+
+                    </select>
+                </div>
+
+                <div zingchart id="myChart" zc-json="myJson2" zc-width=100%></div>
+            </div>
+
+
 
         </div>
 
-    </div>-->
-
-
-    <div class="col-12 text-center">
-        <h5> ยอดสำหรับ เดือน {{eyeDo.month }} พ.ศ. {{ eyeDo.year }} </h5>
+    </div>
+    <div class="row p-3">
+       
     </div>
 </div>

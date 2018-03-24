@@ -29,6 +29,13 @@
                 }
             })
         }
+
+
+
+
+
+
+        
         select_type();
         $scope.type_push_show = false
         $scope.incomeTotal = viewsTest // status first infor total

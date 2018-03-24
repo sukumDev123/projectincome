@@ -102,21 +102,22 @@
 
             </div>
         </div>
-        <div class="row backGcolor p-3 " ng-if='type_ready'>
-
-            <div style='margin:auto;' class="col-12 text-center p-3">
-
-                <h3 class='p-3'> กรุณาตั่งค่า ประเภทย่อย ที่คุณต้องารก่อนเพิ่มรายการ</h3>
-            </div>
-            <div style='margin:auto;' class="col-12 col-md-6">
-
-                <a class='btn btn-block btn-lg btn-primary' ui-sref='setting.type'>ตั่งต่าประเภท</a>
-                <br>
-                <p>หมายเหตุ : การตั่งต่าประเภทย่อยคือ สมมุติเราเลือกรายรับ เราสามารถกำหนดประเภทย่อยเป็น เงินเดือน หรืออื่นๆได้</p>
-            </div>
-        </div>
-
+       
 
     </div>
+    <div class="row income_insert p-3 " style='background:white;box-shadow:0 0 10px 5px rgba(0,0,0,0.1)' ng-if='type_ready' >
+
+        <div style='margin:auto;' class="col-12 text-center p-3">
+
+            <h3 class='p-3'> กรุณาตั่งค่า ประเภทย่อย ที่คุณต้องารก่อนเพิ่มรายการ</h3>
+        </div>
+        <div style='margin:auto;' class="col-12 col-md-6">
+
+            <a class='btn btn-block btn-lg btn-primary' ui-sref='setting.type'>ตั่งต่าประเภท</a>
+            <br>
+            <p>หมายเหตุ : การตั่งต่าประเภทย่อยคือ สมมุติเราเลือกรายรับ เราสามารถกำหนดประเภทย่อยเป็น เงินเดือน หรืออื่นๆได้</p>
+        </div>
+    </div>
+
     <div class="p-1"></div>
 </div>
