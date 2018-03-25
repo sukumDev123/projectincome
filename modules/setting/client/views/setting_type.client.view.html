@@ -2,28 +2,39 @@
 
 
 
-    <div class="col-12 col-md-10 p-3" style='margin:auto ; '>
-        <form class='col-12 col-md-10' style='margin:auto;' ng-submit="saveType()" name='myForm' novalidate>
+    <div class="col-12  p-3" style='margin:auto ; '>
+        <div class="text-center p-2">
+        <h5>เพิ่มประเภทย่อย</h5>
+            
+        </div>
+        <form  style='margin:auto;' ng-submit="saveType()" name='myForm' novalidate>
             <div class="md-form">
-                <label for="type">เลือกประเภทหลัก : </label>
+                <label for="type">เลือกประเภทหลัก </label>
                 <select type="text" class="form-control" name='typeMoney' ng-model="type.typeMoney" required>
 
                     <option value="รายรับ">รายรับ</option>
                     <option value="รายจ่าย">รายจ่าย</option>
                     <option value="เงินออม">เงินออม</option>
                 </select>
+                <small> * ในส่วนของประเภทคือ รายรับ รายจ่าย เงินเก็บ </small>
+
             </div>
             <div class="md-form">
+                <label for="type">ประเภทย่อยที่ต้องการใส่  </label>
                 <input type="text" class="form-control" name='subtype' placeholder="ชนิดเพิ่มเติม * จำเป็นต้องใส่เป็นตัวอักษร" ng-model='type.subtype'
                     required>
+                <small> *จำเป็นต้องใส่เพื่อขยายในส่วนของประเภทหลักว่า เป็นรายการแบบไหน เช่น เป็นรายจ่าย ประเภทย่อยคือ อาหาร หรือ เป็นเครื่องดื่ม หรือ อื่นๆ</small>
+                    
             </div>
-            <button type='submit' ng-disabled="myForm.$invalid" class="btn btn-block">Save</button>
-            <p class='err' ng-show='err'>{{err}}</p>
+            <div class="md-form p-2">
+                <button type='submit' ng-disabled="myForm.$invalid" class="btn btn-block  btn-danger">Save</button>
+                <p class='err' ng-show='err'>{{err}}</p>
+            </div>
         </form>
     </div>
 
-    <div class="col-12 col-md-10 p-3" style='margin:auto ; '>
-
+    <div class="col-12 p-3" style='margin:auto ; '>
+        <small>* เป็นรายการ ประเภทย่อยที่มีอยู่แล้วโดยห้ามใส่รายการให้ ซ่ำกัน</small>
         <div class="table-responsive-sm">
             <table class="table">
                 <tr>
@@ -45,22 +56,4 @@
         </div>
         <button class="btn btn-block" style='background:#1d1a1a' ng-click='show_more()'>Show More</button>
     </div>
-
-    <!--<div class="col-12 col-md-4">
-            <p class='suc' ng-show='sucess'>{{sucess}}</p>
-            <div class="card p-3" ng-repeat="t in num_page">
-                <p class='cancle'>
-                    
-                </p>
-                <p>ประเภท : {{ t.typeMoney }}</p>
-                <p>ประเภทย่อย : {{ t.subtype }}</p>
-                <small> create_at : {{ t.create_at | date : 'dd : MM : yyyy h:mm a' }}</small>
-                <small> update_at : {{ t.update_at | date : 'dd : MM : yyyy h:mm a' }}</small>
-
-            </div>
-        </div>
-        <div class="col-12 col-md-4" style='margin:auto;'>
-           
-
-        </div>-->
 </div>

@@ -97,9 +97,9 @@
         var page_show = () => {
             var begin = ($scope.currentPage - 1) * $scope.numPerPage,
                 end = begin + $scope.numPerPage;
-            check_num_page($scope.information.length)
             $scope.filteredTodos = $scope.information.slice(begin, end);
-
+            check_num_page($scope.information.length)
+            
         }
 
 
@@ -124,7 +124,7 @@
         $scope.notShow = false;
         $scope.timeS = new Date();
         $scope.view_date = (date) => {
-
+            $scope.t = [];
             $scope.inmoney = 0;
             $scope.delmoney = 0;
             $scope.saveMoney = 0;
@@ -153,11 +153,11 @@
                         } else {
                             $scope.information.push(element);
                             incomeFunc(element)
-                            page_show();
                             $scope.type_push_show = null;
 
 
                         }
+                        page_show();
 
                     }
                 } else if (date == 'month') {

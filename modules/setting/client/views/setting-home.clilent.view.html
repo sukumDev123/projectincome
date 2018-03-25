@@ -1,18 +1,22 @@
 <div class="container">
     <div class="row">
-        <div class="col-12 col-md-4">
-            <ul class="list-group">
-                <li class="list-group-item">
-                    <a ui-sref="setting.type">เพิ่มประเภทรายการ</a>
+        <div class="col-12 ">
+
+            <ul class="nav justify-content-center" >
+                <li class="nav-item bb text-center">
+                    
+                    <a class="nav-link" ui-sref="setting.type"> <img src="public/img/certificate.png" style="width:64px" alt="certificate"> เพิ่มรายการประเภทย่อย</a>
+                </li>
+                &nbsp;
+                <li class="nav-item bb ">
+                    <a class="nav-link" ui-sref='setting.user'><img src="public/img/businessman.png" style="width:64px" alt="certificate"> ข้อมูลส่วนตัว</a>
                 </li>
 
-                <li class="list-group-item">
-                    <a ui-sref='setting.user'>ข้อมูลส่วนตัว</a>
-                </li>
+
 
             </ul>
         </div>
-        <div class='col-12 col-md-8 ' style='border-radius:5px;border:0.5px solid rgba(0,0,0,.1);background:white;' ui-view></div>
+        <div class='col-12 col-md-6  bb ' style='border-radius:5px;border:0.5px solid rgba(0,0,0,.1);background:white;margin:auto;;position : relative;top:10px;' ui-view></div>
     </div>
 
 </div>
