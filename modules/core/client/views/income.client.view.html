@@ -109,12 +109,34 @@
 
         <div style='margin:auto;' class="col-12 text-center p-3">
 
-            <h3 class='p-3'> กรุณาตั่งค่า ประเภทย่อย ที่คุณต้องารก่อนเพิ่มรายการ</h3>
+            <h3 class='p-3'> กรุณาตั่งค่า ประเภทย่อย ที่คุณต้องการก่อนเพิ่มบัญชีรายรับรายจ่าย</h3>
         </div>
         <div style='margin:auto;' class="col-12 col-md-6">
 
-            <a class='btn btn-block btn-lg btn-primary' ui-sref='setting.type'>ตั่งต่าประเภท</a>
-            <br>
+                <form  style='margin:auto;' ng-submit="saveType()" name='myForm' novalidate>
+                        <div class="md-form">
+                            <label for="type">เลือกประเภทหลัก </label>
+                            <select type="text" class="form-control" name='typeMoney' ng-model="type_subtype.typeMoney" required>
+            
+                                <option value="รายรับ">รายรับ</option>
+                                <option value="รายจ่าย">รายจ่าย</option>
+                                <option value="เงินออม">เงินออม</option>
+                            </select>
+                            <small> * ในส่วนของประเภทคือ รายรับ รายจ่าย เงินเก็บ </small>
+            
+                        </div>
+                        <div class="md-form">
+                            <label for="type">ประเภทย่อยที่ต้องการใส่  </label>
+                            <input type="text" class="form-control" name='subtype' placeholder="ชนิดเพิ่มเติม * จำเป็นต้องใส่เป็นตัวอักษร" ng-model='type_subtype.subtype'
+                                required>
+                            <small> *จำเป็นต้องใส่เพื่อขยายในส่วนของประเภทหลักว่า เป็นรายการแบบไหน เช่น เป็นรายจ่าย ประเภทย่อยคือ อาหาร หรือ เป็นเครื่องดื่ม หรือ อื่นๆ</small>
+                                
+                        </div>
+                        <div class="md-form p-2">
+                            <button type='submit' ng-disabled="myForm.$invalid" class="btn btn-block  btn-danger">Save</button>
+                           
+                        </div>
+          
             <p>หมายเหตุ : การตั่งต่าประเภทย่อยคือ สมมุติเราเลือกรายรับ เราสามารถกำหนดประเภทย่อยเป็น เงินเดือน หรืออื่นๆได้</p>
         </div>
     </div>
