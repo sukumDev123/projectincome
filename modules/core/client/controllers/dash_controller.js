@@ -228,7 +228,7 @@
             let diff = 0;
             show_date_k.forEach((ele, k) => {
                 diff = date_y(ele.timeCreate).date
-                if (diff <= 7) {
+                if (diff < 7) {
                     a.push(ele)
 
                 }
