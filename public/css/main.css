@@ -68,9 +68,9 @@ button:hover {
 .bb {
     background: white;
     border-radius: 3px;
-    box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1);
-    transition: all 1s;
-    -webkit-transition: all 2s;
+    box-shadow: 0 0 3px 1px rgba(0, 0, 0, 0.1);
+    transition:  box-shadow 1s;
+    -webkit-transition:  box-shadow 2s;
 }
 
 growl-notifications {
@@ -116,7 +116,7 @@ growl-notifications growl-notification {
 }
 
 .bb:hover {
-    box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.3);
 }
 
 .bigShow {

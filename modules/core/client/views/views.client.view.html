@@ -1,9 +1,9 @@
 <div class="container">
     <div class="row view_b ">
-        <div class="col-12 col-md-3 p-3" >
+        <div class="col-12 col-md-3 p-3">
             <ul class="nav flex-column" style='background:rgba(255,255,255,0.8)'>
                 <li class="nav-item cursor-point">
-                    <a class="nav-link "   ng-click='view_date("all")'>all</a>
+                    <a class="nav-link " ng-click='view_date("all")'>all</a>
                 </li>
                 <li class="nav-item cursor-point">
                     <a class="nav-link" ng-click='view_date("day")'>วัน</a>
@@ -17,43 +17,47 @@
                 <li class="nav-item show-view">
                     <a class="nav-link">รายการโชว์ : {{chDate}}</a>
                 </li>
-
+                
             </ul>
-            <div  class="col-12 p-3" style='margin:0 auto;background:rgba(255,255,255,0.8)'>
-                    <label style='color:red;' for="ประเภท" for="ประเภท">เลือกประเภท<br>
-                        <small>* รายรับ รายจ่าย เงินออม</small>
+            <div class="col-12 p-3" style='margin:0 auto;background:rgba(255,255,255,0.8)'>
+                <label style='color:red;' for="ประเภท" for="ประเภท">เลือกประเภท
+                    <br>
+                    <small>* รายรับ รายจ่าย เงินออม</small>
+                </label>
+                <div class="p-2">
+                    <select ng-model='type_push_show' class="form-control" ng-change="showType()" id="">
+                        <option value="รายรับ">รายรับ</option>
+                        <option value="รายจ่าย">รายจ่าย</option>
+                        <option value="เงินออม">เงินออม</option>
+
+                    </select>
+                </div>
+                <input type="checkbox" ng-model="sub_type_show" ng-show='type_push_show'>
+                <small ng-show='type_push_show'> ต้องการประเภทย่อย</small>
+
+                <div class="subtype" ng-if='sub_type_show'>
+                    <label style='color:red' for="ประเภท" for="ประเภท">เลือกประเภทย่อย
+                        <br>
+                        <small style='background:rgba(255,255,255,0.8)'>* จะโชว์ตามประเภทที่มีทั่งหมด</small>
                     </label>
                     <div class="p-2">
-                        <select ng-model='type_push_show' class="form-control" ng-change="showType()" id="">
-                            <option value="รายรับ">รายรับ</option>
-                            <option value="รายจ่าย">รายจ่าย</option>
-                            <option value="เงินออม">เงินออม</option>
-    
+                        <select ng-model='type_push_show' class="form-control" id="">
+                            <option value="รายรับ">อาหาร</option>
+
                         </select>
                     </div>
-                    <input type="checkbox" ng-model="sub_type_show" ng-show='type_push_show' ><small ng-show='type_push_show'> ต้องการประเภทย่อย</small>
-
-                    <div class="subtype" ng-if='sub_type_show'>
-                            <label style='color:red' for="ประเภท" for="ประเภท">เลือกประเภทย่อย<br>
-                                <small  style='background:rgba(255,255,255,0.8)'>* จะโชว์ตามประเภทที่มีทั่งหมด</small>
-                            </label>
-                            <div class="p-2">
-                                <select ng-model='type_push_show' class="form-control"  id="">
-                                        <option value="รายรับ">อาหาร</option>
-                                      
-                                </select>
-                            </div>
-                    </div>
+                </div>
 
 
-                    <label style='color:red;' for="ประเภท">เลือกวัน / เดือน / ปี ที่ต้องการ <br>
-                        <small style='background:rgba(255,255,255,0.8)'>* จะแสดงรายการตามวันที่เลือก โดยจะแสดงตาม ที่เลือก ถ้าเลือกเฉพราะวันนี้ก็จะแสดงแค่วันนี้</small>
-                    </label>
-                    <div class="p-2">
-                        <input ng-hide="notShow" type="date" class='form-control' ng-model="timeS" ng-change="timeChnge()" id="">
-                    </div>
-    
-               </div>
+                <label style='color:red;' for="ประเภท">เลือกวัน / เดือน / ปี ที่ต้องการ
+                    <br>
+                    <small style='background:rgba(255,255,255,0.8)'>* จะแสดงรายการตามวันที่เลือก โดยจะแสดงตาม ที่เลือก ถ้าเลือกเฉพราะวันนี้ก็จะแสดงแค่วันนี้</small>
+                </label>
+                <div class="p-2">
+                    <input ng-hide="notShow" type="date" class='form-control' ng-model="timeS" ng-change="timeChnge()" id="">
+                </div>
+
+            </div>
 
         </div>
         <div class="col-12 col-md-9" style='background-color: #FFFFFF;'>
@@ -80,7 +84,7 @@
                     </div>
 
                 </div>
-            
+
                 <p ng-hide="notShow" class="mb-0 text-center">{{dateSetNew()}}</p>
                 <div class="table-responsive">
                     <table>
@@ -186,3 +190,5 @@
 
 
     </div>
+    
+</div>

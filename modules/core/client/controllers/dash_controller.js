@@ -139,6 +139,7 @@
 
 
 
+        $scope.isNavCollapsed = true;
 
 
 

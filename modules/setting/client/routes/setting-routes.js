@@ -15,11 +15,11 @@
                 roles:['user','admin']
             }
         })
-        .state('setting.type',{
+        .state('home.type',{
             url:'/putType',
             templateUrl:'modules/setting/client/views/setting_type.client.view.html',
         })
-        .state('setting.user',{
+        .state('home.user',{
             url:'/users',
             templateUrl:'modules/setting/client/views/setting_user.client.view.html',
             controller: 'SettingUser'

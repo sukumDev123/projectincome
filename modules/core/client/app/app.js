@@ -1,3 +1,6 @@
+
+
+
 (function (window) {
         'use strict';
 
@@ -5,7 +8,7 @@
 
         var service = {
             angularModuleName: core,
-            angularDependencies: ['ui.router', 'ngResource', 'ui.router.state.events', 'ui-notification','zingchart-angularjs'],
+            angularDependencies: ['ui.router', 'ngResource', 'ui.router.state.events', 'ui-notification','zingchart-angularjs','ui.bootstrap'],
             registerModule: registerModuleFunction
         }
 

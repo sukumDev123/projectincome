@@ -10,7 +10,6 @@
         if (!mySocket.connect()) {
             mySocket.connect();
         }
-
         let match = false;
         let first = "234"
         let chenck = /[0-9]+/ //[ก-๙a-zA-z]+\D/;
