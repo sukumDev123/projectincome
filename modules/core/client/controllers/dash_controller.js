@@ -129,17 +129,8 @@
 
 
 
+       
 
-
-
-
-
-
-
-
-
-
-        $scope.isNavCollapsed = true;
 
 
 
@@ -242,7 +233,7 @@
         chake_max();
         function myJson() {
             $scope.myJson = {
-                type: "line",
+                type: "bar",
                 title: {
                     backgroundColor: "transparent",
                     fontColor: "black",
@@ -324,7 +315,7 @@
         function average_for_show_vis(data) {
             data_loop = [];
             title_donus = data;
-            let color = ['#FFCB45', '#FF7965', '#6FB07F', '#FFCB45', '#50ADF5', '#e8b220', '#6fe820']
+            let color = ['#CD5C5C','#F08080','#FFC300','#ADFF2F','#C70039','#FFA07A','#00BFFF']
             let money_selet = [];
             let i = 0;
             selete_type_date(data);

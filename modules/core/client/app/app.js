@@ -8,7 +8,7 @@
 
         var service = {
             angularModuleName: core,
-            angularDependencies: ['ui.router', 'ngResource', 'ui.router.state.events', 'ui-notification','zingchart-angularjs','ui.bootstrap'],
+            angularDependencies: ['ui.router', 'ngResource', 'ui.router.state.events', 'ui-notification','zingchart-angularjs'],
             registerModule: registerModuleFunction
         }
 

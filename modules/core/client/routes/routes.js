@@ -26,6 +26,7 @@
                     typeView : TypeAndSubType
                     
                 },
+               
                 
             })
             .state('home.insert', {
