@@ -15,23 +15,9 @@
         var DateSet = (date, detail) => {
             return $filter('date')(date, detail);
         }
-        var select_type = () => {
-            $scope.type_save = [];
-            $scope.sub_type_save = [];
-            let type = typeView;
-            let type_count = 0;
-            type.forEach((ele, i) => {
-                if ($scope.type_save[i - 1] != ele.typeMoney && $scope.sub_type_save[i - 1] != ele.subtype) {
-                    $scope.type_save.push({
-                        type: ele.typeMoney
-                    })
-                    $scope.sub_type_save.push(ele.subtype)
-                }
-            })
-        }
 
+    
         
-        select_type();
         $scope.type_push_show = false
         $scope.incomeTotal = viewsTest // status first infor total
         $scope.currentPage = 1;
@@ -42,16 +28,20 @@
         $scope.filteredTodos = []; // for show
         var show_type_boolen = false;
         $scope.showType = () => {
-
             show_type_boolen = true;
             $scope.view_date($scope.chDate);
 
+        }
+        $scope.subType = () =>{
+           
+       
         }
         var showType_r = (type, ele) => {
             if (ele.typeMoney == type) {
                 $scope.information.push(ele);
                 incomeFunc(ele)
                 page_show()
+                
             }
 
         }
@@ -65,17 +55,18 @@
             }
         }
         $scope.changePage = n => {
+
             $scope.currentPage = n;
             $scope.showPage = n;
             page_show()
-        }
 
+        }
         $scope.loads = () => {
             $window.a = true;
             alert($window.a);
         }
         var incomeFunc = (element) => {
-            console.log($scope.inmoney)
+
             if (element.typeMoney == "รายรับ") {
                 $scope.inmoney += parseInt(element.moneyInput);
             } else if (element.typeMoney == "รายจ่าย") {
@@ -94,7 +85,8 @@
                 end = begin + $scope.numPerPage;
             $scope.filteredTodos = $scope.information.slice(begin, end);
             check_num_page($scope.information.length)
-            
+
+
         }
 
 
@@ -111,10 +103,11 @@
                     $scope.view_date($scope.chDate)
                     page_show();
                 }
-            ).catch(err => {
+            ).catch(
+                err => {
 
-                $scope.error = err;
-            })
+                    $scope.error = err;
+                })
         }
         $scope.notShow = false;
         $scope.timeS = new Date();
@@ -192,7 +185,7 @@
                 $scope.filteredTodos = [];
             }
             show_type_boolen = false;
-            if($scope.type_push_show == null) {
+            if ($scope.type_push_show == null) {
                 $scope.sub_type_show = false
             }
         }

@@ -3,16 +3,16 @@
         <div class="col-12 col-md-3 p-3">
             <ul class="nav flex-column" style='background:rgba(255,255,255,0.8)'>
                 <li class="nav-item cursor-point">
-                    <a class="nav-link " ng-click='view_date("all")'>all</a>
+                    <a class="nav-link " ng-click='view_date("all")'>แสดงรายการทั้งหมด</a>
                 </li>
                 <li class="nav-item cursor-point">
-                    <a class="nav-link" ng-click='view_date("day")'>วัน</a>
+                    <a class="nav-link" ng-click='view_date("day")'>แสดงรายการเฉพาะวันนี้</a>
                 </li>
                 <li class="nav-item cursor-point">
-                    <a class="nav-link" ng-click='view_date("month")'>เดือน</a>
+                    <a class="nav-link" ng-click='view_date("month")'>แสดงรายการรายเดือน</a>
                 </li>
                 <li class="nav-item cursor-point">
-                    <a class="nav-link" ng-click='view_date("year")'>ปี</a>
+                    <a class="nav-link" ng-click='view_date("year")'>แสดงรายการรายปี</a>
                 </li>
                 <li class="nav-item show-view">
                     <a class="nav-link">รายการโชว์ : {{chDate}}</a>
@@ -32,23 +32,7 @@
 
                     </select>
                 </div>
-                <input type="checkbox" ng-model="sub_type_show" ng-show='type_push_show'>
-                <small ng-show='type_push_show'> ต้องการประเภทย่อย</small>
-
-                <div class="subtype" ng-if='sub_type_show'>
-                    <label style='color:red' for="ประเภท" for="ประเภท">เลือกประเภทย่อย
-                        <br>
-                        <small style='background:rgba(255,255,255,0.8)'>* จะโชว์ตามประเภทที่มีทั่งหมด</small>
-                    </label>
-                    <div class="p-2">
-                        <select ng-model='type_push_show' class="form-control" id="">
-                            <option value="รายรับ">อาหาร</option>
-
-                        </select>
-                    </div>
-                </div>
-
-
+              
                 <label style='color:red;' for="ประเภท">เลือกวัน / เดือน / ปี ที่ต้องการ
                     <br>
                     <small style='background:rgba(255,255,255,0.8)'>* จะแสดงรายการตามวันที่เลือก โดยจะแสดงตาม ที่เลือก ถ้าเลือกเฉพราะวันนี้ก็จะแสดงแค่วันนี้</small>
@@ -104,9 +88,7 @@
                             <th>
                                 <strong>เวลา</strong>
                             </th>
-                            <th>
-                                <strong>แก้ไข</strong>
-                            </th>
+                           
                             <th>
                                 <strong>ลบ</strong>
                             </th>
@@ -118,9 +100,7 @@
                             <td>{{infor.moneyInput}}</td>
                             <td>{{infor.timeCreate | date: 'h:ma'}}
                                 <br>{{infor.timeCreate | date: 'd/M/yy'}}</td>
-                            <td ng-click='getInfor(infor._id,i)'>
-                                <i class="far fa-edit"></i>
-                            </td>
+                         
                             <td ng-click="deleteInFor( infor._id,i)">
                                 <i style='color:rgb(250, 98, 98);font-size:23px;' class="far fa-times-circle"></i>
                             </td>

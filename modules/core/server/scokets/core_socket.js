@@ -19,13 +19,7 @@ module.exports = (io, app) => {
         socket.on('InputNew', data => {
             var g = data;
             io.sockets.emit('showNew', g)
-            
-            
         })
-       
-        socket.on('disconnect', function(){
-          
-         });
-
+    
     })
 };
