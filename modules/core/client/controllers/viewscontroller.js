@@ -16,8 +16,8 @@
             return $filter('date')(date, detail);
         }
 
-    
-        
+
+
         $scope.type_push_show = false
         $scope.incomeTotal = viewsTest // status first infor total
         $scope.currentPage = 1;
@@ -32,16 +32,13 @@
             $scope.view_date($scope.chDate);
 
         }
-        $scope.subType = () =>{
-           
-       
-        }
+
         var showType_r = (type, ele) => {
             if (ele.typeMoney == type) {
                 $scope.information.push(ele);
                 incomeFunc(ele)
                 page_show()
-                
+
             }
 
         }
@@ -55,10 +52,14 @@
             }
         }
         $scope.changePage = n => {
+            if(n > 0 && n <= $scope.t.length ){
+                $scope.currentPage = n;
+                $scope.showPage = n;
+                page_show()
+            }
+            
 
-            $scope.currentPage = n;
-            $scope.showPage = n;
-            page_show()
+
 
         }
         $scope.loads = () => {

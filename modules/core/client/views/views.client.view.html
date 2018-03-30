@@ -110,7 +110,7 @@
 
                             <ul class="pagination" style='margin:0'>
                                 <li class="page-item">
-                                    <a class="page-link">Previous</a>
+                                    <a class="page-link"  ng-click="changePage(currentPage-1)">Previous</a>
                                 </li>
 
                                 <li class="page-item" ng-repeat="n in t">
@@ -118,7 +118,7 @@
                                 </li>
 
                                 <li class="page-item">
-                                    <a class="page-link">Next</a>
+                                    <a  ng-click="changePage(currentPage+1)" class="page-link">Next</a>
                                 </li>
                             </ul>
                         </nav>
