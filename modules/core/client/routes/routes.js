@@ -39,11 +39,7 @@
                 templateUrl: "modules/core/client/views/income.client.view.html",
                 controller : 'HomeController'
             })
-            .state('home.insert.wanna',{
-                url: "/wanna",
-                templateUrl: "modules/core/client/views/wanna.client.view.html",
-                controller : 'WannaController'
-            })
+          
             .state('home.views', {
                 url: "/views",
                 templateUrl: "modules/core/client/views/views.client.view.html",

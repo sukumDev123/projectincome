@@ -10,15 +10,15 @@
             <div class="form">
                 <form style='margin:auto'>
                     <div class="md-form ">
-                        <label for="">สิ่งของที่ต้องการ : </label>
-                        <input type="text" placeholder="สิ่งของที่ต้องการ" class="form-control">
+                        <label for="สิ่งของที่ต้องการ">สิ่งของที่ต้องการ : </label>
+                        <input type="text" ng-model="wanna.product_name" placeholder="สิ่งของที่ต้องการ" class="form-control">
                     </div>
                     <div class="md-form">
-                        <label for="">ราคาของสิ่งนี้ : </label>
-                        <input type="text" placeholder="ราคาของสิ่งนี้" class="form-control">
+                        <label for="ราคาของสิ่งนี้">ราคาของสิ่งนี้ : </label>
+                        <input type="text" ng-model="wanna.price_product" placeholder="ราคาของสิ่งนี้" class="form-control">
                     </div>
                     <div class="md-form p-2">
-                        <button class="btn btn-block btn-lg btn-danger">บันทึกรายการ</button>
+                        <button class="btn btn-block btn-lg btn-danger" ng-click="saveWanna()" >บันทึกรายการ</button>
                     </div>
                 </form>
             </div>

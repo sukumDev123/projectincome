@@ -80,7 +80,7 @@
                 totalComein: comein,
                 numCome: numcomein,
                 pay: ho,
-                savemoney: savemoney,
+                savemoney: savemoney ? savemoney : 0,
                 numsaveM: numsaveM
             }
             $scope.show.beyond = $scope.show.totalComein - ho;
