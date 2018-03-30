@@ -65,11 +65,12 @@
                             <th>เหลืออีกเท่าไหร่</th>
                             <th>ลบ</th>
                         </tr>
-                        <tr>
-                            <td>Mac book</td>
-                            <td>500.00 </td>
+                        <tr ng-repeat=" (i,sw) in spliceWanna">
+                            <td>{{  sw.product_name  }}</td>
+                            <td>{{ (sw.price_product - show.savemoney > 0) ? (sw.price_product - show.savemoney  |  currency : '฿' : 2 ) : 'รายการนี้ซื้อได้แล้ว';  }}</td>
+                           
                             <td>
-                                <i class="fas fa-times"></i>
+                                <a  ng-click="delete_wanna(i)"><i class="fas fa-times"></i></a></i>
                             </td>
                         </tr>
                     </table>

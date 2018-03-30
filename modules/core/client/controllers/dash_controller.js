@@ -8,9 +8,9 @@
         .controller('DashBoardController', ControllerCtrl)
 
     /** @ngInject */
-    ControllerCtrl.$inject = ['Auth', '$scope', 'MouthY', 'IncomeService', 'viewsTest', 'mySocket', '$filter', '$window', 'Notification']
+    ControllerCtrl.$inject = ['Auth', '$scope', 'MouthY', 'IncomeService', 'viewsTest', 'mySocket', '$filter', '$window', 'Notification', 'Wanna']
 
-    function ControllerCtrl(Auth, $scope, MouthY, IncomeService, viewsTest, mySocket, $filter, $window, Notification) {
+    function ControllerCtrl(Auth, $scope, MouthY, IncomeService, viewsTest, mySocket, $filter, $window, Notification, Wanna) {
         var DateSet = (date, type) => {
             return $filter('date')(date, type);
         }
@@ -129,12 +129,12 @@
 
 
 
-       
 
 
 
 
-        
+
+
         /**Canvas MyJson */
         var day_y = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
         var data_show_data = [];
@@ -191,21 +191,23 @@
             })
 
             return infor = {
-                date : temp , money : array
+                date: temp,
+                money: array
             };
         }
 
-        function date_show_chart_day_index(data){
-            let array = [], numloop = day_y.length;
-           
-            data.date.forEach((ele,a) => {
-                for(let i = 0 ; i < numloop;i++){
+        function date_show_chart_day_index(data) {
+            let array = [],
+                numloop = day_y.length;
+
+            data.date.forEach((ele, a) => {
+                for (let i = 0; i < numloop; i++) {
                     if (array[i] == null) {
                         array[i] = 0;
                     }
                     if (ele == day_y[i]) {
                         array[i] += data.money[a];
-                      
+
                     }
                 }
             })
@@ -227,10 +229,11 @@
             });
             day_select = date_show_Chart_day(a);
             values_day = date_show_Chart_day_money(a, day_select);
-            value_size =  date_show_chart_day_index(values_day)
+            value_size = date_show_chart_day_index(values_day)
             myJson();
         }
         chake_max();
+
         function myJson() {
             $scope.myJson = {
                 type: "bar",
@@ -315,7 +318,7 @@
         function average_for_show_vis(data) {
             data_loop = [];
             title_donus = data;
-            let color = ['#CD5C5C','#F08080','#FFC300','#ADFF2F','#C70039','#FFA07A','#00BFFF']
+            let color = ['#CD5C5C', '#F08080', '#FFC300', '#ADFF2F', '#C70039', '#FFA07A', '#00BFFF']
             let money_selet = [];
             let i = 0;
             selete_type_date(data);
@@ -345,7 +348,7 @@
             var g_h_j = [];
             i = 0;
 
-            
+
             subtype_put_show_s = subtype_put_show_s.sort();
             subtype_put_show_s.forEach((ele, k) => {
                 if (g_h_j[i - 1] != ele) {
@@ -438,6 +441,25 @@
         }
 
 
+
+
+
+
+        /**Wanna */
+
+
+        $scope.wannashow = Wanna;
+        $scope.spliceWanna = [];
+        function slice_wanna() {
+            $scope.spliceWanna = $scope.wannashow.slice(0, 3);
+        }
+        slice_wanna();
+        $scope.delete_wanna = i => {
+            console.log($scope.spliceWanna[i])
+            $scope.spliceWanna = $scope.spliceWanna.splice($scope.spliceWanna[i],1)
+           
+            console.log($scope.spliceWanna)
+        }
     }
 
 
