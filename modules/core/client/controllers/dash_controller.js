@@ -39,6 +39,7 @@
             let numcomein = 0;
             let savemoney = 0;
             let numsaveM = 0;
+            console.log(DateSet(new Date('03 03 2018'), 'MM yyyy'))
             $scope.total.forEach((ele, k) => {
 
                 if (ele.typeMoney == 'รายจ่าย') {
@@ -136,12 +137,20 @@
 
 
         /**Canvas MyJson */
-        var day_y = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
         var data_show_data = [];
         var selete_date_uni = {};
         var value_size = [];
+        var day_y = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+       // var day_y = ['Jan', 'Feb', 'Mar', 'Jun', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+        //day_y = ;
+
+        $scope.type_selete_date = (date_type) => {
+
+
+        }
 
         function date_y(date) {
+
             let date_start = new Date(date);;
             let date_end = new Date();
             let oneDay = 24 * 60 * 60 * 1000;
@@ -232,7 +241,9 @@
             value_size = date_show_chart_day_index(values_day)
             myJson();
         }
+        console.log(day_y)
         chake_max();
+        $scope.type_selete_date('day_7')
 
         function myJson() {
             $scope.myJson = {
@@ -450,14 +461,15 @@
 
         $scope.wannashow = Wanna;
         $scope.spliceWanna = [];
+
         function slice_wanna() {
             $scope.spliceWanna = $scope.wannashow.slice(0, 3);
         }
         slice_wanna();
         $scope.delete_wanna = i => {
             console.log($scope.spliceWanna[i])
-            $scope.spliceWanna = $scope.spliceWanna.splice($scope.spliceWanna[i],1)
-           
+            $scope.spliceWanna = $scope.spliceWanna.splice($scope.spliceWanna[i], 1)
+
             console.log($scope.spliceWanna)
         }
     }

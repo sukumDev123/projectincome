@@ -1,48 +1,49 @@
 <div class="container">
-    <div class="row">
-        <div class="col-12 text-center p-3">
-            <h1 style='color:red'>Dash Board</h1>
+
+    <div class="col-12 text-center p-3">
+        <h1 style='color:red'>Dash Board</h1>
+    </div>
+    <div class="row text-center p-3">
+        <div class="col-12   col-md-3 ">
+            <div class="p-3 bb">
+                <h5 for="เงินเปลี่ย"> เงินเฉลี่ยของเดือนนี้
+                    <br> {{show.avenDay | currency : '฿' : 2 }} บาท
+                </h5>
+
+
+
+
+            </div>
         </div>
-        <div class="col-12 col-md-4 ">
-            <div class='p-3 bb '>
-                <h3 style='color:red;text-align: center'> จำนวนรายจ่ายเฉลี่ย</h3>
-
-                <div class="p-3">
-                    <h3 style='color:rgb(0, 0, 0);text-align: center' ng-click='typeShow("aven")'>
-
-                        <small> {{show.avenDay | currency : '฿' : 2 }} บาท</small>
-                    </h3>
-
-                </div>
-                <div class="p-2 text-center">
-                    <label>รายรับทั่งหมดของเดือนนี้
-                        <br> {{show.totalComein | currency : '฿' : 2 }} บาท </label>
-                    <br>
-                    <label>รายจ่ายทั่งหมดของเดือนนี้
-                        <br>{{show.pay | currency : '฿' : 2 }} บาท </label>
-                    <br>
-                    <label>เงินคงเหลือ
-                        <br> {{show.beyond | currency : '฿' : 2 }} บาท </label>
-                    <br>
-                    <br>
-
-                </div>
-                <div class='text-right'>
-                    <small>
-                        จำนวนรายจ่ายทั่งหมดจาก {{show.numI}} วัน
-                    </small>
-                    <br>
-                    <small>ยอดสำหรับ เดือน {{eyeDo.month }} พ.ศ. {{ eyeDo.year }} </small>
-
-                </div>
+        <div class="col-12 col-md-3 ">
+            <div class="p-3 bb">
+                <label>รายรับทั่งหมดของเดือนนี้
+                    <br> {{show.totalComein | currency : '฿' : 2 }} บาท </label>
             </div>
 
         </div>
-        <div class="col-12 col-md-6 col-lg-8  " style='margin-bottom:10px;'>
+        <div class="col-12 col-md-3 ">
+            <div class="p-3 bb">
+                <label>รายจ่ายทั่งหมดของเดือนนี้
+                    <br>{{show.pay | currency : '฿' : 2 }} บาท </label>
+            </div>
+        </div>
+        <div class="col-12 col-md-3 ">
+            <div class="p-3 bb">
+                <label>เงินคงเหลือ
+                    <br> {{show.beyond | currency : '฿' : 2 }} บาท </label>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+       
+        <div class="col-12" style='margin-bottom:10px;'>
             <div class='p-3 bb'>
                 <div class="text-right">
-       
-                    <a class='btn btn-primary btn-lg' style='color:white'>อาทิตย์</a>
+                    <a ng-click='type_selete_date("day_7")'>day</a>
+                    <a ng-click='type_selete_date("month")'>m</a>
+                    <a ng-click='type_selete_date("year")'>y</a>
+
                 </div>
                 <h3 style='color:red;text-align: center'> ตารางกราฟแสดงผล</h3>
                 <div zingchart id="chart-1" zc-json="myJson" zc-width=100%></div>
@@ -66,18 +67,22 @@
                             <th>ลบ</th>
                         </tr>
                         <tr ng-repeat=" (i,sw) in spliceWanna">
-                            <td>{{  sw.product_name  }}</td>
-                            <td>{{ (sw.price_product - show.savemoney > 0) ? (sw.price_product - show.savemoney  |  currency : '฿' : 2 ) : 'รายการนี้ซื้อได้แล้ว';  }}</td>
-                           
+                            <td>{{ sw.product_name }}</td>
+                            <td>{{ (sw.price_product - show.savemoney > 0) ? (sw.price_product - show.savemoney | currency :
+                                '฿' : 2 ) : 'รายการนี้ซื้อได้แล้ว'; }}</td>
+
                             <td>
-                                <a  ng-click="delete_wanna(i)"><i class="fas fa-times"></i></a></i>
+                                <a ng-click="delete_wanna(i)">
+                                    <i class="fas fa-times"></i>
+                                </a>
+                                </i>
                             </td>
                         </tr>
                     </table>
                 </div>
                 <div class='text-right p-2'>
                     <h5>ยอดเงินเก็บทั่งหมด
-                        <br> {{ show.savemoney |  currency : '฿' : 2}} บาท</h5>
+                        <br> {{ show.savemoney | currency : '฿' : 2}} บาท</h5>
                 </div>
             </div>
 
@@ -102,5 +107,5 @@
         </div>
 
     </div>
-
+    
 </div>
