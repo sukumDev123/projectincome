@@ -1,4 +1,4 @@
-<div class="container">
+<!--<div class="container">
     <div class="row view_b ">
         <div class="col-12 col-md-3 p-3">
             <ul class="nav flex-column" style='background:rgba(255,255,255,0.8)'>
@@ -171,4 +171,92 @@
 
     </div>
     
-</div>
+</div>-->
+<div class="container">
+    <div class="row p-3" style='background:white;height:800px;'>
+        <div class="col-12 col-md-4 ">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" ng-click='show_date("all")'>แสดงรายการทั้งหมด</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link " ng-click='show_date("day")'>แสดงเฉพาะวันนี้</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" ng-click='show_date("month")'>แสดงเฉพาะเดือนนี้</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" ng-click='show_date("year")'>แสดงเฉพาะปีนี้</a>
+                </li>
+            </ul>
+            <div class="p-3" ng-if='showType'>
+                <form>
+                    <div class="md-form">
+                        <label for="เลือกประเภทการแสดง">เลือกประเภทการแสดง</label>
+                        <select ng-change='type_showF(typeS)' ng-model="typeS" class='form-control'>
+                            <option value="">ระบุบสิ่งที่ต้องการแสดง </option>
+                            <option value="รายรับ">รายรับ </option>
+                            <option value="รายจ่าย">รายจ่าย </option>
+                            <option value="เงินออม">เงินออม </option>
+
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-12 col-md-8 ">
+            <label ng-show='array_show_on_browser.length > 0' for="data">ข้อมูลที่ค้นพบ : {{array_show_on_browser.length}}</label><br>
+            <label ng-show='array_show_on_browser.length > 0' for="data"> Page : {{currentPage}} / {{page_end}} </label>
+            
+            <div class="table-responsive">
+                <table class="table">
+                    <tr>
+                        <th>ประเภท</th>
+                        <th>ประเภทย่อย</th>
+                        <th>รายละเอียด</th>
+                        <th>จำนวนเงิน</th>
+                        <th>วันที่บันทึก</th>
+                        <th>ลบ</th>
+                    </tr>
+                    <tr ng-hide='array_show_on_browser.length > 0'>
+                        <td>ไม่มีรายการจะแสดง</td>
+                        <td>ไม่มีรายการจะแสดง</td>
+
+                        <td>ไม่มีรายการจะแสดง</td>
+                        <td>ไม่มีรายการจะแสดง</td>
+                        <td>ไม่มีรายการจะแสดง</td>
+                        <td>ไม่มีรายการจะแสดง</td>
+
+                    </tr>
+                    <tr ng-repeat="(i,data) in array_show_on_browser_html">
+                        <td>{{data.typeMoney}} </td>
+                        <td>{{data.subtypeMoney}} </td>
+                        <td>{{data.detailList}} </td>
+                        <td>{{data.moneyInput}} </td>
+                        <td>{{data.timeCreate | date : 'dd/MM/yy'}} </td>
+                        <td ng-click="deleteInFor(i)">
+                            <i style='color:rgb(250, 98, 98);font-size:23px;' class="far fa-times-circle"></i>
+                        </td>
+
+                    </tr>
+                </table>
+                <nav ng-show='array_show_on_browser.length > 0' aria-label="Page navigation example" style='margin:0 auto;'>
+
+                        <ul class="pagination" style='margin:0'>
+                            <li class="page-item">
+                                <a class="page-link"  ng-click="changePage(currentPage-1)">Previous</a>
+                            </li>
+
+                            <li class="page-item" ng-repeat="n in t">
+                                <a ng-click="changePage(n)" class="page-link">{{n}}</a>
+                            </li>
+
+                            <li class="page-item">
+                                <a  ng-click="changePage(currentPage+1)" class="page-link">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
