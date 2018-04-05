@@ -173,7 +173,7 @@
     
 </div>-->
 <div class="container">
-    <div class="row p-3" style='background:white;height:800px;'>
+    <div class="row p-3" style='background:white;height:auto;'>
         <div class="col-12 col-md-4 ">
             <ul class="nav flex-column">
                 <li class="nav-item">
@@ -205,9 +205,10 @@
             </div>
         </div>
         <div class="col-12 col-md-8 ">
-            <label ng-show='array_show_on_browser.length > 0' for="data">ข้อมูลที่ค้นพบ : {{array_show_on_browser.length}}</label><br>
+            <label ng-show='array_show_on_browser.length > 0' for="data">ข้อมูลที่ค้นพบ : {{array_show_on_browser.length}}</label>
+            <br>
             <label ng-show='array_show_on_browser.length > 0' for="data"> Page : {{currentPage}} / {{page_end}} </label>
-            
+
             <div class="table-responsive">
                 <table class="table">
                     <tr>
@@ -242,21 +243,21 @@
                 </table>
                 <nav ng-show='array_show_on_browser.length > 0' aria-label="Page navigation example" style='margin:0 auto;'>
 
-                        <ul class="pagination" style='margin:0'>
-                            <li class="page-item">
-                                <a class="page-link"  ng-click="changePage(currentPage-1)">Previous</a>
-                            </li>
+                    <ul class="pagination" style='margin:0'>
+                        <li class="page-item">
+                            <a class="page-link" ng-click="changePage(currentPage-1)">Previous</a>
+                        </li>
 
-                            <li class="page-item" ng-repeat="n in t">
-                                <a ng-click="changePage(n)" class="page-link">{{n}}</a>
-                            </li>
+                        <li class="page-item" ng-repeat="n in tl">
+                            <a ng-click="changePage(n)" class="page-link">{{n}}</a>
+                        </li>
 
-                            <li class="page-item">
-                                <a  ng-click="changePage(currentPage+1)" class="page-link">Next</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
+                        <li class="page-item">
+                            <a ng-click="changePage(currentPage+1)" class="page-link">Next</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </div>
+</div>

@@ -6,9 +6,9 @@
         .module('core')
         .controller('ViewsIncomeTotal', ViewsIncomeTotal)
 
-    ViewsIncomeTotal.$inject = ['$scope', 'viewsTest', '$filter', 'MouthY', 'IncomeService', '$state', 'mySocket', '$http', 'Auth', 'typeView', '$stateParams', '$location', 'Notification'];
+    ViewsIncomeTotal.$inject = ['$scope', 'viewsTest', '$filter', 'MouthY', 'IncomeService', '$state', 'mySocket', '$http', 'Auth', 'typeView', '$stateParams', '$location', 'Notification', 'Numpage'];
     /** @ngInject */
-    function ViewsIncomeTotal($scope, viewsTest, $filter, MouthY, IncomeService, $state, mySocket, $http, Auth, typeView, $stateParams, $location, Notification) {
+    function ViewsIncomeTotal($scope, viewsTest, $filter, MouthY, IncomeService, $state, mySocket, $http, Auth, typeView, $stateParams, $location, Notification, Numpage) {
         if (!mySocket.connect()) {
             mySocket.connect();
         }
@@ -108,10 +108,12 @@
                 $scope.showType = false
                 console.log('null')
             }
+            $scope.page_end = Numpage.page_size();
+
         }
 
         $scope.type_showF = (type) => {
-            $scope.array_show_on_browser = [];
+            $scope.array_show_on_browser = []; /** main value data temp */
             if (type === 'รายรับ') {
                 $scope.show_data_for_html.temp_in.forEach(ele => $scope.array_show_on_browser.push(ele));
 
@@ -130,64 +132,36 @@
 
 
         /*************************************************** End show Data 1 */
+
         $scope.pageNum = () => {
+
+            $scope.array_show_on_browser_html = [];
+            Numpage.size = 8;
+            Numpage.total = $scope.array_show_on_browser.length;
             $scope.currentPage = 1;
-            $scope.pageSize = 10;
-            page_show();
+            $scope.tl = Numpage.number_show(0);
+            $scope.array_show_on_browser_html = Numpage.now_show_data(1, $scope.array_show_on_browser)
+
         }
         $scope.changePage = (n) => {
-            let num_input = page_num();
 
-            let num = $scope.t.length;
+            console.log(n)
+            $scope.tl = [];
+            let num = Numpage.page_size();
             if (n > 0 && n <= num) {
+                $scope.array_show_on_browser_html = [];
+                $scope.array_show_on_browser_html = Numpage.now_show_data(n, $scope.array_show_on_browser)
+                $scope.tl = Numpage.number_show(n);
                 $scope.currentPage = n;
-                $scope.pageSize = 10;
-                page_show();
-                if (num_input > num) {
-                    number_show(n + 1);
+            } else {
+                $scope.tl = Numpage.number_show($scope.currentPage);
 
-                }else{
-                    number_show($scope.currentPage);
-                }
             }
-
         }
-        var page_num = () => {
-            return Math.ceil($scope.array_show_on_browser.length / $scope.pageSize)
-        }
-        var number_show = (n) => {
-            let num_input = page_num();
-            $scope.t = []
-            let num = 0;
-            num = (n ? n : 3);
-            for (var i = 0; i < num; i++) {
-                $scope.t.push(i + 1);
-            }
-
-
-
-        }
-        var page_show = () => {
-            number_show(0);
-            let begin = ($scope.currentPage - 1) * $scope.pageSize;
-            let end = begin + $scope.pageSize;
-            $scope.array_show_on_browser_html = $scope.array_show_on_browser.slice(begin, end);
-        }
-
-
 
         /**Start  */
         $scope.show_date('all');
-
-        $scope.page_end = page_num();
-
-
-
-
-
-
-
-
+        // console.log(Numpage.fn())
 
 
         mySocket.on('showNew', data => {
