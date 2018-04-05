@@ -6,15 +6,19 @@
         .module('core')
         .controller('ViewsIncomeTotal', ViewsIncomeTotal)
 
-    ViewsIncomeTotal.$inject = ['$scope', 'viewsTest', '$filter', 'MouthY', 'IncomeService', '$state', 'mySocket', '$http', 'Auth', 'typeView', '$stateParams', '$location', 'Notification', 'Numpage'];
+    ViewsIncomeTotal.$inject = ['$scope', 'viewsTest', '$filter', 'MouthY', 'IncomeService', '$state', 'mySocket', 'Auth', 'typeView', '$stateParams', '$location', 'Notification', 'Numpage', 'CalService'];
     /** @ngInject */
-    function ViewsIncomeTotal($scope, viewsTest, $filter, MouthY, IncomeService, $state, mySocket, $http, Auth, typeView, $stateParams, $location, Notification, Numpage) {
+    function ViewsIncomeTotal($scope, viewsTest, $filter, MouthY, IncomeService, $state, mySocket, Auth, typeView, $stateParams, $location, Notification, Numpage, CalService) {
         if (!mySocket.connect()) {
             mySocket.connect();
         }
         var filter = (date, detail) => {
             return $filter('date')(date, detail);
         }
+
+
+
+
         var data_input = viewsTest; // include data for db.;
         let temp_in = [],
             temp_out = [],
@@ -96,8 +100,10 @@
                 $scope.show_data_for_html = showData_date_all();
             } else if (type == 'day') {
                 $scope.show_data_for_html = showData_data_fix((($scope.date_input) ? $scope.date_input : Date.now()), 'dd MM yyyy');
+
             } else if (type == 'month') {
                 $scope.show_data_for_html = showData_data_fix((($scope.date_input) ? $scope.date_input : Date.now()), 'MM yyyy');
+
             } else if (type == 'year') {
                 $scope.show_data_for_html = showData_data_fix((($scope.date_input) ? $scope.date_input : Date.now()), 'yyyy');
             }
@@ -109,6 +115,7 @@
                 console.log('null')
             }
             $scope.page_end = Numpage.page_size();
+            console.log(CalService.out_($scope.show_data_for_html.temp_out))
 
         }
 
@@ -123,6 +130,7 @@
             } else if (type === 'เงินออม') {
                 $scope.show_data_for_html.temp_save.forEach(ele => $scope.array_show_on_browser.push(ele))
             }
+
             page_show()
         }
         $scope.deleteInFor = index => {
@@ -134,7 +142,6 @@
         /*************************************************** End show Data 1 */
 
         $scope.pageNum = () => {
-
             $scope.array_show_on_browser_html = [];
             Numpage.size = 8;
             Numpage.total = $scope.array_show_on_browser.length;
@@ -162,7 +169,6 @@
         /**Start  */
         $scope.show_date('all');
         // console.log(Numpage.fn())
-
 
         mySocket.on('showNew', data => {
             /*$scope.incomeTotal[$scope.incomeTotal.length] = data // status first infor total

@@ -7,7 +7,6 @@
 
     /** @ngInject */
     function Factory() {
-
         return {
             total: 0,
             size: 0,
