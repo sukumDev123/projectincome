@@ -16,7 +16,8 @@
         /** */
         return {
             income_O_S: incomeCal,
-            out_: outFunction // สำหรับคิดค่าฌเฉล่ย รายจ่าย
+            out_: outFunction ,// สำหรับคิดค่าฌเฉล่ย รายจ่าย,
+            diff_day : dat_diff
         }
         /** */
         function incomeCal(data) {
@@ -91,7 +92,7 @@
                 m += ele;
             })
             temp_ = m / data_total.tmep_array.length;
-            return data_total;
+            return temp_;
         }
 
     }

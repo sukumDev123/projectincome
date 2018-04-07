@@ -8,470 +8,336 @@
         .controller('DashBoardController', ControllerCtrl)
 
     /** @ngInject */
-    ControllerCtrl.$inject = ['Auth', '$scope', 'MouthY', 'IncomeService', 'viewsTest', 'mySocket', '$filter', '$window', 'Notification', 'Wanna']
+    ControllerCtrl.$inject = ['Auth', '$scope', 'MouthY', 'IncomeService', 'viewsTest', 'mySocket', '$filter', '$window', 'Notification', 'Wanna', 'DataShowFile', 'CalService']
 
-    function ControllerCtrl(Auth, $scope, MouthY, IncomeService, viewsTest, mySocket, $filter, $window, Notification, Wanna) {
+    function ControllerCtrl(Auth, $scope, MouthY, IncomeService, viewsTest, mySocket, $filter, $window, Notification, Wanna, DataShowFile, CalService) {
         var DateSet = (date, type) => {
             return $filter('date')(date, type);
         }
         if (!mySocket.connect()) {
             mySocket.connect();
         }
-
-        $scope.eyeDo = {
-            month: MouthY.setMonthT(DateSet(Date.now(), 'MM')),
-            year: MouthY.setYearT(DateSet(Date.now(), 'yyyy'))
+        const color = ["#FA6E6E #FA9494", "#F1C795 #feebd2", "#FDAA97 #FC9B87", "#28C2D1", "#D2D6DE"]
+        const cal = CalService;
+        const date_set = DataShowFile;
+        DataShowFile.viewsTest = viewsTest; /* <-- set data in service  */
+        function diff_type(type) {
+            let temp_ = [];
+            let j = 0;
+            type.forEach((ele, i) => {
+                if (temp_[j - 1] != ele) {
+                    temp_[j] = ele;
+                    j++;
+                }
+            })
+            return temp_
         }
-        $scope.css = 'red;'
-        $scope.data = [];
-        $scope.show = {};
-        var show_date_k = [];
-        let show_sub_type_out = [],
-            show_sub_type_income = [],
-            show_sub_type_save = [];
-        $scope.total = viewsTest;
-        var aven = () => {
-            $scope.show = {};
-            let ho = 0;
-            let num = 0;
-            let numdate = [];
-            let comein = 0;
-            let numcomein = 0;
-            let savemoney = 0;
-            let numsaveM = 0;
-            console.log(DateSet(new Date('03 03 2018'), 'MM yyyy'))
-            $scope.total.forEach((ele, k) => {
 
-                if (ele.typeMoney == 'รายจ่าย') {
-                    if (DateSet(ele.timeCreate, 'MM yyyy') == DateSet(Date.now(), 'MM yyyy')) {
-                        ho += ele.moneyInput; //เงินทั่งหมด     
-                        num++; //จำนวนในการใช้จ่าย
-                        numdate.push(DateSet(ele.timeCreate, 'dd MM yyyy'));
-                        show_date_k.push(ele)
-                        show_sub_type_out.push(ele)
+        function merge_d_m(type, data) {
+            let temp_ = [];
+            let num = type.length;
+            data.forEach(ele => {
+                for (let i = 0; i < num; i++) {
 
-                    }
-                } else if (ele.typeMoney == 'รายรับ') {
-                    if (DateSet(ele.timeCreate, 'MM yyyy') == DateSet(Date.now(), 'MM yyyy')) {
-                        comein += ele.moneyInput; //เงินทั่งหมด        
-                        numcomein++; //จำนวนในการใช้จ่าย
-                        show_sub_type_income.push(ele)
-
-                    }
-                } else if (ele.typeMoney == 'เงินออม') {
-                    if (DateSet(ele.timeCreate, 'MM yyyy') == DateSet(Date.now(), 'MM yyyy')) {
-                        savemoney += ele.moneyInput; //เงินทั่งหมด        
-                        numsaveM++; //จำนวนในการใช้จ่าย
-                        show_sub_type_save.push(ele)
-
+                    if (ele.subtypeMoney == type[i]) {
+                        if (temp_[i] == null) {
+                            temp_[i] = 0;
+                        }
+                        temp_[i] += ele.moneyInput
                     }
                 }
             })
-            let arr = [];
-            let v = 0;
-            for (let a = 0; v = numdate.length, a < v; a++) {
-                if (numdate[a - 1] != numdate[a]) {
-                    arr.push(numdate[a])
-                }
+            return temp_;
+        }
+
+        function function_merge(data) {
+            let temp_ = [],
+                temp_a = [],
+                temp_b = [],
+                temp_c = [];
+            data.forEach(ele => {
+                temp_a.push(ele.subtypeMoney);
+            })
+            temp_a = temp_a.sort();
+            temp_b = diff_type(temp_a); /** แยก ประเภทข้อมูล */
+            temp_c = merge_d_m(temp_b, data); /** หาความถี่ข้อมูล */
+
+            return temp_ = {
+                money: temp_c,
+                subtype: temp_b
+            };
+        }
+
+        function setMyjson(array) {
+            let data = [];
+            array.subtype.forEach((ele, k) => {
+                data.push({
+                    text: ele,
+                    values: [array.money[k]],
+                    backgroundColor: color[k]
+                })
+            })
+            return data
+        }
+
+        function pietypeChange(type) {
+            if (type == 0) {
+                return function_merge(date_set.showDataNeed(Date.now(), 'MM yyyy').temp_in)
+            } else if (type == 1) {
+                return function_merge(date_set.showDataNeed(Date.now(), 'MM yyyy').temp_out)
+
+            } else if (type == 2) {
+                return function_merge(date_set.showDataNeed(Date.now(), 'MM yyyy').temp_save)
+
             }
-            let numdatearr = arr.length;
+        }
+        $scope.data_flow = type => {
+            console.log(type)
+            let data = [];
+            data = setMyjson(pietypeChange(type));
+            console.log(data)
+            chartPie(data)
+
+
+            /*
+            '
+                       */
+        }
+
+        function main() {
+            let data = [];
             $scope.show = {
-                avenDay: ho / numdatearr || 0,
-                numI: numdatearr,
-                totalComein: comein,
-                numCome: numcomein,
-                pay: ho,
-                savemoney: savemoney ? savemoney : 0,
-                numsaveM: numsaveM
+                avenDay: cal.out_(date_set.showDataNeed(Date.now(), 'MM yyyy').temp_out),
+                totalComein: cal.income_O_S(date_set.showDataNeed(Date.now(), 'MM yyyy').temp_in),
+                pay: cal.income_O_S(date_set.showDataNeed(Date.now(), 'MM yyyy').temp_out),
+                savemoney: cal.income_O_S(date_set.showDataNeed(Date.now(), 'MM yyyy').temp_save),
             }
-            $scope.show.beyond = $scope.show.totalComein - ho;
-            $scope.show.numB = numcomein + num
-            $scope.dash_Big = $scope.show.avenDay;
+            $scope.show.beyond = $scope.show.totalComein - $scope.show.pay;
+            let array_out = function_merge(date_set.showDataNeed(Date.now(), 'MM yyyy').temp_out);
+            data = setMyjson(array_out);
+            chartPie(data)/** myjson 2  */
+            myJson(day_myjson(),day_7) /** myjson */
         }
-        aven()
-        $scope.totalShow = false;
-        $scope.typeShow = type => {
-            if (type == 'aven') {
-                $scope.dash_Big = $scope.show.avenDay;
-                $scope.showTitle = 'เงินเฉลียต่อวัน';
-
-            } else if (type == 'beyond') {
-                $scope.dash_Big = $scope.show.beyond;
-                $scope.showTitle = 'เงินคงเหลือ';
 
 
+        function chartPie(data) {
+            $scope.myJson2 = {
+                globals: {
+                    shadow: false,
+                    fontFamily: "Verdana",
+                    fontWeight: "100"
+                },
+                type: "pie",
+                backgroundColor: "#fff",
 
-            } else if (type == 'pay') {
-                $scope.dash_Big = $scope.show.pay;
-
-                $scope.showTitle = 'รายจ่าย';
-
-
-            } else if (type == 'totalComein') {
-                $scope.dash_Big = $scope.show.totalComein;
-                $scope.showTitle = 'รายรับ';
-
-
-
+                legend: {
+                    layout: "x5",
+                    position: "50%",
+                    borderColor: "transparent",
+                    marker: {
+                        borderRadius: 10,
+                        borderColor: "transparent"
+                    }
+                },
+                tooltip: {
+                    text: "%t %v บาท"
+                },
+                plot: {
+                    refAngle: "-90",
+                    borderWidth: "0px",
+                    valueBox: {
+                        placement: "in",
+                        text: "%npv %",
+                        fontSize: "15px",
+                        textAlpha: 1,
+                    }
+                },
+                series: data
             }
         }
-        $scope.showTitle = 'เงินเฉลียต่อวัน';
+
+        const day_7 = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+        function day_differ(type) {
+            let data = [],
+                max = 0;
+            let day = CalService.diff_day(date_set.showDataNeed(Date.now(), 'MM yyyy').temp_out);
+            day.tmep_array.forEach((ele, k) => {
+                max = chack_min_7(DateSet(ele, 'MM dd yyyy'))
+                if (max < 7) {
+                    data.push({
+                        money: day.money[k],
+                        day: DateSet(ele, type)
+                    })        
+                }
+            })
+            return data;
+        }
+
+        function chack_min_7(date) {
+
+            let date_start = new Date(date);;
+            let date_end = new Date();
+            var startA = Date.parse(date_start);
+            var endA = Date.parse(date_end)
+            var gg = endA - startA;
+            var num_days = ((gg % 31536000000) % 2628000000) / 86400000; // day
+            let res = 0;
+            res = Math.round(num_days); // day
+            return res;
+
+        }
+
+        function day_myjson() {
+            let n_day = day_7.length;
+            let data = day_differ('EEE'); 
+            let temp_ = [0, 0, 0, 0, 0, 0, 0];    
+            data.forEach((ele,k) => {
+                for(let i = 0 ; i < n_day; i++){
+                    if(ele.day == day_7[i]){
+                        temp_[i] = ele.money;          
+                        break;
+                    }        
+                }
+            })
+            return temp_;
+        }
+
+
+        function myJson(money,type_date) {
+            $scope.myJson = {
+                "type": "hbar",
+                "background-color": "#fff",
+                "border-color": "#dae5ec",
+                "border-width": "1px",
+                "height": "100%",
+                "width": "96%",
+                "x": "2%",
+                "y": "3%",
+                "title": {
+                    "margin-top": "7px",
+                    "margin-left": "9px",
+                    "font-family": "Arial",
+                    "text": "DEPARTMENT PERFORMANCE",
+                    "background-color": "none",
+                    "shadow": 0,
+                    "text-align": "left",
+                    "font-size": "11px",
+                    "font-weight": "bold",
+                    "font-color": "#707d94"
+                },
+                "scale-y": {
+
+                    "tick": {
+                        "visible": false
+                    },
+                    "item": {
+                        "font-color": "#8391a5",
+                        "font-family": "Arial",
+                        "font-size": "10px",
+                        "padding-right": "5px"
+                    },
+                    "guide": {
+                        "rules": [{
+                                "rule": "%i == 0",
+                                "line-width": 0
+                            },
+                            {
+                                "rule": "%i > 0",
+                                "line-style": "solid",
+                                "line-width": "1px",
+                                "line-color": "#d2dae2",
+                                "alpha": 0.4
+                            }
+
+                        ]
+                    }
+                },
+                "scale-x": {
+                    "items-overlap": true,
+                    "max-items": 9999,
+                    "values":  type_date ,
+                    "offset-y": "1px",
+                    "line-color": "#d2dae2",
+                    "item": {
+                        "font-color": "#8391a5",
+                        "font-family": "Arial",
+                        "font-size": "11px",
+                        "padding-top": "2px"
+                    },
+                    "tick": {
+                        "visible": false,
+                        "line-color": "#d2dae2"
+                    },
+                    "guide": {
+                        "visible": false
+                    }
+                },
+                "plotarea": {
+                    "margin": "45px 20px 38px 45px"
+                },
+                "plot": {
+                    "bar-width": "33px",
+                    "hover-state": {
+                        "visible": false
+                    },
+                    "animation": {
+                        "delay": 500,
+                        "effect": "ANIMATION_SLIDE_BOTTOM"
+                    },
+                    "tooltip": {
+                        "font-color": "#fff",
+                        "font-family": "Arial",
+                        "font-size": "11px",
+                        "border-radius": "6px",
+                        "shadow": false,
+                        "padding": "5px 10px",
+                        "background-color": "#707e94"
+                    }
+                },
+                "series": [{
+                    "values": money,
+                    "styles": [{
+                            "background-color": "#f23737"
+                        },
+                        {
+                            "background-color": "#f0d536"
+                        },
+                        {
+                            "background-color": "#f9a59f"
+                        },
+                        {
+                            "background-color": "#a7e83e"
+                        },
+                        {
+                            "background-color": "#f17837"
+                        },
+                        {
+                            "background-color": "#35b1ef"
+                        },
+                        {
+                            "background-color": "#ad34ef"
+                        },
+
+                    ]
+                }]
+            }
+        }
+
+        main();
+
         mySocket.on('showNew', data => {
-            if ($scope.total[$scope.total.length - 1] != data) {
-                $scope.total.push(data);
-                aven()
-                $scope.dash_Big = $scope.show.avenDay;
-                $scope.showTitle = 'เงินเฉลียต่อวัน';
-            }
+            /* if ($scope.total[$scope.total.length - 1] != data) {
+                 $scope.total.push(data);
+                 aven()
+                 $scope.dash_Big = $scope.show.avenDay;
+                 $scope.showTitle = 'เงินเฉลียต่อวัน';
+             }*/
             //
         })
 
 
 
-
-
-
-
-
-
-
-
-        /**Canvas MyJson */
-        var data_show_data = [];
-        var selete_date_uni = {};
-        var value_size = [];
-        var day_y = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-       // var day_y = ['Jan', 'Feb', 'Mar', 'Jun', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-        //day_y = ;
-
-        $scope.type_selete_date = (date_type) => {
-
-
-        }
-
-        function date_y(date) {
-
-            let date_start = new Date(date);;
-            let date_end = new Date();
-            let oneDay = 24 * 60 * 60 * 1000;
-            var startA = Date.parse(date_start);
-            var endA = Date.parse(date_end)
-            var gg = endA - startA;
-            var num_days = ((gg % 31536000000) % 2628000000) / 86400000; // day
-            let res = {};
-            res.date = Math.round(num_days); // day
-            return res;
-
-        }
-
-        function date_show_Chart_day(ele) {
-            let array = [];
-            let temp = [];
-            let i = 0;
-            ele.forEach((ele, k) => {
-                temp.push(DateSet(ele.timeCreate, 'EEE'))
-            })
-            temp = temp.sort();
-            temp.forEach((ele, k) => {
-                if (array[i - 1] != ele) {
-                    array[i] = ele;
-                    i++;
-                }
-            })
-
-            return array;
-        }
-
-        function date_show_Chart_day_money(data, date_s) {
-            let array = [],
-                temp = [],
-                infor = {};
-            let loop = date_s.length
-            data.forEach((ele, k) => {
-                for (var i = 0; i < loop; i++) {
-                    if (array[i] == null) {
-                        array[i] = 0;
-                    }
-                    if (date_s[i] == DateSet(ele.timeCreate, 'EEE')) {
-                        array[i] += ele.moneyInput;
-                        temp[i] = date_s[i]
-                    }
-                }
-            })
-
-            return infor = {
-                date: temp,
-                money: array
-            };
-        }
-
-        function date_show_chart_day_index(data) {
-            let array = [],
-                numloop = day_y.length;
-
-            data.date.forEach((ele, a) => {
-                for (let i = 0; i < numloop; i++) {
-                    if (array[i] == null) {
-                        array[i] = 0;
-                    }
-                    if (ele == day_y[i]) {
-                        array[i] += data.money[a];
-
-                    }
-                }
-            })
-            return array;
-        }
-
-        function chake_max() {
-            let a = [],
-                day_select = [],
-                values_day = [];
-            let i = 0;
-            let diff = 0;
-            show_date_k.forEach((ele, k) => {
-                diff = date_y(ele.timeCreate).date
-                if (diff < 7) {
-                    a.push(ele)
-
-                }
-            });
-            day_select = date_show_Chart_day(a);
-            values_day = date_show_Chart_day_money(a, day_select);
-            value_size = date_show_chart_day_index(values_day)
-            myJson();
-        }
-        console.log(day_y)
-        chake_max();
-        $scope.type_selete_date('day_7')
-
-        function myJson() {
-            $scope.myJson = {
-                type: "bar",
-                title: {
-                    backgroundColor: "transparent",
-                    fontColor: "black",
-                    text: "รายสัปดาร์"
-                },
-                "plotarea": {
-                    "adjust-layout": true /* For automatic margin adjustment. */
-                },
-                "scale-x": {
-                    "label": { /* Add a scale title with a label object. */
-                        "text": "Above is an example of a category scale",
-                    },
-                    /* Add your scale labels with a labels array. */
-                    "labels": day_y
-                },
-                "series": [{
-                        "values": value_size
-                    }
-
-                ]
-            };
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        /* 
-         */
-        /**myJson2 */
-
-        var data_loop = [];
-
-        var title_donus = null; //$scope.data_flow
-        var subType_show_input_value = [];
-        $scope.data_flow = data => {
-            average_for_show_vis(data);
-        }
-
-        let subtype_put_show_s = [];
-
-        function selete_type_date(data) {
-            subtype_put_show_s = [];
-            subType_show_input_value = [];
-            if (data == "รายรับ") {
-                subType_show_input_value = show_sub_type_income;
-            } else if (data == 'รายจ่าย') {
-                subType_show_input_value = show_sub_type_out;
-            } else if (data == 'เงินออม') {
-                subType_show_input_value = show_sub_type_save;
-            }
-
-        }
-
-        function average_for_show_vis(data) {
-            data_loop = [];
-            title_donus = data;
-            let color = ['#CD5C5C', '#F08080', '#FFC300', '#ADFF2F', '#C70039', '#FFA07A', '#00BFFF']
-            let money_selet = [];
-            let i = 0;
-            selete_type_date(data);
-
-
-            subType_show_input_value.forEach((ele, k) => {
-                if (subtype_put_show_s[0] == null) {
-                    subtype_put_show_s.push(ele.subtypeMoney)
-                } else {
-                    subtype_put_show_s.push(ele.subtypeMoney)
-
-                }
-            })
-            if (subtype_put_show_s.length == 0) {
-
-                Notification({
-                    message: 'รายการว่างเปล่า'
-                })
-                data_loop.push({
-                    text: 'ไม่มีรายการแสดง',
-                    values: [0.0],
-                    backgroundColor: 'rgba(0, 0, 0, 0.5)'
-
-                })
-            }
-
-            var g_h_j = [];
-            i = 0;
-
-
-            subtype_put_show_s = subtype_put_show_s.sort();
-            subtype_put_show_s.forEach((ele, k) => {
-                if (g_h_j[i - 1] != ele) {
-                    g_h_j.push(ele)
-                    i++;
-                }
-            })
-
-
-            i = 0;
-
-
-            subType_show_input_value.forEach((ele, k) => {
-                for (var j = 0; j < g_h_j.length; j++) {
-                    if (money_selet[j] == null) {
-                        money_selet[j] = 0;
-                    }
-                    if (g_h_j[j] == ele.subtypeMoney) {
-                        money_selet[j] += ele.moneyInput
-                    }
-                }
-            })
-            i = 0;
-            let asd = 0;
-            let color_use;
-            /**Show Data */
-            g_h_j.forEach((ele, k) => {
-                color_use = color[k] ? color[k] : '#6fe820'
-                data_loop.push({
-                    text: g_h_j[k],
-                    values: [money_selet[k]],
-                    backgroundColor: color_use,
-                    marker: {
-                        backgroundColor: color_use
-                    }
-                })
-            })
-            myjson2();
-        }
-        $scope.myJson2_S = 'รายจ่าย'
-        average_for_show_vis('รายจ่าย'); // จะแสดงข้อมูลเป็นเปอร์เซน ของ รายรับรายจ่ายเงินออม โดยจะแสดงเงินรายจ่ายเฉลี่ย จากการใช่จ่าย ในประเภท ย่อยนั้นๆ
-        function myjson2() {
-            $scope.myJson2 = {
-                type: "pie",
-                backgroundColor: "#ffffff",
-                plot: {
-                    borderColor: "#2B313B",
-                    borderWidth: 0,
-                    // slice: 90,
-                    valueBox: {
-                        placement: 'out',
-                        text: '%t\n%npv%',
-                        fontFamily: "Kanit', sans-serif"
-                    },
-
-                    animation: {
-                        effect: 4,
-                        method: 5,
-                        speed: 600,
-                        sequence: 1
-                    }
-                },
-                source: {
-                    //  text: 'gs.statcounter.com',
-                    fontColor: "#8e99a9",
-                    fontFamily: "Open Sans"
-                },
-                title: {
-                    fontColor: "red",
-                    text: title_donus,
-                    align: "center",
-                    offsetX: 10,
-                    fontFamily: " 'Kanit', sans-serif",
-                    fontSize: 25
-                },
-                subtitle: {
-                    offsetX: 10,
-                    offsetY: 10,
-                    fontColor: "#8e99a9",
-                    fontFamily: " 'Kanit', sans-serif",
-                    fontSize: "16",
-                    text: DateSet(Date.now(), 'MMM yyyy'),
-                    align: "left"
-                },
-                plotarea: {
-                    margin: "20 0 0 0"
-                },
-                series: data_loop
-            };
-        }
-
-
-
-
-
-
-        /**Wanna */
-
-
-        $scope.wannashow = Wanna;
-        $scope.spliceWanna = [];
-
-        function slice_wanna() {
-            $scope.spliceWanna = $scope.wannashow.slice(0, 3);
-        }
-        slice_wanna();
-        $scope.delete_wanna = i => {
-            console.log($scope.spliceWanna[i])
-            $scope.spliceWanna = $scope.spliceWanna.splice($scope.spliceWanna[i], 1)
-
-            console.log($scope.spliceWanna)
-        }
     }
 
 

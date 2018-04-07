@@ -1,177 +1,4 @@
-<!--<div class="container">
-    <div class="row view_b ">
-        <div class="col-12 col-md-3 p-3">
-            <ul class="nav flex-column" style='background:rgba(255,255,255,0.8)'>
-                <li class="nav-item cursor-point">
-                    <a class="nav-link " ng-click='view_date("all")'>แสดงรายการทั้งหมด</a>
-                </li>
-                <li class="nav-item cursor-point">
-                    <a class="nav-link" ng-click='view_date("day")'>แสดงรายการเฉพาะวันนี้</a>
-                </li>
-                <li class="nav-item cursor-point">
-                    <a class="nav-link" ng-click='view_date("month")'>แสดงรายการรายเดือน</a>
-                </li>
-                <li class="nav-item cursor-point">
-                    <a class="nav-link" ng-click='view_date("year")'>แสดงรายการรายปี</a>
-                </li>
-                <li class="nav-item show-view">
-                    <a class="nav-link">รายการโชว์ : {{chDate}}</a>
-                </li>
-                
-            </ul>
-            <div class="col-12 p-3" style='margin:0 auto;background:rgba(255,255,255,0.8)'>
-                <label style='color:red;' for="ประเภท" for="ประเภท">เลือกประเภท
-                    <br>
-                    <small>* รายรับ รายจ่าย เงินออม</small>
-                </label>
-                <div class="p-2">
-                    <select ng-model='type_push_show' class="form-control" ng-change="showType()" id="">
-                        <option value="รายรับ">รายรับ</option>
-                        <option value="รายจ่าย">รายจ่าย</option>
-                        <option value="เงินออม">เงินออม</option>
 
-                    </select>
-                </div>
-              
-                <label style='color:red;' for="ประเภท">เลือกวัน / เดือน / ปี ที่ต้องการ
-                    <br>
-                    <small style='background:rgba(255,255,255,0.8)'>* จะแสดงรายการตามวันที่เลือก โดยจะแสดงตาม ที่เลือก ถ้าเลือกเฉพราะวันนี้ก็จะแสดงแค่วันนี้</small>
-                </label>
-                <div class="p-2">
-                    <input ng-hide="notShow" type="date" class='form-control' ng-model="timeS" ng-change="timeChnge()" id="">
-                </div>
-
-            </div>
-
-        </div>
-        <div class="col-12 col-md-9" style='background-color: #FFFFFF;'>
-
-            <div class='container'>
-
-                <div class="row" style='margin:0'>
-                    <div class="col-12">
-                        <div class="row p-3">
-                            <div class="col-12 col-md-6">
-                                <p>รายรับทั้้งหมด : {{ inmoney | currency: '฿' : 2 }}</p>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <p>รายจ่ายทั่งหมด : {{ delmoney| currency: '฿' : 2}}</p>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <p>ยอดเงินคงเหลือ : {{ inmoney - delmoney | currency: '฿' : 2}}</p>
-                            </div>
-                            <div class="col-12 col-md-6">
-                                <p>เงินที่ออมได้ : {{ saveMoney | currency: '฿' : 2}}</p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <p ng-hide="notShow" class="mb-0 text-center">{{dateSetNew()}}</p>
-                <div class="table-responsive">
-                    <table>
-                        <tr>
-                            <th>
-                                <strong>ประเภท</strong>
-                            </th>
-                            <th>
-                                <strong>ประเภทย่อย</strong>
-                            </th>
-                            <th>
-                                <strong>รายละเอียด</strong>
-                            </th>
-                            <th>
-                                <strong>จำนวนเงิน</strong>
-                            </th>
-                            <th>
-                                <strong>เวลา</strong>
-                            </th>
-                           
-                            <th>
-                                <strong>ลบ</strong>
-                            </th>
-                        </tr>
-                        <tr ng-repeat="(i,infor) in filteredTodos">
-                            <td>{{infor.typeMoney}}</td>
-                            <td>{{infor.subtypeMoney}}</td>
-                            <td>{{infor.detailList}}</td>
-                            <td>{{infor.moneyInput}}</td>
-                            <td>{{infor.timeCreate | date: 'h:ma'}}
-                                <br>{{infor.timeCreate | date: 'd/M/yy'}}</td>
-                         
-                            <td ng-click="deleteInFor( infor._id,i)">
-                                <i style='color:rgb(250, 98, 98);font-size:23px;' class="far fa-times-circle"></i>
-                            </td>
-
-                        </tr>
-                        <nav aria-label="Page navigation example" style='margin:0 auto;'>
-
-                            <ul class="pagination" style='margin:0'>
-                                <li class="page-item">
-                                    <a class="page-link"  ng-click="changePage(currentPage-1)">Previous</a>
-                                </li>
-
-                                <li class="page-item" ng-repeat="n in t">
-                                    <a ng-click="changePage(n)" class="page-link">{{n}}</a>
-                                </li>
-
-                                <li class="page-item">
-                                    <a  ng-click="changePage(currentPage+1)" class="page-link">Next</a>
-                                </li>
-                            </ul>
-                        </nav>
-
-
-                    </table>
-                </div>
-
-                <div class="col-12 p-3" style='margin:0'>
-                    <p>จำนวนรายการทั้งหมด : {{information.length}}</p>
-                    <p> หน้าที่ : {{showPage || 1}} </p>
-                </div>
-                <div class="row edit" ng-if='showUpadte'>
-                    <div class="container edit_Path">
-                        <div class="col-12 col-md-6 text-center formEdit">
-                            <h5>แก้ไข ข้อมูล</h5>
-
-                            <form class='col-10' style='margin:0 auto'>
-                                <div class="md-form">
-                                    <input type="text" class="form-control" ng-model="dateForUpdate.moneyInput">
-                                </div>
-                                <div class="md-form">
-                                    <input type="text" class="form-control" ng-model="dateForUpdate.detailList">
-                                </div>
-                                <div class="md-form">
-                                    <select class='form-control' ng-change="onChange()" ng-model="dateForUpdate.typeMoney">
-                                        <option value="รายจ่าย">รายจ่าย</option>
-                                        <option value="รายรับ">รายรับ</option>
-                                        <option value="เงินออม">เงินออม</option>
-                                    </select>
-                                    <select class='form-control' ng-model="dateForUpdate.subtypeMoney">
-                                        <option value="{{dateForUpdate.subtypeMoney}}">{{dateForUpdate.subtypeMoney}}</option>
-
-                                        <option ng-repeat="(key,types) in subtype" value='{{types}}'>{{ types }}</option>
-                                    </select>
-                                </div>
-                                <div class="md-form">
-                                    <button class="btn btn-lg btn-block " ng-click='updateInfor()'>แก้ไข</button>
-                                </div>
-                                <div class="md-form">
-                                    <button style='background:rgb(138, 138, 138)' class="btn btn-lg btn-block " ng-click='removeEdit()'>ยกเลิก</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-
-    </div>
-    
-</div>-->
 <div class="container">
     <div class="row p-3" style='background:white;height:auto;'>
         <div class="col-12 col-md-4 ">
@@ -195,13 +22,19 @@
                         <label for="เลือกประเภทการแสดง">เลือกประเภทการแสดง</label>
                         <select ng-change='type_showF(typeS)' ng-model="typeS" class='form-control'>
                             <option value="">ระบุบสิ่งที่ต้องการแสดง </option>
-                            <option value="รายรับ">รายรับ </option>
-                            <option value="รายจ่าย">รายจ่าย </option>
-                            <option value="เงินออม">เงินออม </option>
+                            <option value="0">รายรับ </option>
+                            <option value="1">รายจ่าย </option>
+                            <option value="2">เงินออม </option>
 
                         </select>
                     </div>
                 </form>
+            </div>
+            <div class="p-3" ng-show='array_show_on_browser.length > 0'>
+                <p>รายรับ : {{Data_show_i_o_s.income | currency: '฿' : 2 }} บาท</p>
+                <p>รายจ่าย : {{Data_show_i_o_s.out | currency: '฿' :2 }} บาท</p>
+                <p>เงินออม : {{Data_show_i_o_s.save | currency: '฿' : 2}} บาท</p>
+                
             </div>
         </div>
         <div class="col-12 col-md-8 ">
@@ -235,7 +68,7 @@
                         <td>{{data.detailList}} </td>
                         <td>{{data.moneyInput}} </td>
                         <td>{{data.timeCreate | date : 'dd/MM/yy'}} </td>
-                        <td ng-click="deleteInFor(i)">
+                        <td ng-click="deleteInFor(data._id,i)">
                             <i style='color:rgb(250, 98, 98);font-size:23px;' class="far fa-times-circle"></i>
                         </td>
 

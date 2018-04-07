@@ -6,82 +6,18 @@
         .module('core')
         .controller('ViewsIncomeTotal', ViewsIncomeTotal)
 
-    ViewsIncomeTotal.$inject = ['$scope', 'viewsTest', '$filter', 'MouthY', 'IncomeService', '$state', 'mySocket', 'Auth', 'typeView', '$stateParams', '$location', 'Notification', 'Numpage', 'CalService'];
+    ViewsIncomeTotal.$inject = ['$scope', '$filter', 'MouthY', 'IncomeService', '$state', 'mySocket', 'Auth', 'typeView', '$stateParams', '$location', 'Notification', 'Numpage', 'CalService', 'DataShowFile', 'viewsTest'];
     /** @ngInject */
-    function ViewsIncomeTotal($scope, viewsTest, $filter, MouthY, IncomeService, $state, mySocket, Auth, typeView, $stateParams, $location, Notification, Numpage, CalService) {
+    function ViewsIncomeTotal($scope, $filter, MouthY, IncomeService, $state, mySocket, Auth, typeView, $stateParams, $location, Notification, Numpage, CalService, DataShowFile, viewsTest) {
         if (!mySocket.connect()) {
             mySocket.connect();
         }
         var filter = (date, detail) => {
             return $filter('date')(date, detail);
         }
+        DataShowFile.viewsTest = viewsTest; //insert data -> factory DataShowFile
 
 
-
-
-        var data_input = viewsTest; // include data for db.;
-        let temp_in = [],
-            temp_out = [],
-            temp_save = [],
-            err_i = [];
-        var check_type = ele => {
-            /** Check type of list from a come in input. .
-             * For Keep value 
-             * 
-             */
-            if (ele.typeMoney === 'รายรับ') {
-                temp_in.push(ele)
-            } else if (ele.typeMoney === 'รายจ่าย') {
-                temp_out.push(ele);
-            } else if (ele.typeMoney === 'เงินออม') {
-                temp_save.push(ele);
-            } else {
-                err_i.push(ele)
-            }
-        }
-        var showData_date_all = () => {
-            temp_in = [];
-            temp_out = [];
-            temp_save = [];
-            err_i = [];
-            let temp = {};
-            data_input.forEach((ele, index) => {
-                check_type(ele)
-            })
-            return temp = {
-                temp_in,
-                temp_out,
-                temp_save,
-                err_i
-            };
-
-        }
-        var showData_data_fix = (date_type, type) => {
-            /** Show Data form date type ex. day , month or year */
-            /**
-             * date_type = Date input;
-             * type = Change ex. dd MM yyyy == day 
-             * MM yyyy == month
-             * yyyy == year
-             */
-
-            temp_in = [];
-            temp_out = [];
-            temp_save = [];
-            err_i = [];
-            let temp = {};
-            data_input.forEach((ele, i) => {
-                if (filter(ele.timeCreate, type) === filter(date_type, type)) {
-                    check_type(ele)
-                }
-            })
-            return temp = {
-                temp_in,
-                temp_out,
-                temp_save,
-                err_i
-            };
-        }
         var array_for_show_Html = () => { //** Show All Data. */
             $scope.array_show_on_browser = [];
             $scope.show_data_for_html.temp_in.forEach(ele => $scope.array_show_on_browser.push(ele));
@@ -97,45 +33,57 @@
             $scope.array_show_on_browser = [];
             $scope.show_data_for_html = {};
             if (type == 'all') {
-                $scope.show_data_for_html = showData_date_all();
+                $scope.show_data_for_html = DataShowFile.showDataAll(); /** ข้อมูลทั่งหมด */
             } else if (type == 'day') {
-                $scope.show_data_for_html = showData_data_fix((($scope.date_input) ? $scope.date_input : Date.now()), 'dd MM yyyy');
+                $scope.show_data_for_html = DataShowFile.showDataNeed((($scope.date_input) ? $scope.date_input : Date.now()), 'dd MM yyyy');
 
             } else if (type == 'month') {
-                $scope.show_data_for_html = showData_data_fix((($scope.date_input) ? $scope.date_input : Date.now()), 'MM yyyy');
+                $scope.show_data_for_html = DataShowFile.showDataNeed((($scope.date_input) ? $scope.date_input : Date.now()), 'MM yyyy');
 
             } else if (type == 'year') {
-                $scope.show_data_for_html = showData_data_fix((($scope.date_input) ? $scope.date_input : Date.now()), 'yyyy');
+                $scope.show_data_for_html = DataShowFile.showDataNeed((($scope.date_input) ? $scope.date_input : Date.now()), 'yyyy');
             }
             $scope.showType = true;
-            array_for_show_Html();
-            $scope.pageNum();
+            array_for_show_Html(); /** เอาข้อมูลทั้งหมดไปจัดไว้อยูใน array ตัวเดียวกัน */
+            $scope.pageNum(); /** เซ็ต หมายเลข เภท */
             if ($scope.array_show_on_browser.length == 0) {
                 $scope.showType = false
-                console.log('null')
             }
-            $scope.page_end = Numpage.page_size();
-            console.log(CalService.out_($scope.show_data_for_html.temp_out))
+            $scope.page_end = Numpage.page_size(); /** หมายเลข สุดท้าย */
+            $scope.Data_show_i_o_s = {
+                income: CalService.income_O_S($scope.show_data_for_html.temp_in),
+                out: CalService.income_O_S($scope.show_data_for_html.temp_out),
+                save: CalService.income_O_S($scope.show_data_for_html.temp_save),
+
+            }
+
 
         }
 
         $scope.type_showF = (type) => {
-            $scope.array_show_on_browser = []; /** main value data temp */
-            if (type === 'รายรับ') {
+
+            $scope.array_show_on_browser = [];
+            //$scope.show_data_for_html = []; /** main value data temp */
+            if (type === '0') {
                 $scope.show_data_for_html.temp_in.forEach(ele => $scope.array_show_on_browser.push(ele));
 
-            } else if (type === 'รายจ่าย') {
+            } else if (type === '1') {
                 $scope.show_data_for_html.temp_out.forEach(ele => $scope.array_show_on_browser.push(ele));
 
-            } else if (type === 'เงินออม') {
+            } else if (type === '2') {
                 $scope.show_data_for_html.temp_save.forEach(ele => $scope.array_show_on_browser.push(ele))
             }
+            $scope.pageNum();
 
             page_show()
         }
-        $scope.deleteInFor = index => {
-            /*$scope.array_show_on_browser = $scope.array_show_on_browser.splice($scope.array_show_on_browser.indexOf(index),1);
-            console.log(index)*/
+        $scope.deleteInFor = (id, i) => {
+            $scope.array_show_on_browser = $scope.array_show_on_browser.splice(id, 1)
+            /*IncomeService.delete(id).then(suc => Notification.success({
+                message: "Delete..."
+            })).catch(err => Notification.error({
+                message: "err"
+            }))*/
         }
 
 
@@ -151,8 +99,6 @@
 
         }
         $scope.changePage = (n) => {
-
-            console.log(n)
             $scope.tl = [];
             let num = Numpage.page_size();
             if (n > 0 && n <= num) {

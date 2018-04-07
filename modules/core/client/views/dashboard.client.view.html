@@ -91,14 +91,14 @@
             <div class="p-3 bb">
                 <div class='md-form text-right'>
                     <select class='form-control' ng-model="myJson2_S" ng-change='data_flow(myJson2_S)'>
-                        <option value="รายรับ">รายรับ</option>
-                        <option value="รายจ่าย">รายจ่าย</option>
+                        <option value="">เลือกรายการ</option>
+                        <option value="0">รายรับ</option>
+                        <option value="1">รายจ่าย</option>
 
-                        <option value="เงินออม">เงินออม</option>
+                        <option value="2">เงินออม</option>
 
                     </select>
                 </div>
-
                 <div zingchart id="myChart" zc-json="myJson2" zc-width=100%></div>
             </div>
 
