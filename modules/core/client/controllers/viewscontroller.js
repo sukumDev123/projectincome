@@ -34,14 +34,20 @@
             $scope.show_data_for_html = {};
             if (type == 'all') {
                 $scope.show_data_for_html = DataShowFile.showDataAll(); /** ข้อมูลทั่งหมด */
+                $scope.selete_gg = 'รายการทั้งหมด'
+
             } else if (type == 'day') {
                 $scope.show_data_for_html = DataShowFile.showDataNeed((($scope.date_input) ? $scope.date_input : Date.now()), 'dd MM yyyy');
+                $scope.selete_gg = 'รายวัน'
 
             } else if (type == 'month') {
                 $scope.show_data_for_html = DataShowFile.showDataNeed((($scope.date_input) ? $scope.date_input : Date.now()), 'MM yyyy');
+                $scope.selete_gg = 'รายเดือน'
 
             } else if (type == 'year') {
                 $scope.show_data_for_html = DataShowFile.showDataNeed((($scope.date_input) ? $scope.date_input : Date.now()), 'yyyy');
+                $scope.selete_gg = 'รายปี'
+                
             }
             $scope.showType = true;
             array_for_show_Html(); /** เอาข้อมูลทั้งหมดไปจัดไว้อยูใน array ตัวเดียวกัน */
@@ -49,7 +55,6 @@
             if ($scope.array_show_on_browser.length == 0) {
                 $scope.showType = false
             }
-            $scope.page_end = Numpage.page_size(); /** หมายเลข สุดท้าย */
             $scope.Data_show_i_o_s = {
                 income: CalService.income_O_S($scope.show_data_for_html.temp_in),
                 out: CalService.income_O_S($scope.show_data_for_html.temp_out),
@@ -61,7 +66,6 @@
         }
 
         $scope.type_showF = (type) => {
-
             $scope.array_show_on_browser = [];
             //$scope.show_data_for_html = []; /** main value data temp */
             if (type === '0') {
@@ -75,15 +79,14 @@
             }
             $scope.pageNum();
 
-            page_show()
         }
         $scope.deleteInFor = (id, i) => {
-            $scope.array_show_on_browser = $scope.array_show_on_browser.splice(id, 1)
-            /*IncomeService.delete(id).then(suc => Notification.success({
+            // $scope.array_show_on_browser = $scope.array_show_on_browser.splice(id, 1)
+            IncomeService.delete(id).then(suc => Notification.success({
                 message: "Delete..."
             })).catch(err => Notification.error({
                 message: "err"
-            }))*/
+            }))
         }
 
 
@@ -93,6 +96,8 @@
             $scope.array_show_on_browser_html = [];
             Numpage.size = 8;
             Numpage.total = $scope.array_show_on_browser.length;
+            $scope.page_end = Numpage.page_size(); /** หมายเลข สุดท้าย */
+
             $scope.currentPage = 1;
             $scope.tl = Numpage.number_show(0);
             $scope.array_show_on_browser_html = Numpage.now_show_data(1, $scope.array_show_on_browser)
