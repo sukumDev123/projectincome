@@ -6,123 +6,82 @@
         .controller('ConcludeController', ConcludeController)
 
     /** @ngInject */
-    ConcludeController.$inject = ['$scope', 'viewsTest', '$filter']
+    ConcludeController.$inject = ['$scope', 'viewsTest', '$filter', 'DataShowFile', 'CalService']
 
-    function ConcludeController($scope, viewsTest, $filter) {
-        const view_all = viewsTest;
-        var diff_date = [],
-            type_date = [];
+    function ConcludeController($scope, viewsTest, $filter, DataShowFile, CalService) {
+        DataShowFile.viewsTest = viewsTest;
+        let month = CalService.dataMount_diff(DataShowFile.viewsTest);
+
 
 
         const filter = (date, type) => {
             return $filter('date')(date, type);
         }
 
-        const set_type_values = () => {
-            let total_diff_type = {},
-                keep_t_i = [],
-                keep_t_o = [],
-                keep_t_s = [],
-                i = 0;
-            view_all.forEach((ele, k) => {
-                if (ele.typeMoney === 'รายรับ') {
-                    keep_t_i.push(ele)
-                } else if (ele.typeMoney === 'รายจ่าย') {
-                    keep_t_o.push(ele)
-
-                } else if (ele.typeMoney === 'เงินออม') {
-                    keep_t_s.push(ele)
-                }
+        function month_all(data) {
+            let temp = []
+            data.forEach(ele => {
+                // if (filter(ele, 'MM yyyy') == filter(, 'MM yyyy')) {
+                temp.push(filter(ele, 'MM yyyy'))
+                //}
             })
-            return total_diff_type = {
-                income: keep_t_i,
-                out: keep_t_o,
-                save: keep_t_s
-            }
-
+            return temp;
         }
-        const set_diff_date = (ele) => {
-            let temp_date = [], //Keep month
-                temp_money = [], //Keep Money
-                temp_total = {}, //Keep month + money to Json
-                temp_day = [],
-                temp_day_diff = [],
-                i = 0,
-                i2 = 0;;
-            ele.forEach((eleM, k) => {
 
+        function type_money(data, month_s) {
+            let temp = [],
+                a_money = [];
+            let num = month_s.length;
+            let arratt = CalService.diff_day(data);
+            let num_day = [];
 
-                if (filter(eleM.timeCreate, 'MM yyyy') != temp_date[i - 1]) {
-                    temp_date[i] = filter(eleM.timeCreate, 'MM yyyy');
+            arratt.tmep_array.forEach((ele, j) => {
+                for (let i = 0; i < num; i++) {
 
-                    i++;
-                }
-                if (filter(eleM.timeCreate, 'dd MM yyyy') != filter(temp_day[i2 - 1], 'dd MM yyyy')) {
-                    temp_day[i2] = eleM.timeCreate;
-                    i2++;
-
-                }
-
-            });
-            i = 0, i2 = 0;
-            let t_n = [];
-            temp_day.forEach((ele, k) => {
-                if (filter(temp_day_diff[i - 1], 'MM yyyy') != filter(ele, 'MM yyyy')) {
-                    temp_day_diff[i] = ele;
-                    if (t_n[i2] == null) t_n[i2] = null;
-                    t_n[i2]++;
-                    i2++;
-                    i++;
-                } else {
-                    t_n[i2 - 1]++;
-                }
-            })
-            i = 0;
-            let h = 0;
-            let hh = [];
-            let num = temp_date.length;
-            ele.forEach((eleM, k) => {
-                for (var j = 0; j < num; j++) {
-                    if (temp_money[j] == null && hh[j] == null) {
-                        temp_money[j] = 0;
-
+                    if (filter(ele, 'MM yyyy') == month_s[i]) {
+                        if (a_money[i] == null) {
+                            a_money[i] = 0;
+                            num_day[i] = 0;
+                        }
+                        a_money[i] += arratt.money[j];
+                        num_day[i]++;
                     }
-                    if (temp_date[j] == filter(eleM.timeCreate, 'MM yyyy')) {
-                        temp_money[j] += parseInt(eleM.moneyInput);
 
-                    }
+                    // console.log(a_money[i])
                 }
+
             })
-            let num_ = temp_money.length;
-            let keep_dea = [];
 
-            for (var j = 0; j < num; j++) {
-                keep_dea[j] = temp_money[j] / t_n[j];
-            }
-
-
-
-
-            return temp_total = {
-                date: temp_date,
-                money: temp_money,
-                num: hh,
-                iAs: keep_dea,
-            }
+            return temp = {
+                a_money,
+                num_day
+            };
         }
 
-        $scope.show_date = {
-            income: set_diff_date(set_type_values().income),
-            out: set_diff_date(set_type_values().out),
-            save: set_diff_date(set_type_values().save),
-            //incomeAndO : set_diff_date(set_type_values().out)
+        function main() {
+            let temp = [],
+                array = [],
+                month_ = [];
+            month_ = month_all(month);
+            let temp_array = {
+                i: type_money(DataShowFile.showDataAll().temp_in, month_),
+                o: type_money(DataShowFile.showDataAll().temp_out, month_),
+                s: type_money(DataShowFile.showDataAll().temp_save, month_)
+            }
+            let diff_d_m = [];
+            temp_array.o.a_money.forEach((ele, j) => {
+
+                if (diff_d_m[j] == null) diff_d_m[j] = 0;
+                
+                diff_d_m[j] =ele / temp_array.o.num_day[j]
+            })
 
 
+            console.log(diff_d_m)
         }
 
 
-        console.log($scope.show_date)
-
+        main();
     }
 
 }());

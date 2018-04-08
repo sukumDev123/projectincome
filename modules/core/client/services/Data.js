@@ -5,15 +5,18 @@
         .module('core')
         .factory('DataShowFile', Factory)
     Factory.$inject = ['$filter']
+
     function Factory($filter) {
-        const filter = (date,ty) => {return $filter('date')(date,ty) }
+        const filter = (date, ty) => {
+            return $filter('date')(date, ty)
+        }
         return {
             viewsTest: null,
-            showDataNeed : showData_data_fix,
-            showDataAll : showData_date_all
+            showDataNeed: showData_data_fix,
+            showDataAll: showData_date_all
         }
 
-
+      
 
 
         function showData_date_all() {

@@ -16,8 +16,10 @@
         /** */
         return {
             income_O_S: incomeCal,
-            out_: outFunction ,// สำหรับคิดค่าฌเฉล่ย รายจ่าย,
-            diff_day : dat_diff
+            out_: outFunction, // สำหรับคิดค่าฌเฉล่ย รายจ่าย,
+            diff_day: dat_diff,
+            dataMount_diff: show_diff_month
+      
         }
         /** */
         function incomeCal(data) {
@@ -29,8 +31,19 @@
         }
 
 
+        /**- */
+        function show_diff_month(data) {
+            let temp_ = [],temp_arr = [];
 
+            data.forEach((ele, i) => {
+                temp_arr.push(ele.timeCreate)
+            })
+            temp_arr = temp_arr.sort();
+            temp_ = day_merge(temp_arr,'MM yyyy')
 
+            return temp_;
+
+        }
 
 
 
@@ -53,13 +66,13 @@
             return money_t;
         }
 
-        function day_merge(day) {
+        function day_merge(day,type) {
             let temp_day = [],
                 temp_a = {},
                 money_day = [];
             let j = 0;
             day.forEach((ele, i) => {
-                if (filter(temp_day[j - 1], 'dd MM yyyy') != filter(ele, 'dd MM yyyy')) {
+                if (filter(temp_day[j - 1], type) != filter(ele, type)) {
                     temp_day[j] = ele;
                     j++;
                 }
@@ -76,7 +89,7 @@
                 temp_day.push(ele.timeCreate);
             })
             temp_day = temp_day.sort();
-            tmep_array = day_merge(temp_day);
+            tmep_array = day_merge(temp_day,'dd MM yyyy');
             money = day_money(tmep_array, date_input);
             return temp_array_re = {
                 tmep_array,

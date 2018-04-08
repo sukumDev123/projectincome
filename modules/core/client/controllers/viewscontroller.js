@@ -30,6 +30,8 @@
              * type == day or month or year
              * for keep value in array for show on browser
              */
+            $scope.type_selete = type;
+
             $scope.array_show_on_browser = [];
             $scope.show_data_for_html = {};
             if (type == 'all') {
@@ -47,24 +49,28 @@
             } else if (type == 'year') {
                 $scope.show_data_for_html = DataShowFile.showDataNeed((($scope.date_input) ? $scope.date_input : Date.now()), 'yyyy');
                 $scope.selete_gg = 'รายปี'
-                
+
             }
+
             $scope.showType = true;
             array_for_show_Html(); /** เอาข้อมูลทั้งหมดไปจัดไว้อยูใน array ตัวเดียวกัน */
             $scope.pageNum(); /** เซ็ต หมายเลข เภท */
             if ($scope.array_show_on_browser.length == 0) {
                 $scope.showType = false
             }
+            cal();
+
+
+        }
+
+        function cal() {
             $scope.Data_show_i_o_s = {
                 income: CalService.income_O_S($scope.show_data_for_html.temp_in),
                 out: CalService.income_O_S($scope.show_data_for_html.temp_out),
                 save: CalService.income_O_S($scope.show_data_for_html.temp_save),
 
             }
-
-
         }
-
         $scope.type_showF = (type) => {
             $scope.array_show_on_browser = [];
             //$scope.show_data_for_html = []; /** main value data temp */
@@ -80,11 +86,31 @@
             $scope.pageNum();
 
         }
+
+        $scope.day_show_function = () => {
+            $scope.date_input = $scope.day_show;
+            $scope.show_date($scope.type_selete);
+        }
+
+
         $scope.deleteInFor = (id, i) => {
-            // $scope.array_show_on_browser = $scope.array_show_on_browser.splice(id, 1)
-            IncomeService.delete(id).then(suc => Notification.success({
-                message: "Delete..."
-            })).catch(err => Notification.error({
+            $scope.array_show_on_browser.splice(i, 1);
+            if (id.typeMoney == 'รายรับ') {
+                $scope.Data_show_i_o_s.income -= id.moneyInput
+            } else if (id.typeMoney == 'รายจ่าย') {
+                $scope.Data_show_i_o_s.out -= id.moneyInput
+            } else if (id.typeMoney == 'เงินออม') {
+                $scope.Data_show_i_o_s.save -= id.moneyInput
+            }
+
+
+            IncomeService.delete(id._id).then(suc => {
+                Notification.success({
+                    message: "Delete..."
+                })
+                $scope.pageNum();
+
+            }).catch(err => Notification.error({
                 message: "err"
             }))
         }
