@@ -20,7 +20,7 @@
         }, 1000)
         $scope.show_d = false;
         $scope.showD = (a) => {
-            console.log("asda")
+   
             if(a == true){
                 $scope.show_d = false
                     
@@ -33,8 +33,7 @@
             Notification.success({
                 message: 'New Income ' + infor.typeMoney
             });
-            console.log(infor)
-
+          
         })
 
     }
